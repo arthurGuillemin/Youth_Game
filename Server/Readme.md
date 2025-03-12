@@ -23,4 +23,4 @@ SUPABASE_ANON_KEY=your-supabase-anon-key
 npm start
 ```
 
-L'application est démarrée
+L'application est démarrée et un swagger pour l'api est disponible sur http://localhost:3000
