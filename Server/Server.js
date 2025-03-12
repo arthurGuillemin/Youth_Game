@@ -10,9 +10,13 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 const userRoutes = require('./Routes/UserRoutes');
-
+const partyRoutes = require('./Routes/partyRoutes');
+const scoreRoutes = require('./Routes/scoreRoutes');
 
 app.use('/api/users', userRoutes);
+app.use('/api/partys', partyRoutes);
+app.use('/api/scores', scoreRoutes);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
