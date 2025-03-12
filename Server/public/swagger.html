@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            color: #222;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .endpoint {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 5px solid #007BFF;
+            background: #f4f4f4;
+            border-radius: 5px;
+        }
+        .method {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+        }
+        .get { background: #28a745; }
+        .post { background: #007bff; }
+        .put { background: #ffc107; }
+        .delete { background: #dc3545; }
+        code {
+            background: #e8e8e8;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        pre {
+            background: #222;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📜 Documentation de l'API</h1>
+        
+        <div class="endpoint">
+            <h2>🔹 Récupérer tous les utilisateurs</h2>
+            <p><span class="method get">GET</span> <code>/api/users</code></p>
+            <p><strong>Description :</strong> Retourne tous les utilisateurs sous format JSON.</p>
+            <h3>Exemple de réponse :</h3>
+            <pre>
+{
+  "users": [
+    { "id": 1, "name": "John", "email": "John@example.com" },
+    { "id": 2, "name": "Bob", "email": "bob@example.com" }
+  ]
+}
+            </pre>
+        </div>
+
+        <div class="endpoint">
+            <h2>🔹 Créer un nouvel utilisateur</h2>
+            <p><span class="method post">POST</span> <code>/api/users</code></p>
+            <p><strong>Description :</strong> Ajoute un nouvel utilisateur à la base de données.</p>
+            <h3>Exemple de requête :</h3>
+            <pre>
+POST /api/users
+Content-Type: application/json
+
+{
+  "name": "John",
+  "email": "John@example.com"
+}
+            </pre>
+            <h3>Exemple de réponse :</h3>
+            <pre>
+{
+  "message": "Utilisateur créé avec succès",
+  "user": { "id": 3, "name": "John", "email": "John@example.com" }
+}
+            </pre>
+        </div>
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>
