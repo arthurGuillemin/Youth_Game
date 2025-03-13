@@ -26,6 +26,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'swagger.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Serveur démarré sur http://localhost:${port}`);
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Serveur démarré sur http://0.0.0.0:3000');
 });
