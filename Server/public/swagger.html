@@ -1,105 +1,169 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation API</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f8f8f8;
-        }
-        h1 {
-            color: #222;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .endpoint {
-            margin-bottom: 30px;
-            padding: 15px;
-            border-left: 5px solid #007BFF;
-            background: #f4f4f4;
-            border-radius: 5px;
-        }
-        .method {
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: white;
-        }
-        .get { background: #28a745; }
-        .post { background: #007bff; }
-        .put { background: #ffc107; }
-        .delete { background: #dc3545; }
-        code {
-            background: #e8e8e8;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-        pre {
-            background: #222;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      display: flex;
+    }
+    #sidebar {
+      width: 220px;
+      background: #007BFF;
+      color: white;
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      height: 20vh;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    }
+    #sidebar h2 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    #sidebar ul li {
+      margin: 8px 0;
+    }
+    #sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background 0.3s;
+      font-size: 14px;
+    }
+    #sidebar ul li a:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .container {
+      flex-grow: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #222;
+      text-align: center;
+    }
+    .endpoint {
+      margin-bottom: 30px;
+      padding: 15px;
+      border-left: 5px solid #007BFF;
+      background: #f4f4f4;
+      border-radius: 5px;
+    }
+    .method {
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: white;
+    }
+    .get { background: #28a745; }
+    .post { background: #007bff; }
+    .put { background: #ffc107; }
+    .delete { background: #dc3545; }
+    code {
+      background: #e8e8e8;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    pre {
+      background: #222;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .section-title {
+      border-bottom: 2px solid #007BFF;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>📜 Documentation de l'API</h1>
-        
-        <div class="endpoint">
-            <h2>🔹 Récupérer tous les utilisateurs</h2>
-            <p><span class="method get">GET</span> <code>/api/users</code></p>
-            <p><strong>Description :</strong> Retourne tous les utilisateurs sous format JSON.</p>
-            <h3>Exemple de réponse :</h3>
-            <pre>
-{
-  "users": [
-    { "id": 1, "name": "John", "email": "John@example.com" },
-    { "id": 2, "name": "Bob", "email": "bob@example.com" }
-  ]
-}
-            </pre>
-        </div>
+  <div id="sidebar">
+    <h2>📜 Sommaire</h2>
+    <ul>
+      <li><a href="#users">👤 Utilisateurs</a></li>
+      <li><a href="#quiz-questions">❓ Quiz Questions</a></li>
+      <li><a href="#points">⭐ Points</a></li>
+    </ul>
+  </div>
 
-        <div class="endpoint">
-            <h2>🔹 Créer un nouvel utilisateur</h2>
-            <p><span class="method post">POST</span> <code>/api/users</code></p>
-            <p><strong>Description :</strong> Ajoute un nouvel utilisateur à la base de données.</p>
-            <h3>Exemple de requête :</h3>
-            <pre>
-POST /api/users
-Content-Type: application/json
+  <div class="container">
+    <h1>📜 Documentation de l'API</h1>
 
-{
-  "name": "John",
-  "email": "John@example.com"
-}
-            </pre>
-            <h3>Exemple de réponse :</h3>
-            <pre>
-{
-  "message": "Utilisateur créé avec succès",
-  "user": { "id": 3, "name": "John", "email": "John@example.com" }
-}
-            </pre>
-        </div>
-
-
-        </div>
-
+    <h2 id="users" class="section-title">Utilisateurs</h2>
+    <div class="endpoint">
+      <h3>🔹 Récupérer tous les utilisateurs</h3>
+      <p><span class="method get">GET</span> <code>/api/users</code></p>
     </div>
+
+    <div class="endpoint">
+      <h3>🔹 Créer un nouvel utilisateur</h3>
+      <p><span class="method post">POST</span> <code>/api/users</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer un utilisateur par ID</h3>
+      <p><span class="method get">GET</span> <code>/api/users/{id}</code></p>
+    </div>
+
+    <h2 id="quiz-questions" class="section-title">Quiz Questions</h2>
+    <div class="endpoint">
+      <h3>🔹 Récupérer toutes les questions</h3>
+      <p><span class="method get">GET</span> <code>/api/quiz-questions</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Ajouter une question</h3>
+      <p><span class="method post">POST</span> <code>/api/quiz-questions</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer 10 questions aléatoires</h3>
+      <p><span class="method get">GET</span> <code>/api/quiz-questions/random?limit=10</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer une question par ID</h3>
+      <p><span class="method get">GET</span> <code>/api/quiz-questions/{id}</code></p>
+    </div>
+
+    <h2 id="points" class="section-title">Points</h2>
+    <div class="endpoint">
+      <h3>🔹 Récupérer tous les points</h3>
+      <p><span class="method get">GET</span> <code>/api/points</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Ajouter des points</h3>
+      <p><span class="method post">POST</span> <code>/api/points</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer un enregistrement de points par ID</h3>
+      <p><span class="method get">GET</span> <code>/api/points/{id}</code></p>
+    </div>
+
+  </div>
 
 </body>
 </html>
