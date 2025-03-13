@@ -1,31 +1,49 @@
 const supabase = require('../Config/supabase');
 
-const ScoreModel = {
-  async createScore({ user_id, game_id, party_id, points }) {
+const PartyModel = {
+  async createParty({ game_id, created_by, start_time, end_time }) {
     const { data, error } = await supabase
-      .from('scores')
-      .insert([{ user_id, game_id, party_id, points }]);
+      .from('parties')
+      .insert([{ game_id, created_by, start_time, end_time }]);
     if (error) throw error;
     return data[0];
   },
 
-  async getScoresByUser(user_id) {
+  async getAllParties() {
     const { data, error } = await supabase
-      .from('scores')
-      .select('*')
-      .eq('user_id', user_id);
+      .from('parties')
+      .select('*');
     if (error) throw error;
     return data;
   },
 
-  async getScoresByParty(party_id) {
+  async getPartyById(id) {
     const { data, error } = await supabase
-      .from('scores')
+      .from('parties')
       .select('*')
-      .eq('party_id', party_id);
+      .eq('id', id)
+      .single();
     if (error) throw error;
     return data;
   },
+
+  async updateParty(id, updates) {
+    const { data, error } = await supabase
+      .from('parties')
+      .update(updates)
+      .eq('id', id);
+    if (error) throw error;
+    return data[0];
+  },
+
+  async deleteParty(id) {
+    const { error } = await supabase
+      .from('parties')
+      .delete()
+      .eq('id', id);
+    if (error) throw error;
+    return { message: 'Partie supprimée' };
+  }
 };
 
-module.exports = ScoreModel;
+module.exports = PartyModel;

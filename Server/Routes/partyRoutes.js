@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const partyController = require('../Controllers/partyController');
 
-router.post('/', partyController.createParty);   // POST /api/parties
-router.get('/', partyController.getAllParties);    // GET /api/parties
-router.get('/:id', partyController.getParty);      // GET /api/parties/:id
+router.post('/', partyController.createParty);
+router.get('/', partyController.getAllParties);
+router.get('/:id', partyController.getPartyById);
+router.put('/:id', partyController.updateParty);
+router.delete('/:id', partyController.deleteParty);
 
 module.exports = router;

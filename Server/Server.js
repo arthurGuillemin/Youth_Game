@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const app = express();
 require('dotenv').config();
@@ -12,10 +11,12 @@ app.use(express.json());
 const userRoutes = require('./Routes/UserRoutes');
 const partyRoutes = require('./Routes/partyRoutes');
 const scoreRoutes = require('./Routes/scoreRoutes');
+const quizQuestionRoutes = require('./Routes/QuizQuestionRoutes');
 
-app.use('/api/users', userRoutes);
-app.use('/api/partys', partyRoutes);
-app.use('/api/scores', scoreRoutes);
+app.use('/users', userRoutes);
+app.use('/parties', partyRoutes);
+app.use('/scores', scoreRoutes);
+app.use('/quiz-questions', quizQuestionRoutes);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
