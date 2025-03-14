@@ -12,12 +12,13 @@ const userRoutes = require('./Routes/UserRoutes');
 const partyRoutes = require('./Routes/partyRoutes');
 const scoreRoutes = require('./Routes/scoreRoutes');
 const quizQuestionRoutes = require('./Routes/QuizQuestionRoutes');
+const leaderboardRoutes = require('./Routes/leaderboardRoutes');
 
 app.use('/users', userRoutes);
 app.use('/parties', partyRoutes);
 app.use('/scores', scoreRoutes);
 app.use('/quiz-questions', quizQuestionRoutes);
-
+app.use('/leaderboard', leaderboardRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

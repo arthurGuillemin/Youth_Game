@@ -27,6 +27,15 @@ const UserModel = {
     if (error) throw error;
     return data;
   },
+
+  async updateUser(id, updates) {
+    const { data, error } = await supabase
+      .from('users')
+      .update(updates)
+      .eq('id', id);
+    if (error) throw error;
+    return data[0];
+  },
 };
 
 module.exports = UserModel;

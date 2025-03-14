@@ -43,7 +43,22 @@ const ScoreModel = {
       .eq('id', id);
     if (error) throw error;
     return { message: 'Score supprimé' };
+  },
+
+   async getScoreByUserid(user_id) {
+    const { error, data } = await supabase
+      .from('scores')
+      .select('*')
+      .eq('user_id', user_id);
+
+    if (error) {
+      console.error("Erreur Supabase :", error); 
+      throw error;
+    }
+
+    return data;
   }
+
 };
 
 module.exports = ScoreModel;

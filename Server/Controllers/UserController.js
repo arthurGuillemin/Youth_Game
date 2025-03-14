@@ -30,6 +30,18 @@ const userController = {
       res.status(500).json({ error: error.message });
     }
   },
+
+
+  async updateUser(req, res) {
+    try {
+      const { id } = req.params;
+      const updates = req.body;
+      const user = await UserModel.updateUser(id, updates);
+      res.json(score);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
 
 module.exports = userController;

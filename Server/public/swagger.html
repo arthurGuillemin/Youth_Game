@@ -103,7 +103,7 @@
     <ul>
       <li><a href="#users">👤 Utilisateurs</a></li>
       <li><a href="#quiz-questions">❓ Quiz Questions</a></li>
-      <li><a href="#points">⭐ Points</a></li>
+      <li><a href="#points">⭐ Scores</a></li>
     </ul>
   </div>
 
@@ -126,6 +126,11 @@
       <p><span class="method get">GET</span> <code>/users/{id}</code></p>
     </div>
 
+    <div class="endpoint">
+      <h3>🔹 Mettre à jour un utilisateur</h3>
+      <p><span class="method put">PUT</span> <code>/users/{id}</code></p>
+    </div>
+
     <h2 id="quiz-questions" class="section-title">Quiz Questions</h2>
     <div class="endpoint">
       <h3>🔹 Récupérer toutes les questions</h3>
@@ -138,8 +143,8 @@
     </div>
 
     <div class="endpoint">
-      <h3>🔹 Récupérer 10 questions aléatoires</h3>
-      <p><span class="method get">GET</span> <code>/quiz-questions/random?limit=10 (ajoustable)</code></p>
+      <h3>🔹 Récupérer 10 (autant que voulue) questions aléatoires</h3>
+      <p><span class="method get">GET</span> <code>/quiz-questions/random?limit=10 </code>(ajustable)</p>
     </div>
 
     <div class="endpoint">
@@ -147,20 +152,37 @@
       <p><span class="method get">GET</span> <code>/quiz-questions/{id}</code></p>
     </div>
 
-    <h2 id="points" class="section-title">Points</h2>
+    <h2 id="points" class="section-title">Scores</h2>
     <div class="endpoint">
-      <h3>🔹 Récupérer tous les points</h3>
-      <p><span class="method get">GET</span> <code>/points</code></p>
+      <h3>🔹 Récupérer tous les scores</h3>
+      <p><span class="method get">GET</span> <code>/scores</code></p>
     </div>
 
     <div class="endpoint">
-      <h3>🔹 Ajouter des points</h3>
-      <p><span class="method post">POST</span> <code>/points</code></p>
+      <h3>🔹 Récupérer  les scores d'un user pr son ID</h3>
+      <p><span class="method get">GET</span> <code>/scores/user/{id}</code></p>
     </div>
 
     <div class="endpoint">
-      <h3>🔹 Récupérer un enregistrement de points par ID</h3>
-      <p><span class="method get">GET</span> <code>/points/{id}</code></p>
+      <h3>🔹 Ajouter un score</h3>
+      <p><span class="method post">POST</span> <code>/scores</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer un enregistrement de score par ID</h3>
+      <p><span class="method get">GET</span> <code>/scores/{id}</code></p>
+    </div>
+
+    <h2 id="leaderboard" class="section-title">Leaderboard</h2>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer le classement International</h3>
+      <p><span class="method get">GET</span> <code>/leaderboard</code></p>
+    </div>
+
+    <div class="endpoint">
+      <h3>🔹 Récupérer le classement d'un pays</h3>
+      <p><span class="method get">GET</span> <code>/leaderboard/country/{country}</code></p>
     </div>
 
   </div>
