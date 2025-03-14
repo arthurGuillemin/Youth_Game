@@ -12,7 +12,7 @@ const userRoutes = require('./Routes/UserRoutes');
 const partyRoutes = require('./Routes/partyRoutes');
 const scoreRoutes = require('./Routes/scoreRoutes');
 const quizQuestionRoutes = require('./Routes/QuizQuestionRoutes');
-const leaderboardRoutes = require('./Routes/leaderboardRoutes');
+const leaderboardRoutes = require('./Routes/leaderBoardRoutes');
 
 app.use('/users', userRoutes);
 app.use('/parties', partyRoutes);
@@ -30,4 +30,3 @@ app.get('/', (req, res) => {
 app.listen(3000, '0.0.0.0', () => {
   console.log('Serveur démarré sur http://0.0.0.0:3000');
 });
-
