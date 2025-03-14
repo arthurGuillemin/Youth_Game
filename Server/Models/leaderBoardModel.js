@@ -21,6 +21,24 @@ const LeaderboardModel = {
     if (error) throw error;
     return data;
   },
+  async getCountryLeaderboard() {
+    const { data, error } = await supabase
+      .from('leaderboard')
+      .select('country, total_points');
+
+    if (error) throw error;
+    const countryScores = data.reduce((acc, entry) => {
+      if (!acc[entry.country]) {
+        acc[entry.country] = 0;
+      }
+      acc[entry.country] += entry.total_points;
+      return acc;
+    }, {});
+
+    return Object.entries(countryScores)
+      .map(([country, total_points]) => ({ country, total_points }))
+      .sort((a, b) => b.total_points - a.total_points);
+  },
 };
 
 module.exports = LeaderboardModel;

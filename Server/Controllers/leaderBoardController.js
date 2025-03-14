@@ -25,6 +25,15 @@ const leaderboardController = {
       res.status(500).json({ error: error.message });
     }
   },
+
+  async getCountryLeaderboard(req, res) {
+    try {
+      const leaderboard = await LeaderboardModel.getCountryLeaderboard();
+      res.json(leaderboard);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
 
 module.exports = leaderboardController;

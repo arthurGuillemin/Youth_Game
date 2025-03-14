@@ -178,16 +178,20 @@
     <h2 id="leaderboard" class="section-title">Leaderboard</h2>
 
     <div class="endpoint">
-      <h3>🔹 Récupérer le classement International</h3>
+      <h3>🔹 Récupérer le classement International  (tous joueur confondus)</h3>
       <p><span class="method get">GET</span> <code>/leaderboard</code></p>
     </div>
 
     <div class="endpoint">
-      <h3>🔹 Récupérer le classement d'un pays</h3>
+      <h3>🔹 Récupérer le classement d'un pays(entre joueurs dans le pays)</h3>
       <p><span class="method get">GET</span> <code>/leaderboard/country/{country}</code></p>
     </div>
 
-  </div>
+    <div class="endpoint">
+      <h3>🔹 Récuperer le classement International (entre pays)</h3>
+      <p><span class="method get">GET</span> <code>/leaderboard/countries</code></p>
+    </div>
 
+  </div>
 </body>
 </html>
