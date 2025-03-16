@@ -7,6 +7,7 @@ const theme = {
     text: "#000000",
     muted: "#A9AEFF",
     highlight: "#FFCC00",
+    error: "#FF3B30",
   },
   fontSizes: {
     small: 14,

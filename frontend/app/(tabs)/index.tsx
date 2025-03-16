@@ -25,7 +25,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <View style={globalStyles.container}>
+    <View style={[globalStyles.container, { flex: 1 }]}>
       <Header title="WELCOME TO" subtitle="Youth Games" showProfileCard={true} />
       <Text style={globalStyles.sectionTitle}>GAMES AWAITING PLAYERS</Text>
       <FlatList
@@ -34,10 +34,10 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => {
           const backgroundColor = colors[index % colors.length];
-          const textColor = textColors[backgroundColor];
+          const textColor = textColors[backgroundColor as keyof typeof textColors];
           return <GameCard title={item.title} color={backgroundColor} textColor={textColor} variant="square" />;
         }}
-        contentContainerStyle={globalStyles.gamesContainer}
+        contentContainerStyle={[globalStyles.gamesContainer, { flexGrow: 1 }]}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         showsVerticalScrollIndicator={false}
       />

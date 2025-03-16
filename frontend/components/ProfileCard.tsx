@@ -15,7 +15,7 @@ export default function ProfileCard({ showExtraStats = false }: ProfileCardProps
           source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
           style={globalStyles.profileImage}
         />
-        <View style={globalStyles.profileInfo}>
+        <View>
           <Text style={globalStyles.profileUsername}>Name</Text>
           <Text style={globalStyles.profileCountry}>
             <Ionicons name="location-outline" size={14} /> Country
@@ -41,7 +41,7 @@ export default function ProfileCard({ showExtraStats = false }: ProfileCardProps
             <Text>0 000 €</Text>
           </View>
           <View style={globalStyles.statsBox}>
-            <Ionicons name="chess-outline" size={16} />
+            <Ionicons name="game-controller-outline" size={16} />
             <Text>00 games</Text>
           </View>
         </View>

@@ -7,7 +7,7 @@ const globalStyles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
 
-  /** HEADER */
+  /** Header */
   header: {
     backgroundColor: theme.colors.primary,
     paddingVertical: theme.spacing.large,
@@ -15,6 +15,18 @@ const globalStyles = StyleSheet.create({
     borderBottomLeftRadius: theme.borderRadius.medium,
     borderBottomRightRadius: theme.borderRadius.medium,
     position: "relative",
+  },
+  headerTitleWithGoBack: {
+    marginTop: 100,
+  },
+  headerSubtitleWithGoBack: {
+    marginTop: 5,
+  },
+  goBackButton: {
+    position: "absolute",
+    top: 80,
+    left: 20,
+    zIndex: 10,
   },
   headerTitle: {
     color: "#ffffff",
@@ -33,8 +45,13 @@ const globalStyles = StyleSheet.create({
   headerWithSearch: {
     height: 200,
   },
+  headerRightIcon: {
+    position: "absolute",
+    top: 90,
+    right: 20,
+  },
 
-  /** PROFILE CARD */
+  /** Profile Card */
   profileCard: {
     backgroundColor: "#ffffff",
     padding: theme.spacing.medium,
@@ -84,7 +101,7 @@ const globalStyles = StyleSheet.create({
     justifyContent: "flex-start",
   },
 
-  /** GAMES LIST */
+  /** Games List */
   sectionTitle: {
     marginTop: theme.spacing.large,
     paddingHorizontal: theme.spacing.medium,
@@ -94,8 +111,6 @@ const globalStyles = StyleSheet.create({
     color: theme.colors.primary,
   },
   gamesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     marginLeft: theme.spacing.small,
   },
   gameCard: {
@@ -110,8 +125,6 @@ const globalStyles = StyleSheet.create({
     height: 160,
     padding: theme.spacing.medium,
     borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
     margin: theme.spacing.medium,
     position: "relative",
     justifyContent: "flex-end",
@@ -144,7 +157,7 @@ const globalStyles = StyleSheet.create({
     right: 25,
   },
 
-  /** SEARCH BAR */
+  /** Search Bar */
   searchWrapper: {
     position: "absolute",
     top: 160,
@@ -170,6 +183,125 @@ const globalStyles = StyleSheet.create({
     paddingVertical: theme.spacing.small,
   },
 
+  /** Ranking */
+  rankingTabs: {
+    flexDirection: "row",
+    backgroundColor: theme.colors.secondary,
+    borderRadius: theme.borderRadius.medium,
+    marginHorizontal: theme.spacing.medium,
+    margin: theme.spacing.large,
+    overflow: "hidden",
+  },
+
+  tabButton: {
+    flex: 1,
+    alignItems: "center",
+    paddingVertical: theme.spacing.small,
+  },
+
+  activeTab: {
+    backgroundColor: theme.colors.accent,
+    borderRadius: theme.borderRadius.medium,
+  },
+
+  tabText: {
+    fontSize: theme.fontSizes.medium,
+    fontFamily: "Inter-Regular",
+    color: theme.colors.text,
+  },
+
+  activeTabText: {
+    fontFamily: "MontserratAlternates-Bold",
+    color: "#ffffff",
+  },
+
+  rankingList: {
+    paddingBottom: 20,
+  },
+
+  /** Simple Card */
+  simpleCard: {
+    backgroundColor: "#F5F6FF",
+    padding: 15,
+    borderRadius: 15,
+    marginBottom: theme.spacing.small,
+    marginHorizontal: 20,
+
+  },
+  simpleCardGame: {
+    backgroundColor: theme.colors.muted,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#010773",
+  },
+  cardTitleGame: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#010773",
+  },
+
+  cardSubtitle: {
+    fontSize: 12,
+    color: "#555",
+    marginTop: 5,
+  },
+
+  cardSubtitleGame: {
+    fontSize: 12,
+    color: "#010773",
+  },
+
+  /** Profil Info */
+  infoContainer: {
+    marginTop: theme.spacing.large,
+    backgroundColor: theme.colors.background,
+  },
+  infoRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: theme.spacing.medium,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.muted,
+    padding: theme.spacing.medium,
+  },
+  infoText: {
+    fontSize: theme.fontSizes.medium,
+    marginLeft: theme.spacing.small,
+    color: theme.colors.text,
+  },
+
+  /** Edit Profil Button */
+  editProfileButton: {
+    backgroundColor: theme.colors.primary,
+    padding: theme.spacing.medium,
+    borderRadius: theme.borderRadius.medium,
+    alignItems: "center",
+    margin: theme.spacing.medium
+  },
+  editProfileText: {
+    color: "#ffffff",
+    fontSize: theme.fontSizes.medium,
+    fontFamily: "MontserratAlternates-Bold",
+  },
+
+  /** Logout Button */
+  logoutButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: theme.colors.error,
+    paddingVertical: theme.spacing.medium,
+    borderRadius: theme.borderRadius.medium,
+    margin: theme.spacing.large,
+  },
+
+  logoutText: {
+    fontSize: theme.fontSizes.medium,
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
 });
 
 export default globalStyles;
