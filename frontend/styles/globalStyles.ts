@@ -14,6 +14,7 @@ const globalStyles = StyleSheet.create({
     paddingHorizontal: theme.spacing.medium,
     borderBottomLeftRadius: theme.borderRadius.medium,
     borderBottomRightRadius: theme.borderRadius.medium,
+    position: "relative",
   },
   headerTitle: {
     color: "#ffffff",
@@ -25,10 +26,12 @@ const globalStyles = StyleSheet.create({
   },
   headerSubtitle: {
     color: "#ffffff",
-    fontSize: theme.fontSizes.large,
-    fontWeight: "bold",
+    fontSize: theme.fontSizes.xlarge,
     letterSpacing: 1,
-    fontFamily: "MontserratAlternates-Regular",
+    fontFamily: "MontserratAlternates-Bold",
+  },
+  headerWithSearch: {
+    height: 200,
   },
 
   /** PROFILE CARD */
@@ -84,33 +87,50 @@ const globalStyles = StyleSheet.create({
   /** GAMES LIST */
   sectionTitle: {
     marginTop: theme.spacing.large,
-    padding: theme.spacing.medium,
-    fontSize: theme.fontSizes.medium,
-    fontWeight: "bold",
-    color: theme.colors.text,
+    paddingHorizontal: theme.spacing.medium,
+    paddingTop: theme.spacing.medium,
+    paddingBottom: theme.spacing.medium,
+    fontSize: theme.fontSizes.large,
+    color: theme.colors.primary,
   },
   gamesContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: theme.spacing.medium,
-    gap: theme.spacing.large,
-    paddingHorizontal: theme.spacing.large,
+    marginLeft: theme.spacing.small,
   },
   gameCard: {
-    width: 160, // Largeur fixe
-    height: 160, // Hauteur fixe
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    padding: 20,
+    position: "relative",
+  },
+  gameCardSquare: {
+    width: 160,
+    height: 160,
     padding: theme.spacing.medium,
-    borderRadius: 15, // Border radius de 15px
-    justifyContent: "center", // Centrer le texte
+    borderRadius: 15,
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: theme.spacing.small,
-    position: "relative", // Permet d'aligner les icônes et le texte en position absolue
+    margin: theme.spacing.medium,
+    position: "relative",
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
+  },
+  gameCardRectangle: {
+    height: 80,
+    marginBottom: 10,
+    marginHorizontal: theme.spacing.medium
   },
   gameTitle: {
     fontSize: theme.fontSizes.medium,
-    fontWeight: "bold",
-    color: theme.colors.text,
-    textAlign: "center", // Centrer le texte dans la carte
+    textAlign: "left",
+    color: theme.colors.primary
+  },
+  gameSubtitle: {
+    fontSize: 12,
+    color: theme.colors.primary,
+    marginTop: 5,
   },
   gameIcon: {
     position: "absolute",
@@ -122,6 +142,32 @@ const globalStyles = StyleSheet.create({
     position: "absolute",
     top: 10,
     right: 25,
+  },
+
+  /** SEARCH BAR */
+  searchWrapper: {
+    position: "absolute",
+    top: 160,
+    paddingHorizontal: theme.spacing.large,
+    width: "100%",
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: theme.colors.background,
+    borderRadius: theme.borderRadius.medium,
+    paddingHorizontal: theme.spacing.medium,
+    paddingVertical: theme.spacing.small,
+    borderWidth: 2,
+    borderColor: theme.colors.highlight,
+  },
+
+  searchInput: {
+    flex: 1,
+    fontSize: theme.fontSizes.medium,
+    fontFamily: "Inter-Regular",
+    color: theme.colors.text,
+    paddingVertical: theme.spacing.small,
   },
 
 });

@@ -12,13 +12,11 @@ export default function SettingScreen() {
 
   return (
     <View style={settingStyles.container}>
-      {/* Header */}
       <View style={settingStyles.header}>
         <Text style={settingStyles.headerTitle}>YOUR</Text>
         <Text style={settingStyles.headerSubtitle}>Settings</Text>
       </View>
 
-      {/* Preferences */}
       <Text style={settingStyles.sectionTitle}>PREFERENCES</Text>
       <View style={settingStyles.settingRow}>
         <Text style={settingStyles.settingText}>Push notifications</Text>
@@ -39,7 +37,6 @@ export default function SettingScreen() {
         />
       </View>
 
-      {/* Support */}
       <Text style={settingStyles.sectionTitle}>SUPPORT</Text>
       <TouchableOpacity style={settingStyles.settingRow}>
         <Text style={settingStyles.settingText}>Help</Text>
@@ -50,7 +47,6 @@ export default function SettingScreen() {
         <Ionicons name="chevron-forward" size={20} color={theme.colors.primary} />
       </TouchableOpacity>
 
-      {/* Logout */}
       <TouchableOpacity style={settingStyles.logoutRow}>
         <Text style={settingStyles.logoutText}>Log out</Text>
       </TouchableOpacity>

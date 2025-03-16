@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { View, ScrollView } from "react-native";
 import globalStyles from "../../styles/globalStyles";
-import ProfileCard from "../../components/ProfileCard";
 import RankingTab from "../../components/RankingTab";
 import RankingItem from "../../components/RankingItem";
+import Header from "@/components/Header";
 
 export default function RankingScreen() {
   const [selectedTab, setSelectedTab] = useState("National");
@@ -18,7 +18,8 @@ export default function RankingScreen() {
 
   return (
     <ScrollView style={globalStyles.container}>
-      <ProfileCard />
+
+      <Header title="DISCOVER YOUR" subtitle="Rankings" showProfileCard={true} />
       <RankingTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       <View>
         {rankingData.map((item, index) => (

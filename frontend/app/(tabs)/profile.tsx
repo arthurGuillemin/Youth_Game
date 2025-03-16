@@ -2,7 +2,6 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import profileStyles from "../../styles/profileStyles";
-import theme from "../../styles/theme";
 
 export default function ProfileScreen() {
   const router = useRouter();

@@ -1,27 +1,35 @@
-import { View, Text, ScrollView } from "react-native";
-import SearchBar from "../../components/SearchBar";
-import GameTypeCard from "../../components/GameTypeCard";
+import { View, Text, FlatList } from "react-native";
+import GameCard from "../../components/GameCard";
 import globalStyles from "../../styles/globalStyles";
+import Header from "@/components/Header";
 
 export default function GameScreen() {
-  const games = ["Type of quizz", "Type of quizz", "Type of quizz", "Type of quizz", "Type of quizz"];
+  const games = [
+    { id: "1", title: "Type of quizz", isMultiplayer: true },
+    { id: "2", title: "Type of quizz", isMultiplayer: false },
+    { id: "3", title: "Type of quizz", isMultiplayer: true },
+    { id: "4", title: "Type of quizz", isMultiplayer: false },
+    { id: "5", title: "Type of quizz", isMultiplayer: true },
+    { id: "6", title: "Type of quizz", isMultiplayer: true },
+    { id: "7", title: "Type of quizz", isMultiplayer: false },
+    { id: "8", title: "Type of quizz", isMultiplayer: true },
+    { id: "9", title: "Type of quizz", isMultiplayer: false },
+    { id: "10", title: "Type of quizz", isMultiplayer: true },
+  ];
 
   return (
-    <ScrollView style={globalStyles.container}>
-      <View style={globalStyles.header}>
-        <Text style={globalStyles.headerTitle}>START THE</Text>
-        <Text style={globalStyles.headerSubtitle}>Games</Text>
-      </View>
-
-      <View style={globalStyles.searchBarContainer}>
-        <SearchBar />
-      </View>
-
+    <View style={globalStyles.container}>
+      <Header title="START THE" subtitle="Games" showSearchBar={true} />
       <Text style={globalStyles.sectionTitle}>CREATE A PARTY</Text>
 
-      {games.map((game, index) => (
-        <GameTypeCard key={index} title={game} />
-      ))}
-    </ScrollView>
+      <FlatList
+        data={games}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <GameCard title={item.title} variant="rectangle" isMultiplayer={item.isMultiplayer} />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 }

@@ -1,17 +1,18 @@
 const theme = {
   colors: {
-    primary: "#02026B",
+    primary: "#010773",
     secondary: "#D9DBFD",
     accent: "#A0A4FF",
     background: "#ffffff",
     text: "#000000",
-    muted: "#555",
-    highlight: "#FDCB58",
+    muted: "#A9AEFF",
+    highlight: "#FFCC00",
   },
   fontSizes: {
     small: 14,
     medium: 16,
-    large: 24,
+    large: 20,
+    xlarge: 24
   },
   spacing: {
     small: 10,
