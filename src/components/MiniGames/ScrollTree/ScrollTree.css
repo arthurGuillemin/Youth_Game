@@ -12,7 +12,7 @@
     position: relative;
 }
 
-/* 🌟 Score en haut, toujours visible */
+/* 🌟 Score affiché en haut */
 .big-score {
     position: fixed;
     top: 5%;
@@ -26,6 +26,19 @@
     padding: 10px 20px;
     border-radius: 10px;
     z-index: 100;
+}
+
+/* ⏳ Timer affiché à côté du score */
+.timer {
+    position: fixed;
+    top: 5%;
+    right: 10%;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 /* 🌱 Zone de jeu */
@@ -42,7 +55,7 @@
     touch-action: none;
 }
 
-/* 🔒 Désactive le scroll après la fin */
+/* 🔒 Désactiver le scroll après la fin */
 .scroll-area.disabled {
     pointer-events: none;
     opacity: 0.6;
@@ -56,17 +69,18 @@
     position: relative;
 }
 
-/* 🌲 Tronc visible et qui pousse bien vers le haut */
+/* 🌲 Tronc animé */
 .tree-trunk {
-    width: 50px;
-    background: url('https://i.imgur.com/fR6Ac9S.png');
+    width: 60px;
+    background: url('https://i.imgur.com/fR6Ac9S.png'); /* Texture tronc */
     background-size: cover;
     border-radius: 15px;
     transition: height 0.1s ease-in-out, transform 0.1s ease-in-out;
     transform-origin: bottom center;
+    animation: tree-grow 1s linear infinite;
 }
 
-/* 🍃 Feuilles qui apparaissent à la fin */
+/* 🌱 Feuilles qui apparaissent à la fin */
 .tree-leaves {
     width: 120px;
     height: 80px;
@@ -80,12 +94,12 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-/* 🌿 Apparition des feuilles uniquement quand l’arbre est grand */
-.tree-container .tree-leaves {
+/* 🍃 Apparition progressive */
+.tree-leaves.show {
     opacity: 1;
 }
 
-/* 🎉 Animation du score final */
+/* 🎉 Animation score final */
 .final-score {
     position: absolute;
     top: 40%;
@@ -99,7 +113,7 @@
     animation: fadeInScale 1s ease-in-out;
 }
 
-/* 🌟 Effets d'apparition */
+/* 🌟 Apparition */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -108,4 +122,10 @@
 @keyframes fadeInScale {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+
+/* 🌲 Animation croissance infinie */
+@keyframes tree-grow {
+    0% { background-position: bottom; }
+    100% { background-position: top; }
 }

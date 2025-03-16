@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import './ScrollTree.css';
+import React, { useState, useRef, useEffect } from "react";
+import "./ScrollTree.css";
 
 const ScrollTree = ({ onGameEnd }) => {
     const [score, setScore] = useState(0);
@@ -10,9 +10,9 @@ const ScrollTree = ({ onGameEnd }) => {
     const treeHeight = useRef(50);
     const lastTouchY = useRef(null);
     const growthSound = useRef(null);
-    const isPlaying = useRef(false); // Gère l’état du son
+    const isPlaying = useRef(false);
 
-    // 📌 Activer l’audio uniquement après interaction utilisateur
+    // 🎵 Activer l’audio uniquement après interaction utilisateur
     useEffect(() => {
         const enableAudio = () => {
             if (!growthSound.current) {
@@ -48,7 +48,7 @@ const ScrollTree = ({ onGameEnd }) => {
 
     // 📌 Gestion du scroll tactile
     const handleTouchMove = (event) => {
-        if (gameOver) return; // Bloque le scroll après la fin du temps
+        if (gameOver) return;
 
         if (event.touches.length > 0) {
             const touchY = event.touches[0].clientY;
@@ -59,13 +59,11 @@ const ScrollTree = ({ onGameEnd }) => {
                     setScore((prevScore) => prevScore + 5);
                     treeHeight.current += 7;
 
-                    // 🎵 Démarrer le son si ce n'est pas déjà en lecture
                     if (growthSound.current && !isPlaying.current) {
                         growthSound.current.play().catch(err => console.warn("Erreur audio:", err));
                         isPlaying.current = true;
                     }
 
-                    // Afficher les feuilles quand l'arbre est assez grand
                     if (treeHeight.current > 250) {
                         setShowLeaves(true);
                     }
@@ -75,11 +73,9 @@ const ScrollTree = ({ onGameEnd }) => {
         }
     };
 
-    // 🛑 Arrêter le son lorsque l'utilisateur arrête de scroller
+    // 🛑 Arrêter le son après le scroll
     const handleTouchEnd = () => {
         lastTouchY.current = null;
-
-        // 🎵 Stopper le son proprement
         if (growthSound.current && isPlaying.current) {
             growthSound.current.pause();
             isPlaying.current = false;
@@ -91,6 +87,9 @@ const ScrollTree = ({ onGameEnd }) => {
             {/* Score toujours visible */}
             <div className="big-score">🌳 {Math.floor(score)} px</div>
 
+            {/* Timer affiché en haut */}
+            <div className="timer">{timeLeft} sec</div>
+
             {/* Zone tactile */}
             <div 
                 className={`scroll-area ${gameOver ? 'disabled' : ''}`} 
@@ -98,18 +97,21 @@ const ScrollTree = ({ onGameEnd }) => {
                 onTouchEnd={handleTouchEnd}
             >   
                 <div className="tree-container">
-                    {/* Tronc qui pousse vers le haut */}
+                    {/* Tronc animé */}
                     <div 
                         className="tree-trunk" 
-                        style={{ height: `${treeHeight.current}px`, transform: `translateY(${-treeHeight.current * 0.5}px)` }}
+                        style={{ 
+                            height: `${treeHeight.current}px`, 
+                            transform: `translateY(${-treeHeight.current * 0.5}px)` 
+                        }}
                     />
 
-                    {/* Feuilles qui apparaissent à la fin */}
-                    {showLeaves && <div className="tree-leaves" />}
+                    {/* Feuilles animées */}
+                    {showLeaves && <div className="tree-leaves show" />}
                 </div>
             </div>
 
-            {/* Animation du score final */}
+            {/* Score final animé */}
             {showFinalScore && (
                 <div className="final-score">
                     🎉 Score final : {Math.floor(score)} px 🎉
