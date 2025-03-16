@@ -1,0 +1,20 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-native",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "app/**/*",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    ".expo/types/**/*.ts"
+, "components/GameCard.tsx", "components/ProfileCard.tsx", "constants/Colors.ts", "styles/globalStyles.ts", "styles/theme.ts"  ]
+}
