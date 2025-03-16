@@ -15,7 +15,7 @@ const userController = {
     try {
       const { id } = req.params;
       const user = await UserModel.getUserById(id);
-      if (!user) return res.status(404).json({ message: 'Utilisateur introuvanle' });
+      if (!user) return res.status(404).json({ message: 'Utilisateur introuvable' });
       res.json(user);
     } catch (error) {
       res.status(500).json({ error: error.message });
