@@ -6,7 +6,7 @@ const QuizQuestionModel = {
       .from('quiz_questions')
       .insert([{ game_id, question_text, answer_options, correct_answer }]);
     if (error) throw error;
-    return data[0];
+    return { message: 'Question created' };
   },
 
   async getAllQuestions() {
@@ -33,7 +33,7 @@ const QuizQuestionModel = {
       .update(updates)
       .eq('id', id);
     if (error) throw error;
-    return data[0];
+    return { message: 'Question updated' };
   },
 
   async deleteQuestion(id) {
@@ -42,7 +42,7 @@ const QuizQuestionModel = {
       .delete()
       .eq('id', id);
     if (error) throw error;
-    return { message: 'Question supprimée' };
+    return { message: 'Question deleted' };
   },
 
   async getRandomQuestions(limit = 10) {
@@ -50,10 +50,7 @@ const QuizQuestionModel = {
       .from('quiz_questions')
       .select('*');
     if (error) throw error;
-    
-    // Mélanger le tableau de questions
     const shuffled = data.sort(() => Math.random() - 0.5);
-    // Retourner seulement "limit" questions
     return shuffled.slice(0, limit);
   }
 };

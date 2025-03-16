@@ -34,7 +34,7 @@ const UserModel = {
       .update(updates)
       .eq('id', id);
     if (error) throw error;
-    return data[0];
+    return { message: 'User updated' };
   },
 };
 

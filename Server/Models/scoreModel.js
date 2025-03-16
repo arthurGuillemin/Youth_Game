@@ -6,7 +6,7 @@ const ScoreModel = {
       .from('scores')
       .insert([{ user_id, game_id, party_id, points }]);
     if (error) throw error;
-    return data[0];
+    return { message: 'Score created' };
   },
 
   async getAllScores() {
@@ -33,7 +33,7 @@ const ScoreModel = {
       .update(updates)
       .eq('id', id);
     if (error) throw error;
-    return data[0];
+    return { message: 'Score updated' };
   },
 
   async deleteScore(id) {
@@ -42,7 +42,7 @@ const ScoreModel = {
       .delete()
       .eq('id', id);
     if (error) throw error;
-    return { message: 'Score supprimé' };
+    return { message: 'Score deleted' };
   },
 
    async getScoreByUserid(user_id) {
@@ -50,12 +50,7 @@ const ScoreModel = {
       .from('scores')
       .select('*')
       .eq('user_id', user_id);
-
-    if (error) {
-      console.error("Erreur Supabase :", error); 
-      throw error;
-    }
-
+    if (error) throw error;
     return data;
   }
 

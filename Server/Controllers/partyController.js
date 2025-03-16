@@ -50,7 +50,50 @@ const partyController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  }
+  },
+
+  async getPartyUsers(req, res) {
+    try {
+      const { id } = req.params;  //id de la partie
+      const users = await PartyModel.getPartyUsers(id);
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }, 
+
+  
+  async addUserToParty(req, res) {
+    try {
+      const { id } = req.params;
+      const { user_id } = req.body;
+      if (!user_id) {
+        return res.status(400).json({ error: "L'ID de l'utilisateur est requis" });
+      }
+      const response = await PartyModel.addUserToParty(id, user_id);
+      res.json(response);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  async removeUserFromParty(req, res) {
+    try {
+      const { id } = req.params; 
+      const { user_id } = req.body; 
+      if (!user_id) {
+        return res.status(400).json({ error: "L'ID de l'utilisateur est requis" });
+      }
+      const response = await PartyModel.removeUserFromParty(id, user_id);
+      res.json(response);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+  
+  
+  
+
 };
 
 module.exports = partyController;

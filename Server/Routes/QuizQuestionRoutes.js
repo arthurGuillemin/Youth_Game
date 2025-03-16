@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const quizQuestionController = require('../Controllers/QuizQuestionController');
-router.get('/random', quizQuestionController.getRandomQuestions);
 
+
+
+router.get('/random', quizQuestionController.getRandomQuestions);
 router.post('/', quizQuestionController.createQuestion);
 router.get('/', quizQuestionController.getAllQuestions);
 router.get('/:id', quizQuestionController.getQuestionById);
