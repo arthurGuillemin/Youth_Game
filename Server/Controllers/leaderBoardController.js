@@ -1,4 +1,4 @@
-const LeaderboardModel = require('../Models/leaderboardModel');
+const LeaderboardModel = require('../Models/leaderBoardModel');
 
 const leaderboardController = {
   async getLeaderBoard(req, res) {
