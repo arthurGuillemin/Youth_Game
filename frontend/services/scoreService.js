@@ -2,13 +2,11 @@ const API_BASE_URL = "http://13.60.245.133:3000/scores";
 
 export const createScore = async (scoreData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/create`, {
+    const response = await fetch(`${API_BASE_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(scoreData),
     });
-
-    if (error) throw new Error("Erreur lors de la création du score");
 
     return await response.json();
   } catch (error) {

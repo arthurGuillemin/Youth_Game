@@ -8,8 +8,6 @@ export const createUser = async (userData) => {
       body: JSON.stringify(userData),
     });
 
-    if (error) throw new Error("Erreur lors de la création de l'utilisateur");
-
     return await response.json();
   } catch (error) {
     console.error("createUser:", error.message);
