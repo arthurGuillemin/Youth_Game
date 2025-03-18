@@ -4,7 +4,7 @@ export const getEmojiGuess = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/all`);
 
-    if (!response.ok) throw new Error("Erreur lors de la récupération des devinettes Emoji");
+    if (!response.ok) throw new Error("Erreur lors de la récupération des emojiGuess");
 
     return await response.json();
   } catch (error) {
@@ -17,7 +17,7 @@ export const getRandomGuess = async (limit = 10) => {
   try {
     const response = await fetch(`${API_BASE_URL}/random?limit=${limit}`);
 
-    if (!response.ok) throw new Error("Erreur lors de la récupération des devinettes Emoji aléatoires");
+    if (!response.ok) throw new Error("Erreur lors de la récupération des devinettes emojiGuess random");
 
     return await response.json();
   } catch (error) {
