@@ -302,6 +302,116 @@ const globalStyles = StyleSheet.create({
     color: "#ffffff",
     fontWeight: "bold",
   },
+
+    /** Connexion */
+    fullScreenContainer: {
+      flex: 1,
+      backgroundColor: "white",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 20,
+    },
+    screenTitle: {
+      fontSize: 24,
+      fontWeight: "bold",
+      marginBottom: 10,
+      color: "#010773",
+      marginTop: 50, // Titre plus bas
+    },
+    screenSubtitle: {
+      fontSize: 18,
+      marginBottom: 20,
+      color: "#666",
+    },
+  
+    /** Conteneur de l'input avec avatar */
+    inputContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: "80%",
+      marginBottom: 15,
+    },
+    avatarSelector: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      backgroundColor: "#f0f0f0",
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: 10,
+    },
+    avatarInsideSelector: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+    },
+    input: {
+      flex: 1,
+      backgroundColor: "#f0f0f0",
+      padding: 10,
+      borderRadius: 8,
+    },
+  
+    /** Bouton principal */
+    button: {
+      backgroundColor: "#010773",
+      padding: 10,
+      borderRadius: 8,
+      marginTop: 10,
+      alignItems: "center",
+      width: "80%",
+    },
+    buttonSelected: {
+      backgroundColor: "#FFD700",
+    },
+    buttonText: {
+      color: "white",
+      fontWeight: "bold",
+    },
+  
+    /** Modal de sélection d'avatar */
+    modalContainer: {
+      flex: 1,
+      backgroundColor: "rgba(0,0,0,0.8)",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    modalContent: {
+      backgroundColor: "white",
+      padding: 20,
+      borderRadius: 15,
+      alignItems: "center",
+      width: "80%",
+    },
+    modalTitle: {
+      fontSize: 20,
+      fontWeight: "bold",
+      marginBottom: 20,
+      color: "#010773",
+    },
+    avatarModal: {
+      width: 60,
+      height: 60,
+      margin: 10,
+      borderRadius: 30,
+    },
+    closeModalButton: {
+      marginTop: 20,
+      backgroundColor: "#010773",
+      padding: 10,
+      borderRadius: 8,
+      width: "80%",
+      alignItems: "center",
+    },
+      /** Sélecteur de pays */
+  pickerContainer: {
+    backgroundColor: "#f0f0f0",
+    borderRadius: 8,
+    width: "80%",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 15,
+  },
 });
 
 export default globalStyles;
