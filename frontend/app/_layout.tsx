@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 import { MontserratAlternates_400Regular, MontserratAlternates_700Bold } from "@expo-google-fonts/montserrat-alternates";
 import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
@@ -9,6 +9,8 @@ import { Platform } from "react-native";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const router = useRouter();
+  const [firstLaunch, setFirstLaunch] = useState(true);
   const [fontsLoaded] = useFonts({
     "MontserratAlternates-Regular": MontserratAlternates_400Regular,
     "MontserratAlternates-Bold": MontserratAlternates_700Bold,
@@ -19,6 +21,9 @@ export default function RootLayout() {
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
+      if (firstLaunch) {
+        router.replace("/FirstTimeScreen"); // Redirection vers la page de première connexion
+      }
     }
   }, [fontsLoaded]);
 
@@ -37,7 +42,6 @@ export default function RootLayout() {
   if (!fontsLoaded) {
     return null;
   }
-
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
