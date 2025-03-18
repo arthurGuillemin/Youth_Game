@@ -1,4 +1,4 @@
-const supabase = require('../config/supabase');
+const supabase = require('../Config/supabase');
 
 const gameModel = {
   async getGamesNames() {
