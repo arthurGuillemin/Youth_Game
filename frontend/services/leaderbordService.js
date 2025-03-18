@@ -8,7 +8,7 @@ export const getLeaderBoard = async () => {
 
     return await response.json();
   } catch (error) {
-    console.error("getLeaderBoard:", error.message);
+    console.error:("getLeaderBoard:", error.message);
     return null;
   }
 };

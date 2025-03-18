@@ -8,7 +8,6 @@ export const createUser = async (userData) => {
       body: JSON.stringify(userData),
     });
 
-
     return await response.json();
   } catch (error) {
     console.error("createUser:", error.message);
@@ -20,7 +19,7 @@ export const getUser = async (userId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${userId}`);
 
-    if (!response.ok) throw new Error("Utilisateur introuvable");
+    if (error) throw new Error("Erreur lors de la recup de l'utilisateur");
 
     return await response.json();
   } catch (error) {
