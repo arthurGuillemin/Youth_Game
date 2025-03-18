@@ -2,13 +2,12 @@ const API_BASE_URL = "http://13.60.245.133:3000/users";
 
 export const createUser = async (userData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/create`, {
+    const response = await fetch(`${API_BASE_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
 
-    if (!response.ok) throw new Error("Erreur lors de la création de l'utilisateur");
 
     return await response.json();
   } catch (error) {

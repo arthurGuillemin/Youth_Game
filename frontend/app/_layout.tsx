@@ -31,7 +31,7 @@ export default function RootLayout() {
     if (Platform.OS === "web" && typeof document !== "undefined") {
       const body = document.body;
       body.style.width = "393px";
-      body.style.height = "852px"; 
+      body.style.height = "852px";
       body.style.marginLeft = "40rem";
       body.style.marginTop = "2rem";
       body.style.backgroundColor = "#A9A9A9";

@@ -1,13 +1,34 @@
+import React, { useEffect, useState } from "react";
 import { View, Text, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import globalStyles from "../styles/globalStyles";
-import theme from "../styles/theme";
+import { getUser } from "../services/userService";
 
 interface ProfileCardProps {
+  userId: string;
   showExtraStats?: boolean;
 }
 
-export default function ProfileCard({ showExtraStats = false }: ProfileCardProps) {
+export default function ProfileCard({ userId, showExtraStats = false }: ProfileCardProps) {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const id = 'c83b94c4-1aec-45e2-8c36-c1df039159f6';
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      console.log("User ID envoyé à getUser:", id);
+      const userData = await getUser(id);
+      if (userData) {
+        console.log("Utilisateur récupéré :", userData);
+        setUser(userData);
+      }
+      setLoading(false);
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+
   return (
     <View style={globalStyles.profileCard}>
       <View style={globalStyles.profileHeader}>
@@ -16,9 +37,9 @@ export default function ProfileCard({ showExtraStats = false }: ProfileCardProps
           style={globalStyles.profileImage}
         />
         <View>
-          <Text style={globalStyles.profileUsername}>Name</Text>
+          <Text style={globalStyles.profileUsername}>{user?.username || "Utilisateur"}</Text>
           <Text style={globalStyles.profileCountry}>
-            <Ionicons name="location-outline" size={14} /> Country
+            <Ionicons name="location-outline" size={14} /> {user?.country || "Pays inconnu"}
           </Text>
         </View>
       </View>
