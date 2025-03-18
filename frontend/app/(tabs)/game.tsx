@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 
 export default function GameScreen() {
   const games = [
-    { id: "1", title: "Type of quizz", isMultiplayer: true },
+    { id: "1", title: "EU Quizz", isMultiplayer: false },
     { id: "2", title: "Type of quizz", isMultiplayer: false },
     { id: "3", title: "Type of quizz", isMultiplayer: true },
     { id: "4", title: "Type of quizz", isMultiplayer: false },

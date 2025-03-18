@@ -103,12 +103,13 @@ const globalStyles = StyleSheet.create({
 
   /** Games List */
   sectionTitle: {
-    marginTop: theme.spacing.large,
+    marginTop: theme.spacing.xxlarge,
     paddingHorizontal: theme.spacing.medium,
     paddingTop: theme.spacing.medium,
-    paddingBottom: theme.spacing.medium,
-    fontSize: theme.fontSizes.large,
-    color: theme.colors.primary,
+    paddingBottom: theme.spacing.large,
+    fontSize: theme.fontSizes.xlarge,
+    fontWeight: 'bold',
+    color: theme.colors.text,
   },
   gamesContainer: {
     marginLeft: theme.spacing.small,
@@ -286,22 +287,6 @@ const globalStyles = StyleSheet.create({
     fontFamily: "MontserratAlternates-Bold",
   },
 
-  /** Logout Button */
-  logoutButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: theme.colors.error,
-    paddingVertical: theme.spacing.medium,
-    borderRadius: theme.borderRadius.medium,
-    margin: theme.spacing.large,
-  },
-
-  logoutText: {
-    fontSize: theme.fontSizes.medium,
-    color: "#ffffff",
-    fontWeight: "bold",
-  },
 
     /** Connexion */
     fullScreenContainer: {
