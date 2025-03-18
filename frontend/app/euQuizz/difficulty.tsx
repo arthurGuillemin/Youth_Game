@@ -1,0 +1,45 @@
+import { View, Text, ImageBackground, FlatList } from "react-native";
+import { useLocalSearchParams } from "expo-router";
+import globalStyles from "../../styles/globalStyles";
+import euQuizzStyles from "../../styles/euQuizzStyles";
+import CategorySelect from "@/components/euQuizz/CategorySelect";
+import DifficultySelect from "@/components/euQuizz/DifficultySelect";
+import theme from "@/styles/theme";
+
+const categories = [
+  { id: "1", title: "International Food", image: require("../../assets/images/food.jpg"), color: "#5D9CEC" },
+  { id: "2", title: "Music and Culture", image: require("../../assets/images/music.jpg"), color: "#6DD5FA" },
+];
+
+const difficulties = [
+  { points: 100, color: "#4aabff" },
+  { points: 200, color: "#4eb0f2" },
+  { points: 300, color: "#56c2e3" },
+  { points: 400, color: "#5dc8de" },
+  { points: 500, color: "#63dce0" },
+];
+
+export default function DifficultySelection() {
+  const { category } = useLocalSearchParams();
+  const selectedCategory = categories.find((cat) => cat.id === category);
+
+  return (
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.sectionTitle}>Difficulty</Text>
+
+      {selectedCategory && (
+        <CategorySelect id={selectedCategory.id} title={selectedCategory.title} image={selectedCategory.image} color={selectedCategory.color} showPlayButton={false} />
+      )}
+      <FlatList
+        data={difficulties}
+        keyExtractor={(item) => item.points.toString()}
+        renderItem={({ item }) => <DifficultySelect points={item.points} color={item.color} />}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ marginTop: theme.spacing.xxlarge }}
+      />
+      <View style={euQuizzStyles.randomButton}>
+        <Text style={euQuizzStyles.randomButtonText}>🎲 random</Text>
+      </View>
+    </View>
+  );
+}

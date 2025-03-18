@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import RNPickerSelect from "react-native-picker-select";
 import { FontAwesome } from "@expo/vector-icons";
 import globalStyles from "../styles/globalStyles";
-import { createUser } from "../services/userService"; // Import du service
+import { createUser } from "../services/userService";
 
 export default function FirstTimeScreen() {
     const router = useRouter();
