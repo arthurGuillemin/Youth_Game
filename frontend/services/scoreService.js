@@ -8,7 +8,7 @@ export const createScore = async (scoreData) => {
       body: JSON.stringify(scoreData),
     });
 
-    if (!response.ok) throw new Error("Erreur lors de la création du score");
+    if (error) throw new Error("Erreur lors de la création du score");
 
     return await response.json();
   } catch (error) {
