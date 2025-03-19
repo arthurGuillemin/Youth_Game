@@ -32,6 +32,16 @@ const euQuizmodel = {
     if (error) throw error;
     return data;
   },
+  async getCategories() {
+    const { data, error } = await supabase
+      .from('euquizquestions')
+      .select('category')
+      .order('category', { ascending: true }); 
+    if (error) throw error;
+    const uniqueCategories = [...new Set(data.map(item => item.category))];
+  
+    return uniqueCategories;
+  }
   
 
 };

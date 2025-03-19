@@ -44,7 +44,15 @@ const euQuizController = {
       console.error("Erreur dans getQuestionByNationDifficulty:", error.message);
       res.status(500).json({ error: error.message });
     }
-  }
+  }, 
+  async getCategories(req, res) {
+    try {
+      const categories = await euQuizModel.getCategories();
+      res.json(categories);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }, 
 };  
 
 export default euQuizController;
