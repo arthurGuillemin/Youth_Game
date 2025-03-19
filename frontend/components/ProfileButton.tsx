@@ -9,8 +9,7 @@ export default function ProfileButton() {
   return (
     <TouchableOpacity
       style={globalStyles.profileButton}
-      onPress={() => router.push("/profile")}
-    >
+      onPress={() => {router.push("/profile");}}>
       <View style={globalStyles.profileIconContainer}>
         <Ionicons name="person-outline" size={30} color="white" />
       </View>

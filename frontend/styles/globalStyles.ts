@@ -177,40 +177,106 @@ const globalStyles = StyleSheet.create({
     paddingVertical: theme.spacing.small,
   },
 
-  /** Ranking */
-  rankingTabs: {
+  /** 🔹 Profil utilisateur */
     flexDirection: "row",
-    backgroundColor: theme.colors.secondary,
-    borderRadius: theme.borderRadius.medium,
-    marginHorizontal: theme.spacing.medium,
-    margin: theme.spacing.large,
-    overflow: "hidden",
-  },
-
-  tabButton: {
-    flex: 1,
     alignItems: "center",
-    paddingVertical: theme.spacing.small,
+    marginBottom: 20,
   },
-
-  activeTab: {
-    backgroundColor: theme.colors.accent,
-    borderRadius: theme.borderRadius.medium,
+  profileIcon: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 15,
   },
-
-  tabText: {
-    fontSize: theme.fontSizes.medium,
-    fontFamily: "Inter-Regular",
-    color: theme.colors.text,
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
-
-  activeTabText: {
-    fontFamily: "MontserratAlternates-Bold",
+  profileUsername: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  profileScore: {
+    fontSize: 14,
+    color: "#ffffff",
+  },
+  profileHighScore: {
+    fontSize: 14,
     color: "#ffffff",
   },
 
-  rankingList: {
-    paddingBottom: 20,
+  /** 🔹 Leaderboard */
+  leaderboardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  leaderboardTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  leaderboardShowAll: {
+    fontSize: 14,
+    color: "#ffffff",
+    textDecorationLine: "underline",
+  },
+
+  /** 🔹 Sélecteur de région */
+  regionSelector: {
+    backgroundColor: "#4aabff",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  regionSelectorText: {
+    fontSize: 16,
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+
+  /** 🔹 Classement */
+  rankSectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#ffffff",
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  rankItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#1c2c5c",
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  rankPosition: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  rankName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  rankCountry: {
+    fontSize: 14,
+    color: "#ffffff",
+  },
+  rankPoints: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#ffffff",
   },
 
   /** Simple Card */
@@ -252,8 +318,9 @@ const globalStyles = StyleSheet.create({
     position: "absolute",
     top: 90,
     right: 20,
-    backgroundColor: "transparent",
+    backgroundColor: theme.colors.background,
     padding: 10,
+    zIndex: 10,
   },
   profileIconContainer: {
     width: 60,
