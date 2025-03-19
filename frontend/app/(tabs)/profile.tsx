@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import globalStyles from "../../styles/globalStyles";
-import Header from "@/components/Header";
 import ProfileInfoRow from "../../components/ProfileInfoRow";
 import { getUser } from "../../services/userService"; 
+
 
 export default function ProfileScreen() {
   const router = useRouter();
@@ -47,7 +47,6 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView style={globalStyles.container}>
-      <Header title="THIS IS YOUR" subtitle="Profile" rightIcon="settings" showProfileCard={true} showExtraStats={true} />
 
       <View style={globalStyles.infoContainer}>
         {profileInfo.map((item, index) => (

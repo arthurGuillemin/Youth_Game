@@ -3,7 +3,6 @@ import { useRouter } from "expo-router";
 
 import GameCard from "../../components/GameCard";
 import globalStyles from "../../styles/globalStyles";
-import Header from "@/components/Header";
 
 export default function GameScreen() {
   const router = useRouter();
@@ -15,7 +14,6 @@ export default function GameScreen() {
 
     return (
       <View style={globalStyles.container}>
-        <Header title="START THE" subtitle="Games" showSearchBar={true} />
         <Text style={globalStyles.sectionTitle}>CREATE A PARTY</Text>
 
         <FlatList

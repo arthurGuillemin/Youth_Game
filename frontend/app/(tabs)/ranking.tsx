@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, FlatList, ActivityIndicator, Alert } from "react-native";
 import globalStyles from "../../styles/globalStyles";
-import Header from "../../components/Header";
 import TabSwitcher from "../../components/TabSwitcher";
 import SimpleCard from "../../components/SimpleCard";
 import { getLeaderBoard, getLeaderBoardByCountry } from "../../services/leaderbordService"; 
@@ -55,7 +54,6 @@ export default function RankingScreen() {
 
   return (
     <View style={globalStyles.container}>
-      <Header title="DISCOVER YOUR" subtitle="Ranking" showProfileCard={true} />
 
       <TabSwitcher tabs={tabs} selectedTab={selectedTab} onSelectTab={setSelectedTab} />
 

@@ -1,30 +1,6 @@
-import { Text, View, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
 import globalStyles from "../styles/globalStyles";
-
-function splitTitle(title: string) {
-  const words = title.split(" ");
-
-  if (words.length === 1) {
-    return ["", words[0].toUpperCase()];
-  }
-
-  let firstLine = "";
-  let secondLine = "";
-
-  for (let i = 0; i < words.length - 1; i++) {
-    if ((firstLine + words[i]).length <= 10) {
-      firstLine += (firstLine ? " " : "") + words[i];
-    } else {
-      break;
-    }
-  }
-
-  secondLine = words.slice(firstLine.split(" ").length).join(" ").toUpperCase();
-
-  return [firstLine, secondLine];
-}
 
 interface GameCardProps {
   title: string;
@@ -32,76 +8,39 @@ interface GameCardProps {
   textColor?: string;
   isMultiplayer?: boolean;
   variant?: "square" | "rectangle";
+  image?: any;
 }
 
 export default function GameCard({
   title,
-  color,
-  textColor = "#000",
-  isMultiplayer = true,
   variant = "square",
+  image
 }: GameCardProps) {
   const router = useRouter();
-  const [firstLine, secondLine] = splitTitle(title);
-
 
   const handlePress = () => {
     if (title === "EU Quizz") {
       router.push("../euQuizz/category");
-    } if (title === "EmojiGame") {
+    } else if (title === "EmojiGame") {
       router.push("../game-emoji");
     } else if (title === "QuizzGame") {
       router.push("../game-quizz");
     }
   };
 
-  return (
-    <TouchableOpacity onPress={handlePress} style={[
-      globalStyles.gameCard,
-      variant === "rectangle" ? globalStyles.gameCardRectangle : globalStyles.gameCardSquare,
-      { backgroundColor: color || "#F5F5FF" }
-    ]}>
-      {variant === "square" && (
-        <>
-          <Ionicons name="person-outline" size={14} style={{ position: "absolute", top: 10, right: 10, color: textColor }} />
-          <Text style={{ fontSize: 12, position: "absolute", top: 10, right: 25, color: textColor }}> 0/5 </Text>
-        </>
+    return (
+      <TouchableOpacity onPress={handlePress} style={[
+        globalStyles.gameCard,
+        variant === "rectangle" ? globalStyles.gameCardRectangle : globalStyles.gameCardSquare,
+      ]}>
+
+      {image && (
+        <Image source={image} style={globalStyles.gameImage} resizeMode="cover" />
       )}
 
-      <View>
-        {variant === "square" ? (
-          <>
-            {firstLine ? (
-              <Text style={[
-                globalStyles.gameTitle,
-                { fontFamily: "Inter-Regular", textTransform: "capitalize", color: textColor }
-              ]}>
-                {firstLine}
-              </Text>
-            ) : null}
-
-            <Text style={[
-              globalStyles.gameTitle,
-              { fontFamily: "MontserratAlternates-Bold", textTransform: "uppercase", color: textColor }
-            ]}>
-              {secondLine}
-            </Text>
-          </>
-        ) : (
-          <Text style={[
-            globalStyles.gameTitle,
-            { fontFamily: "MontserratAlternates-Regular", textTransform: "uppercase" }
-          ]}>
-            {title}
-          </Text>
-        )}
+      <View style={globalStyles.overlay}>
+        <Text style={globalStyles.gameTitle}>{title}</Text>
       </View>
-
-      {variant === "rectangle" && (
-        <Text style={globalStyles.gameSubtitle}>
-          {isMultiplayer ? "MULTIPLAYER" : "SINGLEPLAYER"}
-        </Text>
-      )}
     </TouchableOpacity>
   );
 }
