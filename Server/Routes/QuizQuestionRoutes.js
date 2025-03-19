@@ -1,6 +1,8 @@
-const express = require('express');
+import express from 'express';
+import quizQuestionController from '../Controllers/QuizQuestionController.js';
+
 const router = express.Router();
-const quizQuestionController = require('../Controllers/QuizQuestionController');
+
 
 
 
@@ -11,4 +13,4 @@ router.get('/:id', quizQuestionController.getQuestionById);
 router.put('/:id', quizQuestionController.updateQuestion);
 router.delete('/:id', quizQuestionController.deleteQuestion);
 
-module.exports = router;
+export default router;

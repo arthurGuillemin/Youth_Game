@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 const gameModel = {
   async getGamesNames() {
@@ -10,4 +10,4 @@ const gameModel = {
   }
 }
 
-module.exports = gameModel;
+export default gameModel;

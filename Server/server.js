@@ -1,27 +1,39 @@
-const express = require('express');
 const app = express();
-require('dotenv').config();
 
-const path = require('path');
+import dotenv from 'dotenv';
+import cors from "cors";
+import express from "express";
+import path from "path";
+
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Définir __dirname avec ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors());
 
-const userRoutes = require('./Routes/UserRoutes');
-const partyRoutes = require('./Routes/partyRoutes');
-const scoreRoutes = require('./Routes/scoreRoutes');
-const quizQuestionRoutes = require('./Routes/QuizQuestionRoutes');
-const leaderboardRoutes = require('./Routes/leaderBoardRoutes');
-const emojjiGuessRoutes = require('./Routes/emojiGuessRoutes');
-const euquizQuestionsRoutes = require('./Routes/euquizQuestionsRoutes');
-const gamesRoutes = require('./Routes/gamesRoutes');
+import userRoutes from "./Routes/UserRoutes.js";
+import partyRoutes from "./Routes/partyRoutes.js";
+import scoreRoutes from "./Routes/scoreRoutes.js";
+import quizQuestionRoutes from "./Routes/QuizQuestionRoutes.js";
+import leaderboardRoutes from "./Routes/leaderBoardRoutes.js";
+import emojiGuessRoutes from "./Routes/emojiGuessRoutes.js";
+import euquizQuestionsRoutes from "./Routes/euquizQuestionsRoutes.js";
+import gamesRoutes from "./Routes/gamesRoutes.js";
+
 app.use('/users', userRoutes);
 app.use('/parties', partyRoutes);
 app.use('/scores', scoreRoutes);
 app.use('/quiz-questions', quizQuestionRoutes);
 app.use('/leaderboard', leaderboardRoutes);
-app.use('/emojiguess', emojjiGuessRoutes);
+app.use('/emojiguess', emojiGuessRoutes);
 app.use('/euquizquestions', euquizQuestionsRoutes);
 app.use('/games', gamesRoutes);
 

@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 const LeaderboardModel = {
   async getLeaderBoard() {
@@ -41,4 +41,4 @@ const LeaderboardModel = {
   },
 };
 
-module.exports = LeaderboardModel;
+export default LeaderboardModel;

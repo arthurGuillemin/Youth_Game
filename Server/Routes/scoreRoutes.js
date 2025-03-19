@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import scoreController from '../Controllers/scoreController.js';
+
 const router = express.Router();
-const scoreController = require('../Controllers/scoreController');
 
 router.post('/', scoreController.createScore);
 router.get('/', scoreController.getAllScores);
@@ -9,4 +10,4 @@ router.get('/user/:user_id', scoreController.getScoreByUserid);
 router.put('/:id', scoreController.updateScore);
 router.delete('/:id', scoreController.deleteScore);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const LeaderboardModel = require('../Models/leaderBoardModel');
+import LeaderboardModel from "../Models/leaderBoardModel.js";
 
 const leaderboardController = {
   async getLeaderBoard(req, res) {
@@ -36,4 +36,4 @@ const leaderboardController = {
   },
 };
 
-module.exports = leaderboardController;
+export default leaderboardController;

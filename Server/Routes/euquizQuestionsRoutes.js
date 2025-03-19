@@ -1,10 +1,14 @@
-const express = require('express');
+import express from 'express';
+import euquizController from '../Controllers/euquizController.js'; 
+
 const router = express.Router();
-const euquizController = require('../Controllers/euquizController');
+
 
 
 
 router.get('/', euquizController.getEuquizQuestions);
 router.get('/:category/exclude/:country/:difficulty', euquizController.getQuestionByCategoryExcludeCountry);
+router.get('/categories', euquizController.getCategories);
 router.get('/:nation/:difficulty/:category', euquizController.getQuestionByNationDifficulty);
-module.exports = router;
+
+export default router;

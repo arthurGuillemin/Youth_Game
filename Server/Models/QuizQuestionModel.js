@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 const QuizQuestionModel = {
   async createQuestion({ game_id, question_text, answer_options, correct_answer }) {
@@ -55,4 +55,4 @@ const QuizQuestionModel = {
   }
 };
 
-module.exports = QuizQuestionModel;
+export default QuizQuestionModel;

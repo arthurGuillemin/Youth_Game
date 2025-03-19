@@ -1,5 +1,4 @@
-const { get } = require('http');
-const euQuizModel = require('../Models/euquizModel');
+import euQuizModel from "../Models/euquizModel.js";
 
 const euQuizController = {
 
@@ -45,7 +44,15 @@ const euQuizController = {
       console.error("Erreur dans getQuestionByNationDifficulty:", error.message);
       res.status(500).json({ error: error.message });
     }
-  }
+  }, 
+  async getCategories(req, res) {
+    try {
+      const categories = await euQuizModel.getCategories();
+      res.json(categories);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }, 
 };  
 
-module.exports = euQuizController;
+export default euQuizController;
