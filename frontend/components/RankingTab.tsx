@@ -1,35 +1,27 @@
-import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import globalStyles from "../styles/globalStyles";
-import theme from "../styles/theme";
+import { View, Text } from "react-native";
+import rankingStyles from "../styles/RankingStyles";
+import theme from "@/styles/theme";
 
-export default function RankingTab({ selectedTab, setSelectedTab }) {
+interface RankingTabProps {
+  title: string;
+  data: { name: string; points: string; country?: string }[];
+}
+
+export default function RankingTab({ title, data }: RankingTabProps) {
   return (
-    <View style={{ flexDirection: "row", marginVertical: theme.spacing.medium }}>
-      <TouchableOpacity
-        style={{
-          flex: 1,
-          backgroundColor: selectedTab === "National" ? theme.colors.accent : theme.colors.secondary,
-          padding: theme.spacing.small,
-          borderTopLeftRadius: theme.borderRadius.medium,
-          borderBottomLeftRadius: theme.borderRadius.medium,
-        }}
-        onPress={() => setSelectedTab("National")}
-      >
-        <Text style={{ textAlign: "center", fontWeight: "bold" }}>NATIONAL</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          flex: 1,
-          backgroundColor: selectedTab === "Europe" ? theme.colors.accent : theme.colors.secondary,
-          padding: theme.spacing.small,
-          borderTopRightRadius: theme.borderRadius.medium,
-          borderBottomRightRadius: theme.borderRadius.medium,
-        }}
-        onPress={() => setSelectedTab("Europe")}
-      >
-        <Text style={{ textAlign: "center", fontWeight: "bold" }}>EUROPE</Text>
-      </TouchableOpacity>
+    <View style={{margin: theme.spacing.medium}}>
+      <Text style={rankingStyles.rankSectionTitle}>{title}</Text>
+      {data.slice(0, 3).map((item, index) => (
+        <View key={`${title}-${index}`} style={rankingStyles.rankItem}>
+          <Text style={rankingStyles.rankPosition}>{index + 1}.</Text>
+          <View>
+            <Text style={rankingStyles.rankName}>{item.name}</Text>
+            <Text style={rankingStyles.rankCountry}>🇩🇪 {item.country || "Unknown"}</Text>
+          </View>
+          <Text style={rankingStyles.rankPoints}>{item.points}</Text>
+        </View>
+      ))}
     </View>
   );
 }
+

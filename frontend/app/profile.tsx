@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
-import globalStyles from "../../styles/globalStyles";
-import ProfileInfoRow from "../../components/ProfileInfoRow";
-import { getUser } from "../../services/userService"; 
+import globalStyles from "../styles/globalStyles";
+import ProfileInfoRow from "../components/ProfileInfoRow";
+import { getUser } from "../services/userService"; 
 
 
 export default function ProfileScreen() {
