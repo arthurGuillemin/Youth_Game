@@ -19,8 +19,6 @@ export const getUser = async (userId) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${userId}`);
 
-    if (error) throw new Error("Erreur lors de la recup de l'utilisateur");
-
     return await response.json();
   } catch (error) {
     console.error("getUser:", error.message);
