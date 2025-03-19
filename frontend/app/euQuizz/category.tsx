@@ -1,6 +1,8 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import globalStyles from "../../styles/globalStyles";
 import CategorySelect from "../../components/euQuizz/CategorySelect";
+import { useRouter } from "expo-router";
 
 const categories = [
   { id: "1", title: "International Food", image: require("../../assets/images/food.jpg"), color: "#4aabff" },
@@ -11,9 +13,15 @@ const categories = [
 ];
 
 export default function CategorySelection() {
+  const router = useRouter();
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.sectionTitle}>Categories</Text>
+      <View style={globalStyles.headerWithGoBack}>
+        <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={globalStyles.sectionTitle}>Categories</Text>
+      </View>
 
       <FlatList
         data={categories}

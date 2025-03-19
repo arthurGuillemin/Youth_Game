@@ -9,8 +9,13 @@ interface ProfileCardProps {
   showExtraStats?: boolean;
 }
 
+interface User {
+  username: string;
+  country: string;
+}
+
 export default function ProfileCard({ userId, showExtraStats = false }: ProfileCardProps) {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const id = 'c83b94c4-1aec-45e2-8c36-c1df039159f6';
 

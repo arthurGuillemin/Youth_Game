@@ -181,6 +181,81 @@ const euQuizzStyles = StyleSheet.create({
         flexDirection: "row",
         gap: 10,
       },
+
+      //result
+      resultContainer: {
+        flex: 1,
+        backgroundColor: theme.colors.background,
+        padding: theme.spacing.large,
+        alignItems: "center",
+      },
+      resultTitle: {
+        marginTop: theme.spacing.xxlarge,
+        fontSize: theme.fontSizes.xlarge,
+        fontWeight: "bold",
+        color: "#ffffff",
+        alignSelf:'flex-start',
+      },
+      resultSubtitle: {
+        fontSize: theme.fontSizes.large,
+        fontWeight: "bold",
+        color: "#ffffff",
+        marginBottom: theme.spacing.large,
+        alignSelf:'flex-start',
+      },
+      podiumIcon: {
+        marginBottom: theme.spacing.large,
+        marginTop: theme.spacing.large,
+      },
+
+      // Ranking Card
+      rankingCard: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        backgroundColor: "transparent",
+        borderWidth: 2,
+        borderColor: "#4B92D8",
+        borderRadius: theme.borderRadius.medium,
+        paddingVertical: theme.spacing.medium,
+        paddingHorizontal: theme.spacing.large,
+        marginBottom: theme.spacing.medium,
+        width: "90%",
+      },
+      rankingText: {
+        fontSize: theme.fontSizes.large,
+        fontWeight: "bold",
+        color: "#ffffff",
+      },
+      rankingName: {
+        fontSize: theme.fontSizes.medium,
+        fontWeight: "bold",
+        color: "#ffffff",
+      },
+      rankingScore: {
+        fontSize: theme.fontSizes.medium,
+        fontWeight: "bold",
+        color: "#ffffff",
+      },
+      nextButton: {
+        marginTop: 30,
+        alignSelf: "center",
+        backgroundColor: "#ffffff",
+        paddingVertical: 12,
+        paddingHorizontal: 40,
+        borderRadius: 25,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+      },
+      nextButtonText: {
+        color: "#010773",
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: "center",
+      },
+      
 });
 
 export default euQuizzStyles;
