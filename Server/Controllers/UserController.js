@@ -1,4 +1,4 @@
-const UserModel = require('../Models/UserModel');
+import UserModel from '../Models/UserModel.js';
 
 const userController = {
   async createUser(req, res) {
@@ -44,4 +44,4 @@ const userController = {
   },
 };
 
-module.exports = userController;
+export default userController;

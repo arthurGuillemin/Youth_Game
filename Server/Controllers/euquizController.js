@@ -1,5 +1,4 @@
-const { get } = require('http');
-const euQuizModel = require('../Models/euquizModel');
+import euQuizModel from "../Models/euquizModel.js";
 
 const euQuizController = {
 
@@ -48,4 +47,4 @@ const euQuizController = {
   }
 };  
 
-module.exports = euQuizController;
+export default euQuizController;

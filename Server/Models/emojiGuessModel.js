@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 
 const EmojiGuessModel = {
@@ -22,4 +22,4 @@ const EmojiGuessModel = {
 
 }
 
-module.exports = EmojiGuessModel;
+export default EmojiGuessModel;

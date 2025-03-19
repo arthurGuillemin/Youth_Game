@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import  supabase from '../Config/supabase.js'
 
 const UserModel = {
 
@@ -38,4 +38,4 @@ const UserModel = {
   },
 };
 
-module.exports = UserModel;
+export default UserModel;

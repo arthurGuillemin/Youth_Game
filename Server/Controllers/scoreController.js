@@ -1,4 +1,4 @@
-const ScoreModel = require('../Models/scoreModel');
+import ScoreModel from '../Models/scoreModel.js';
 
 const scoreController = {
   async createScore(req, res) {
@@ -70,4 +70,4 @@ const scoreController = {
   }
 };
 
-module.exports = scoreController;
+export default scoreController;

@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 const ScoreModel = {
   async createScore({ user_id, game_id, party_id, points }) {
@@ -56,4 +56,4 @@ const ScoreModel = {
 
 };
 
-module.exports = ScoreModel;
+export default ScoreModel;

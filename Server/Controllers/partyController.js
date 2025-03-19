@@ -1,4 +1,4 @@
-const PartyModel = require('../Models/partyModel');
+import PartyModel from '../Models/partyModel.js';
 
 const partyController = {
   async createParty(req, res) {
@@ -106,4 +106,4 @@ const partyController = {
 
 };
 
-module.exports = partyController;
+export default partyController;

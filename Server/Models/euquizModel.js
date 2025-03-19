@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 const euQuizmodel = {
   async getEuQuiz() {
@@ -37,4 +37,4 @@ const euQuizmodel = {
 };
 
 
-module.exports = euQuizmodel;
+export default euQuizmodel;

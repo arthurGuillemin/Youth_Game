@@ -1,4 +1,4 @@
-const supabase = require('../Config/supabase');
+import supabase from '../Config/supabase.js';
 
 const PartyModel = {
   async createParty({ game_id, created_by, start_time, end_time }) {
@@ -88,4 +88,4 @@ const PartyModel = {
   
 };
 
-module.exports = PartyModel;
+export default PartyModel;

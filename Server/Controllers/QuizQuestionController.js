@@ -1,4 +1,4 @@
-const QuizQuestionModel = require('../Models/QuizQuestionModel');
+import QuizQuestionModel from '../Models/QuizQuestionModel.js';
 
 const quizQuestionController = {
   async createQuestion(req, res) {
@@ -62,4 +62,4 @@ const quizQuestionController = {
   }
 };
 
-module.exports = quizQuestionController;
+export default quizQuestionController;

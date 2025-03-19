@@ -1,10 +1,9 @@
-const express = require('express');
+import express from 'express';
+import emojiGuessController from '../Controllers/emojiGuessController.js';
+
 const router = express.Router();
-const emojiGuessController = require('../Controllers/emojiGuessController');
 
 router.get('/', emojiGuessController.getEmojiGuess);
 router.get('/random', emojiGuessController.getRandomGuess);
 
-
-
-module.exports = router;
+export default router;

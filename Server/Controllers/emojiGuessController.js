@@ -1,4 +1,4 @@
-const EmojiGuessModel = require('../Models/emojiGuessModel');
+import EmojiGuessModel from '../Models/emojiGuessModel.js';
 
 const emojiGuessController = {
 
@@ -23,4 +23,4 @@ const emojiGuessController = {
 
 };
 
-module.exports = emojiGuessController;
+export default emojiGuessController;

@@ -1,4 +1,4 @@
-const gameModel = require('../Models/gameModel');
+import gameModel from '../Models/gameModel.js';
 
 const gameController = {
 
@@ -12,4 +12,4 @@ const gameController = {
   }
 };
 
-module.exports = gameController;
+export default gameController;
