@@ -9,7 +9,6 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// Définir __dirname avec ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -27,6 +26,8 @@ import leaderboardRoutes from "./Routes/leaderBoardRoutes.js";
 import emojiGuessRoutes from "./Routes/emojiGuessRoutes.js";
 import euquizQuestionsRoutes from "./Routes/euquizQuestionsRoutes.js";
 import gamesRoutes from "./Routes/gamesRoutes.js";
+import achievementRoutes from './Routes/AchievementRoutes.js';
+
 
 app.use('/users', userRoutes);
 app.use('/parties', partyRoutes);
@@ -36,6 +37,7 @@ app.use('/leaderboard', leaderboardRoutes);
 app.use('/emojiguess', emojiGuessRoutes);
 app.use('/euquizquestions', euquizQuestionsRoutes);
 app.use('/games', gamesRoutes);
+app.use('/achievements', achievementRoutes);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
