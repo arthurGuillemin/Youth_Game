@@ -17,26 +17,16 @@ export default function GameScreen() {
       <View style={globalStyles.container}>
         <Header title="START THE" subtitle="Games" showSearchBar={true} />
         <Text style={globalStyles.sectionTitle}>CREATE A PARTY</Text>
-  
+
         <FlatList
           data={games}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => {
-                if (item.title === "QuizzGame") {
-                  router.push("/game-quizz");
-                } else if (item.title === "EmojiGame") {
-                  router.push("/game-emoji");
-                }
-              }}
-            >
               <GameCard
                 title={item.title}
                 variant="rectangle"
                 isMultiplayer={item.isMultiplayer}
               />
-            </TouchableOpacity>
           )}
           showsVerticalScrollIndicator={false}
         />
