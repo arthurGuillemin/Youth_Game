@@ -23,8 +23,16 @@ const GameQuizz = ({ onFinish }) => {
   useEffect(() => {
     const fetchQuestions = async () => {
       const questionsFromAPI = await getRandomQuestions(10);
-      if (questionsFromAPI) {
-        setRandomizedQuestions(shuffleArray(questionsFromAPI));
+      console.log("Questions reçues :", questionsFromAPI); // Debugging
+
+      if (questionsFromAPI && Array.isArray(questionsFromAPI) && questionsFromAPI.length > 0) {
+        const formattedQuestions = questionsFromAPI.map(q => ({
+          question: q.question_text, // ✅ Adaptation des clés de l'API
+          options: q.answer_options,
+          answer: q.correct_answer,
+        }));
+
+        setRandomizedQuestions(shuffleArray(formattedQuestions));
       } else {
         Alert.alert("Erreur", "Impossible de charger les questions.");
       }
@@ -35,15 +43,18 @@ const GameQuizz = ({ onFinish }) => {
   }, []);
 
   const handleAnswer = (selectedOption: string) => {
-    const correctAnswer = randomizedQuestions[currentQuestionIndex].answer;
+    const currentQuestion = randomizedQuestions[currentQuestionIndex];
+    if (!currentQuestion) return;
+
+    const correctAnswer = currentQuestion.answer;
     const newButtonColors = [...buttonColors];
 
     if (selectedOption === correctAnswer) {
-      newButtonColors[randomizedQuestions[currentQuestionIndex].options.indexOf(selectedOption)] = 'green';
-      setScore(score + 1);  
+      newButtonColors[currentQuestion.options.indexOf(selectedOption)] = 'green';
+      setScore(prevScore => prevScore + 1);
     } else {
-      newButtonColors[randomizedQuestions[currentQuestionIndex].options.indexOf(selectedOption)] = 'red';
-      newButtonColors[randomizedQuestions[currentQuestionIndex].options.indexOf(correctAnswer)] = 'green';
+      newButtonColors[currentQuestion.options.indexOf(selectedOption)] = 'red';
+      newButtonColors[currentQuestion.options.indexOf(correctAnswer)] = 'green';
     }
 
     setButtonColors(newButtonColors);
@@ -52,14 +63,15 @@ const GameQuizz = ({ onFinish }) => {
     setTimeout(() => {
       const nextIndex = currentQuestionIndex + 1;
       if (nextIndex < randomizedQuestions.length) {
-        setCurrentQuestionIndex(nextIndex); 
+        setCurrentQuestionIndex(nextIndex);
       } else {
         Alert.alert(
           "Quiz terminé",
-          `Vous avez obtenu ${score} sur 10`,
+          `Vous avez obtenu ${score + 1} sur 10`, // ✅ Correction affichage score final
           [{ text: "OK", onPress: onFinish }]
         );
         setCurrentQuestionIndex(0);
+        setScore(0); // ✅ Reset du score après le quiz
       }
       setIsAnswered(false);
       setButtonColors(Array(4).fill('#007bff'));
