@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity } from "react-native";
 import CategorySelect from "../../components/euQuizz/CategorySelect";
 import { getCategories } from "../../services/euQuizService";
 import globalStyles from "../../styles/globalStyles";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export default function CategorySelection() {
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,10 +33,15 @@ export default function CategorySelection() {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.sectionTitle}>Categories</Text>
+      <View style={globalStyles.headerWithGoBack}>
+        <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={globalStyles.sectionTitle}>Categories</Text>
+      </View>
       <FlatList
         data={categories}
-        keyExtractor={(item) => item} 
+        keyExtractor={(item) => item}
         renderItem={({ item }) => <CategorySelect title={item} />}
         showsVerticalScrollIndicator={false}
       />

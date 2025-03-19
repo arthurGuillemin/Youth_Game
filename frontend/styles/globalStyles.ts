@@ -250,14 +250,14 @@ const globalStyles = StyleSheet.create({
   /** Profil Info */
   profileButton: {
     position: "absolute",
-    top: -20,
-    right: -20,
+    top: 90,
+    right: 20,
     backgroundColor: "transparent",
     padding: 10,
   },
   profileIconContainer: {
-    width: 170,
-    height: 170,
+    width: 60,
+    height: 60,
     borderRadius: 500,
     justifyContent: "center",
     alignItems: "center",

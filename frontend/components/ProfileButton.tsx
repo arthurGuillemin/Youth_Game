@@ -12,7 +12,7 @@ export default function ProfileButton() {
       onPress={() => router.push("/profile")}
     >
       <View style={globalStyles.profileIconContainer}>
-        <Ionicons name="person-outline" size={40} color="white" />
+        <Ionicons name="person-outline" size={30} color="white" />
       </View>
     </TouchableOpacity>
   );

@@ -22,13 +22,13 @@ export default function HomeScreen() {
 
       <View style={{ width: "100%", marginBottom: 20 }}>
         <GameCard
-          title="Quiz duel"
+          title="EU Quizz"
           textColor="#ffffff"
           variant="rectangle"
           image={require("../../assets/images/ReadyForAQuiz.png")}
         />
       </View>
-      
+
       <Text style={globalStyles.Title}>Minigames</Text>
 
       <FlatList
