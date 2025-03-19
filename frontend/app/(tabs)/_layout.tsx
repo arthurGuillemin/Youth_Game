@@ -13,8 +13,8 @@ export default function TabLayout() {
           height: 70,
           paddingTop: 10,
         },
-        tabBarActiveTintColor: theme.colors.highlight,
-        tabBarInactiveTintColor: theme.colors.primary,
+        tabBarActiveTintColor: theme.colors.text,
+        tabBarInactiveTintColor: "#4aabff",
       }}
     >
       <Tabs.Screen
@@ -23,15 +23,6 @@ export default function TabLayout() {
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? "home" : "home-outline"} size={28} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="reward"
-        options={{
-          title: "Reward",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "cash" : "cash-outline"} size={28} color={color} />
           ),
         }}
       />
@@ -45,11 +36,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="reward"
         options={{
-          title: "Profile",
+          title: "Reward",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "person" : "person-outline"} size={28} color={color} />
+            <Ionicons name={focused ? "cash" : "cash-outline"} size={28} color={color} />
           ),
         }}
       />

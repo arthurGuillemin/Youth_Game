@@ -13,11 +13,11 @@ export default function HomeScreen() {
     { id: "6", title: "Comming soon", isMultiplayer: false },]
 
   return (
-    <View style={[globalStyles.container, { flex: 1, paddingHorizontal: 20 }]}>
+    <View style={[globalStyles.container, { flex: 1 }]}>
       <ProfileButton />
       <View style={{ marginTop: 100 }}>
-        <Text style={globalStyles.Subtitle}>Welcome</Text>
-        <Text style={globalStyles.Subtitle}>Back!</Text>
+        <Text style={globalStyles.Title}>Welcome</Text>
+        <Text style={globalStyles.Title}>Back!</Text>
       </View>
 
       <View style={{ width: "100%", marginBottom: 20 }}>
@@ -29,19 +29,24 @@ export default function HomeScreen() {
         />
       </View>
 
-      <Text style={globalStyles.Title}>Minigames</Text>
+      <Text style={globalStyles.Subtitle}>Reward</Text>
 
       <FlatList
         data={games}
-        numColumns={2}
         keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => <GameCard title={item.title} variant="square" />}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+      />
 
-          return <GameCard title={item.title} variant="square" />;
-        }}
-        contentContainerStyle={{ flexGrow: 1 }}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
-        showsVerticalScrollIndicator={false}
+      <Text style={globalStyles.Subtitle}>Minigames</Text>
+
+      <FlatList
+        data={games}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <GameCard title={item.title} variant="square" />}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );

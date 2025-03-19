@@ -1,22 +1,29 @@
 import { useState, useEffect } from "react";
-import { View, Text, FlatList, ActivityIndicator, Alert, TouchableOpacity, Image } from "react-native";
-import globalStyles from "../../styles/globalStyles";
+import { View, Text, ScrollView, Alert } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
+import globalStyles from "@/styles/globalStyles";
 import RankingTab from "../../components/RankingTab";
+import ProfileCard from "../../components/ProfileCard";
 import { getLeaderBoard, getLeaderBoardByCountry } from "../../services/leaderbordService"; 
+import rankingStyles from "@/styles/RankingStyles";
+import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function RankingScreen() {
-  const [selectedTab, setSelectedTab] = useState<"National" | "Europe">("Europe");
+  const [selectedRegion, setSelectedRegion] = useState("Europe");
   const [rankingData, setRankingData] = useState<{ name: string; points: string; country?: string }[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const userCountry = "Allemagne";
 
   useEffect(() => {
     const fetchRanking = async () => {
       setLoading(true);
       try {
-        const data = selectedTab === "National"
-          ? await getLeaderBoardByCountry("France")
-          : await getLeaderBoard();
+        const data =
+          selectedRegion === "Europe"
+            ? await getLeaderBoard()
+            : await getLeaderBoardByCountry(userCountry);
 
         if (Array.isArray(data)) {
           setRankingData(data.map((entry) => ({
@@ -35,78 +42,43 @@ export default function RankingScreen() {
     };
 
     fetchRanking();
-  }, [selectedTab]);
+  }, [selectedRegion]);
 
   return (
     <View style={globalStyles.container}>
 
-      {/* 🔹 Profil de l'utilisateur */}
-      <View style={globalStyles.profileHeader}>
-      <View style={globalStyles.profileIcon}>
-          <Ionicons name="person-circle-outline" size={50} color="white" /> 
+      <ProfileCard username="Kai" score={2100} highScore={500} />
+
+      <View style={rankingStyles.leaderboardHeader}>
+        <Text style={globalStyles.Subtitle}>Leaderboard</Text>
+        <Text style={{color : theme.colors.text, fontSize: theme.fontSizes.small, fontFamily: theme.fonts.regular}}>Show All</Text>
         </View>
-        <View>
-          <Text style={globalStyles.profileUsername}>Kai</Text>
-          <Text style={globalStyles.profileScore}>Score: 2100 pts</Text>
-          <Text style={globalStyles.profileHighScore}>Highest Monthly Score: 500</Text>
-        </View>
+        <View style={rankingStyles.pickerContainer}>
+        <RNPickerSelect
+          onValueChange={(value) => setSelectedRegion(value)}
+          items={[
+            { label: "🇪🇺 All of Europe", value: "Europe" },
+            { label: `🌍 All of ${userCountry}`, value: userCountry },
+          ]}
+          value={selectedRegion}
+          style={{
+            inputIOS: rankingStyles.pickerText,
+          }}
+          useNativeAndroidPickerStyle={false} // ✅ Permet d'appliquer notre style custom
+          fixAndroidTouchableBug={true} // ✅ Corrige un bug sur Android
+          placeholder={{}}
+          Icon={() => (
+            <Ionicons name="chevron-down-outline" size={24} style={rankingStyles.pickerIcon} />
+          )}
+        />
       </View>
 
-      {/* 🔹 Leaderboard Header */}
-      <View style={globalStyles.leaderboardHeader}>
-        <Text style={globalStyles.leaderboardTitle}>Leaderboard</Text>
-        <TouchableOpacity>
-          <Text style={globalStyles.leaderboardShowAll}>Show all</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <RankingTab title="Top 3 of all Time" data={rankingData} />
+    <RankingTab title="Top 3 of this Month" data={rankingData} />
+  </ScrollView>
+</View>
 
-      {/* 🔹 Sélecteur de région */}
-      <TouchableOpacity style={globalStyles.regionSelector} onPress={() => setSelectedTab("Europe")}>
-        <Text style={globalStyles.regionSelectorText}>🇪🇺 All of Europe</Text>
-      </TouchableOpacity>
 
-      {/* 🔹 Classements */}
-      {loading ? (
-        <ActivityIndicator size="large" color="#ffffff" style={{ marginTop: 20 }} />
-      ) : (
-        <>
-          {/* 🔹 Top 3 all time */}
-          <Text style={globalStyles.rankSectionTitle}>Top 3 of all Time</Text>
-          <FlatList
-            data={rankingData.slice(0, 3)}
-            keyExtractor={(item, index) => `alltime-${index}`}
-            renderItem={({ item, index }) => (
-              <View style={globalStyles.rankItem}>
-                <Text style={globalStyles.rankPosition}>{index + 1}.</Text>
-                <View>
-                  <Text style={globalStyles.rankName}>{item.name}</Text>
-                  <Text style={globalStyles.rankCountry}>🇩🇪 Germany</Text>
-                </View>
-                <Text style={globalStyles.rankPoints}>{item.points}</Text>
-              </View>
-            )}
-            showsVerticalScrollIndicator={false}
-          />
-
-          {/* 🔹 Top 3 of this month */}
-          <Text style={globalStyles.rankSectionTitle}>Top 3 of this month</Text>
-          <FlatList
-            data={rankingData.slice(0, 3)}
-            keyExtractor={(item, index) => `month-${index}`}
-            renderItem={({ item, index }) => (
-              <View style={globalStyles.rankItem}>
-                <Text style={globalStyles.rankPosition}>{index + 1}.</Text>
-                <View>
-                  <Text style={globalStyles.rankName}>{item.name}</Text>
-                  <Text style={globalStyles.rankCountry}>🇩🇪 Germany</Text>
-                </View>
-                <Text style={globalStyles.rankPoints}>{item.points}</Text>
-              </View>
-            )}
-            showsVerticalScrollIndicator={false}
-          />
-        </>
-      )}
-    </View>
   );
 }

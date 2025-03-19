@@ -30,7 +30,6 @@ export default function GameCard({
 
     return (
       <TouchableOpacity onPress={handlePress} style={[
-        globalStyles.gameCard,
         variant === "rectangle" ? globalStyles.gameCardRectangle : globalStyles.gameCardSquare,
       ]}>
 
