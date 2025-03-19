@@ -27,11 +27,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="game"
+        name="reward"
         options={{
-          title: "Game",
+          title: "Reward",
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "game-controller" : "game-controller-outline"} size={28} color={color} />
+            <Ionicons name={focused ? "cash" : "cash-outline"} size={28} color={color} />
           ),
         }}
       />

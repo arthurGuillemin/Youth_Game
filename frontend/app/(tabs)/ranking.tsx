@@ -1,49 +1,34 @@
 import { useState, useEffect } from "react";
-import { View, FlatList, ActivityIndicator, Alert } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, Alert, TouchableOpacity, Image } from "react-native";
 import globalStyles from "../../styles/globalStyles";
-import TabSwitcher from "../../components/TabSwitcher";
-import SimpleCard from "../../components/SimpleCard";
+import RankingTab from "../../components/RankingTab";
 import { getLeaderBoard, getLeaderBoardByCountry } from "../../services/leaderbordService"; 
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RankingScreen() {
-  const [selectedTab, setSelectedTab] = useState<"National" | "Europe">("National");
-  const [rankingData, setRankingData] = useState<{ name: string; points: string }[]>([]);
+  const [selectedTab, setSelectedTab] = useState<"National" | "Europe">("Europe");
+  const [rankingData, setRankingData] = useState<{ name: string; points: string; country?: string }[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const tabs = [
-    { key: "National", label: "NATIONAL" },
-    { key: "Europe", label: "EUROPE" },
-  ];
 
   useEffect(() => {
     const fetchRanking = async () => {
       setLoading(true);
-      let data = null;
-
       try {
-        if (selectedTab === "National") {
-          console.log("🔵 Chargement du classement National...");
-          data = await getLeaderBoardByCountry("France"); 
-        } else {
-          console.log("🟡 Chargement du classement Européen...");
-          data = await getLeaderBoard();
-        }
-
-        console.log(`🔍 Données reçues pour ${selectedTab}:`, data);
+        const data = selectedTab === "National"
+          ? await getLeaderBoardByCountry("France")
+          : await getLeaderBoard();
 
         if (Array.isArray(data)) {
-          const formattedData = data.map((entry) => ({
-            name: entry.users?.username ?? "Inconnu",
+          setRankingData(data.map((entry) => ({
+            name: entry.users?.username ?? "Unknown",
             points: `${entry.total_points ?? 0} pts`,
-          }));
-
-          setRankingData(formattedData);
+            country: entry.users?.country ?? "Unknown",
+          })));
         } else {
-          throw new Error("Format de données invalide");
+          throw new Error("Invalid data format");
         }
       } catch (error) {
-        console.error(`⛔ Erreur lors du chargement du classement ${selectedTab}:`, error);
-        Alert.alert("Erreur", "Impossible de charger le classement.");
+        Alert.alert("Error", "Unable to load ranking.");
       } finally {
         setLoading(false);
       }
@@ -55,18 +40,72 @@ export default function RankingScreen() {
   return (
     <View style={globalStyles.container}>
 
-      <TabSwitcher tabs={tabs} selectedTab={selectedTab} onSelectTab={setSelectedTab} />
+      {/* 🔹 Profil de l'utilisateur */}
+      <View style={globalStyles.profileHeader}>
+      <View style={globalStyles.profileIcon}>
+          <Ionicons name="person-circle-outline" size={50} color="white" /> 
+        </View>
+        <View>
+          <Text style={globalStyles.profileUsername}>Kai</Text>
+          <Text style={globalStyles.profileScore}>Score: 2100 pts</Text>
+          <Text style={globalStyles.profileHighScore}>Highest Monthly Score: 500</Text>
+        </View>
+      </View>
 
+      {/* 🔹 Leaderboard Header */}
+      <View style={globalStyles.leaderboardHeader}>
+        <Text style={globalStyles.leaderboardTitle}>Leaderboard</Text>
+        <TouchableOpacity>
+          <Text style={globalStyles.leaderboardShowAll}>Show all</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* 🔹 Sélecteur de région */}
+      <TouchableOpacity style={globalStyles.regionSelector} onPress={() => setSelectedTab("Europe")}>
+        <Text style={globalStyles.regionSelectorText}>🇪🇺 All of Europe</Text>
+      </TouchableOpacity>
+
+      {/* 🔹 Classements */}
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />
+        <ActivityIndicator size="large" color="#ffffff" style={{ marginTop: 20 }} />
       ) : (
-        <FlatList
-          data={rankingData}
-          keyExtractor={(item, index) => `${selectedTab}-${index}`}
-          renderItem={({ item }) => <SimpleCard title={item.name} subtitle={item.points} />}
-          contentContainerStyle={globalStyles.rankingList}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          {/* 🔹 Top 3 all time */}
+          <Text style={globalStyles.rankSectionTitle}>Top 3 of all Time</Text>
+          <FlatList
+            data={rankingData.slice(0, 3)}
+            keyExtractor={(item, index) => `alltime-${index}`}
+            renderItem={({ item, index }) => (
+              <View style={globalStyles.rankItem}>
+                <Text style={globalStyles.rankPosition}>{index + 1}.</Text>
+                <View>
+                  <Text style={globalStyles.rankName}>{item.name}</Text>
+                  <Text style={globalStyles.rankCountry}>🇩🇪 Germany</Text>
+                </View>
+                <Text style={globalStyles.rankPoints}>{item.points}</Text>
+              </View>
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+
+          {/* 🔹 Top 3 of this month */}
+          <Text style={globalStyles.rankSectionTitle}>Top 3 of this month</Text>
+          <FlatList
+            data={rankingData.slice(0, 3)}
+            keyExtractor={(item, index) => `month-${index}`}
+            renderItem={({ item, index }) => (
+              <View style={globalStyles.rankItem}>
+                <Text style={globalStyles.rankPosition}>{index + 1}.</Text>
+                <View>
+                  <Text style={globalStyles.rankName}>{item.name}</Text>
+                  <Text style={globalStyles.rankCountry}>🇩🇪 Germany</Text>
+                </View>
+                <Text style={globalStyles.rankPoints}>{item.points}</Text>
+              </View>
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        </>
       )}
     </View>
   );
