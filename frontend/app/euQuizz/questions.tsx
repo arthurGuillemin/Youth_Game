@@ -4,10 +4,12 @@ import { Ionicons } from "@expo/vector-icons";
 import TimerBar from "../../components/euQuizz/TimerBar";
 import AnswerCard from "../../components/euQuizz/AnswerCard";
 import euQuizzStyles from "@/styles/euQuizzStyles";
+import { useRouter } from "expo-router";
 
 export default function QuestionsScreen() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const router = useRouter();
   const questions = [
     {
       id: "1",
@@ -18,26 +20,46 @@ export default function QuestionsScreen() {
         { id: "1", image: require("../../assets/images/currywurst.png"), isCorrect: true },
         { id: "2", image: require("../../assets/images/bretzel.png"), isCorrect: false },
         { id: "3", image: require("../../assets/images/beer.png"), isCorrect: false },
-        //{ id: "4", text: "test", isCorrect: false },
+      ],
+    },
+    {
+      id: "2",
+      question: "What is a „Baguette“?",
+      flag: "🇫🇷",
+      points: 200,
+      answers: [
+        { id: "1", image: require("../../assets/images/baguette.png"), isCorrect: true },
+        { id: "2", image: require("../../assets/images/croissant.png"), isCorrect: false },
+        { id: "3", image: require("../../assets/images/cheese.png"), isCorrect: false },
       ],
     },
   ];
 
   const handleSelectAnswer = (answerId: string) => {
     const isCorrect = questions[currentQuestionIndex].answers.find(a => a.id === answerId)?.isCorrect;
+
     if (isCorrect) {
       setScore(score + questions[currentQuestionIndex].points);
     }
-    setCurrentQuestionIndex((prev) => (prev + 1) % questions.length);
+
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    } else {
+      router.push({ pathname: "/euQuizz/result", params: { score } });
+    }
   };
 
   const handleTimeUp = () => {
-    setCurrentQuestionIndex((prev) => (prev + 1) % questions.length);
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    } else {
+      router.push({ pathname: "/euQuizz/result", params: { score } });
+    }
   };
 
   return (
     <View>
-      <TimerBar duration={15} onTimeUp={handleTimeUp} />
+      <TimerBar key={currentQuestionIndex} duration={15} onTimeUp={handleTimeUp} />
 
       <View style={euQuizzStyles.questionContainer}>
         <Text style={euQuizzStyles.flag}>{questions[currentQuestionIndex].flag}</Text>

@@ -1,10 +1,12 @@
-import { View, Text, ImageBackground, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
 import globalStyles from "../../styles/globalStyles";
 import euQuizzStyles from "../../styles/euQuizzStyles";
 import CategorySelect from "@/components/euQuizz/CategorySelect";
 import DifficultySelect from "@/components/euQuizz/DifficultySelect";
 import theme from "@/styles/theme";
+import { useRouter } from "expo-router";
 
 const categories = [
   { id: "1", title: "International Food", image: require("../../assets/images/food.jpg"), color: "#5D9CEC" },
@@ -22,10 +24,16 @@ const difficulties = [
 export default function DifficultySelection() {
   const { category } = useLocalSearchParams();
   const selectedCategory = categories.find((cat) => cat.id === category);
+  const router = useRouter();
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.sectionTitle}>Difficulty</Text>
+      <View style={globalStyles.headerWithGoBack}>
+        <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={globalStyles.sectionTitle}>Difficulty</Text>
+      </View>
 
       {selectedCategory && (
         <CategorySelect id={selectedCategory.id} title={selectedCategory.title} image={selectedCategory.image} color={selectedCategory.color} showPlayButton={false} />

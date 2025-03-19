@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { View, Text, Animated } from "react-native";
 import euQuizzStyles from "../../styles/euQuizzStyles";
 
@@ -9,10 +9,12 @@ interface TimerBarProps {
 
 export default function TimerBar({ duration, onTimeUp }: TimerBarProps) {
     const [timeLeft, setTimeLeft] = useState(duration);
-    const progress = new Animated.Value(1);
+    const progress = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
         setTimeLeft(duration);
+        progress.setValue(1)
+
         Animated.timing(progress, {
             toValue: 0,
             duration: duration * 1000,
@@ -21,7 +23,7 @@ export default function TimerBar({ duration, onTimeUp }: TimerBarProps) {
 
         const interval = setInterval(() => {
             setTimeLeft((prev) => {
-                if (prev === 1) {
+                if (prev <= 1) {
                     clearInterval(interval);
                     onTimeUp();
                     return 0;
@@ -31,7 +33,7 @@ export default function TimerBar({ duration, onTimeUp }: TimerBarProps) {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [duration]);
+    }, [duration, onTimeUp]);
 
     return (
         <View style={euQuizzStyles.timerBar}>

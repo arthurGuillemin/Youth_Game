@@ -9,8 +9,8 @@ import { createUser } from "../services/userService";
 export default function FirstTimeScreen() {
     const router = useRouter();
     const [username, setUsername] = useState("");
-    const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-    const [selectedAvatar, setSelectedAvatar] = useState<any | null>(null);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedAvatar, setSelectedAvatar] = useState(null);
     const [avatarModalVisible, setAvatarModalVisible] = useState(false);
     const [loading, setLoading] = useState(false);
 

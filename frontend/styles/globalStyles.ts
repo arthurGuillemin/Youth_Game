@@ -22,12 +22,6 @@ const globalStyles = StyleSheet.create({
   headerSubtitleWithGoBack: {
     marginTop: 5,
   },
-  goBackButton: {
-    position: "absolute",
-    top: 80,
-    left: 20,
-    zIndex: 10,
-  },
   headerTitle: {
     color: "#ffffff",
     fontSize: 14,
@@ -397,6 +391,17 @@ const globalStyles = StyleSheet.create({
     paddingVertical: 5,
     marginBottom: 15,
   },
+
+  headerWithGoBack: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+    marginHorizontal: 20,
+  },
+  goBackButton: {
+    marginTop: 60,
+  },
+
 });
 
 export default globalStyles;
