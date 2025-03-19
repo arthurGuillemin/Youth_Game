@@ -25,7 +25,7 @@ const GameEmoji = () => {
   const [emojiIndex, setEmojiIndex] = useState(1);
   const [message, setMessage] = useState('');
 
-  const router = useRouter(); 
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {

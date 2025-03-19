@@ -6,44 +6,34 @@ const globalStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
-
-  /** Header */
-  header: {
-    backgroundColor: theme.colors.primary,
-    paddingVertical: theme.spacing.large,
-    paddingHorizontal: theme.spacing.medium,
-    borderBottomLeftRadius: theme.borderRadius.medium,
-    borderBottomRightRadius: theme.borderRadius.medium,
-    position: "relative",
+  Subtitle: {
+    fontSize: 35,
+    color: theme.colors.text,
+    fontFamily: theme.fonts.demiBold,
   },
-  headerTitleWithGoBack: {
-    marginTop: 100,
-  },
-  headerSubtitleWithGoBack: {
-    marginTop: 5,
-  },
-  headerTitle: {
-    color: "#ffffff",
-    fontSize: 14,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    marginTop: theme.spacing.xxlarge,
-    fontFamily: "Inter-Regular",
-  },
-  headerSubtitle: {
-    color: "#ffffff",
+  Title: {
     fontSize: theme.fontSizes.xlarge,
-    letterSpacing: 1,
-    fontFamily: "MontserratAlternates-Bold",
+    textAlign: 'center',
+    marginBottom: theme.spacing.small,
+    marginTop: theme.spacing.small,
+    color: theme.colors.text,
+    fontFamily: theme.fonts.regular,
   },
-  headerWithSearch: {
-    height: 200,
+
+  /** Index */
+  welcomeText: {
+    fontSize: theme.fontSizes.xlarge,
+    fontWeight: "bold",
+    color: "#ffffff",
+    marginTop: theme.spacing.xxlarge,
   },
-  headerRightIcon: {
-    position: "absolute",
-    top: 90,
-    right: 20,
+  minigamesTitle: {
+    fontSize: theme.fontSizes.large,
+    fontWeight: "bold",
+    color: "#ffffff",
+    marginBottom: theme.spacing.medium,
   },
+
 
   /** Profile Card */
   profileCard: {
@@ -105,41 +95,50 @@ const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.text,
   },
-  gamesContainer: {
-    marginLeft: theme.spacing.small,
-  },
   gameCard: {
     borderRadius: 15,
-    justifyContent: "center",
     alignItems: "flex-start",
-    padding: 20,
     position: "relative",
   },
   gameCardSquare: {
-    width: 160,
-    height: 160,
-    padding: theme.spacing.medium,
-    borderRadius: 15,
-    margin: theme.spacing.medium,
-    position: "relative",
+    flex: 1,
+    height: 100,
+    margin: 10,
     justifyContent: "flex-end",
     alignItems: "flex-start",
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#4aabff",
+    padding: 20,
   },
   gameCardRectangle: {
-    height: 80,
-    marginBottom: 10,
-    marginHorizontal: theme.spacing.medium
+    height: 200,
+    margin: 10,
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
+    borderRadius: 10,
+    marginTop: theme.spacing.large,
   },
+  overlay: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    padding: theme.spacing.small,
+  },
+
+  gameImage: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 10,
+  },
+
   gameTitle: {
     fontSize: theme.fontSizes.medium,
-    textAlign: "left",
-    color: theme.colors.primary
+    fontWeight: "bold",
+    color: "#ffffff",
   },
-  gameSubtitle: {
-    fontSize: 12,
-    color: theme.colors.primary,
-    marginTop: 5,
-  },
+
   gameIcon: {
     position: "absolute",
     top: 10,
@@ -249,6 +248,22 @@ const globalStyles = StyleSheet.create({
   },
 
   /** Profil Info */
+  profileButton: {
+    position: "absolute",
+    top: -20,
+    right: -20,
+    backgroundColor: "transparent",
+    padding: 10,
+  },
+  profileIconContainer: {
+    width: 170,
+    height: 170,
+    borderRadius: 500,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor : theme.colors.text,
+    borderWidth: 1,
+  },
   infoContainer: {
     marginTop: theme.spacing.large,
     backgroundColor: theme.colors.background,
@@ -282,107 +297,107 @@ const globalStyles = StyleSheet.create({
   },
 
 
-    /** Connexion */
-    fullScreenContainer: {
-      flex: 1,
-      backgroundColor: "white",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 20,
-    },
-    screenTitle: {
-      fontSize: 24,
-      fontWeight: "bold",
-      marginBottom: 10,
-      color: "#010773",
-      marginTop: 50, // Titre plus bas
-    },
-    screenSubtitle: {
-      fontSize: 18,
-      marginBottom: 20,
-      color: "#666",
-    },
-  
-    /** Conteneur de l'input avec avatar */
-    inputContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      width: "80%",
-      marginBottom: 15,
-    },
-    avatarSelector: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-      backgroundColor: "#f0f0f0",
-      justifyContent: "center",
-      alignItems: "center",
-      marginRight: 10,
-    },
-    avatarInsideSelector: {
-      width: 50,
-      height: 50,
-      borderRadius: 25,
-    },
-    input: {
-      flex: 1,
-      backgroundColor: "#f0f0f0",
-      padding: 10,
-      borderRadius: 8,
-    },
-  
-    /** Bouton principal */
-    button: {
-      backgroundColor: "#010773",
-      padding: 10,
-      borderRadius: 8,
-      marginTop: 10,
-      alignItems: "center",
-      width: "80%",
-    },
-    buttonSelected: {
-      backgroundColor: "#FFD700",
-    },
-    buttonText: {
-      color: "white",
-      fontWeight: "bold",
-    },
-  
-    /** Modal de sélection d'avatar */
-    modalContainer: {
-      flex: 1,
-      backgroundColor: "rgba(0,0,0,0.8)",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    modalContent: {
-      backgroundColor: "white",
-      padding: 20,
-      borderRadius: 15,
-      alignItems: "center",
-      width: "80%",
-    },
-    modalTitle: {
-      fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 20,
-      color: "#010773",
-    },
-    avatarModal: {
-      width: 60,
-      height: 60,
-      margin: 10,
-      borderRadius: 30,
-    },
-    closeModalButton: {
-      marginTop: 20,
-      backgroundColor: "#010773",
-      padding: 10,
-      borderRadius: 8,
-      width: "80%",
-      alignItems: "center",
-    },
-      /** Sélecteur de pays */
+  /** Connexion */
+  fullScreenContainer: {
+    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  screenTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#010773",
+    marginTop: 50,
+  },
+  screenSubtitle: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: "#666",
+  },
+
+  /** Conteneur de l'input avec avatar */
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "80%",
+    marginBottom: 15,
+  },
+  avatarSelector: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#f0f0f0",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 10,
+  },
+  avatarInsideSelector: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  input: {
+    flex: 1,
+    backgroundColor: "#f0f0f0",
+    padding: 10,
+    borderRadius: 8,
+  },
+
+  /** Bouton principal */
+  button: {
+    backgroundColor: "#010773",
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 10,
+    alignItems: "center",
+    width: "80%",
+  },
+  buttonSelected: {
+    backgroundColor: "#FFD700",
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+
+  /** Modal de sélection d'avatar */
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.8)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 15,
+    alignItems: "center",
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#010773",
+  },
+  avatarModal: {
+    width: 60,
+    height: 60,
+    margin: 10,
+    borderRadius: 30,
+  },
+  closeModalButton: {
+    marginTop: 20,
+    backgroundColor: "#010773",
+    padding: 10,
+    borderRadius: 8,
+    width: "80%",
+    alignItems: "center",
+  },
+  /** Sélecteur de pays */
   pickerContainer: {
     backgroundColor: "#f0f0f0",
     borderRadius: 8,

@@ -25,6 +25,11 @@ const theme = {
     small: 10,
     medium: 20,
   },
+  fonts: {
+    regular: "Mundial-Regular",
+    bold: "Mundial-Bold",
+    demiBold: "Mundial-Demibold",
+  },
 };
 
 export default theme;

@@ -2,7 +2,6 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import globalStyles from "../../styles/globalStyles";
-import Header from "@/components/Header";
 import ProfileInfoRow from "../../components/ProfileInfoRow"
 
 export default function ProfileScreen() {
@@ -17,9 +16,8 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView style={globalStyles.container}>
-<Header title="THIS IS YOUR" subtitle="Profile" rightIcon="settings" showProfileCard={true} showExtraStats={true}/>
 
-<View style={globalStyles.infoContainer}>
+      <View style={globalStyles.infoContainer}>
         {profileInfo.map((item, index) => (
           <ProfileInfoRow key={index} icon={item.icon} text={item.text} />
         ))}

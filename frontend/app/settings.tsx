@@ -2,9 +2,7 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import globalStyles from "../styles/globalStyles";
-import theme from "../styles/theme";
-import Header from "@/components/Header";
-import ProfileInfoRow from "@/components/ProfileInfoRow"; 
+import ProfileInfoRow from "@/components/ProfileInfoRow";
 
 export default function SettingScreen() {
   const [pushNotifications, setPushNotifications] = useState(true);
@@ -12,7 +10,6 @@ export default function SettingScreen() {
 
   return (
     <View style={globalStyles.container}>
-      <Header title="YOUR" subtitle="Settings" showGoBack={true} />
 
       <Text style={globalStyles.sectionTitle}>PREFERENCES</Text>
 
