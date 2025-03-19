@@ -74,6 +74,15 @@ const PartyModel = {
     return { message: `Utilisateur ${userId} retiré de la partie ${partyId}` };
   },
 
+  async getUserNationInParty (partyId) {
+    const { data, error } = await supabase
+      .from('party_players')
+      .select('user_id, users(username, country)')
+      .eq('party_id', partyId);
+    if (error) throw error;
+    return data;
+  },
+
   
 
   

@@ -1,3 +1,4 @@
+const { get } = require('http');
 const euQuizModel = require('../Models/euquizModel');
 
 const euQuizController = {
@@ -23,7 +24,28 @@ const euQuizController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+  }, 
+  async getQuestionByNationDifficulty(req, res) {
+    try {
+      console.log("Params reçus:", req.params); // Log pour voir les paramètres
+  
+      const { nation, difficulty, category } = req.params;
+      if (!nation || !difficulty || !category) {
+        return res.status(400).json({ error: "Les paramètres 'nation', 'difficulty', 'category' sont requis." });
+      }
+  
+      const questions = await euQuizModel.getQuestionByNationDifficulty(nation, difficulty, category);
+      
+      if (!questions.length) {
+        return res.status(404).json({ message: "Aucune question trouvée pour ces critères." });
+      }
+  
+      res.json(questions);
+    } catch (error) {
+      console.error("Erreur dans getQuestionByNationDifficulty:", error.message);
+      res.status(500).json({ error: error.message });
+    }
   }
-};
+};  
 
 module.exports = euQuizController;

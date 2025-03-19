@@ -21,6 +21,19 @@ const euQuizmodel = {
     return data;
   },
 
+  async getQuestionByNationDifficulty(nation, difficulty, category) {
+    const { data, error } = await supabase
+      .from('euquizquestions')
+      .select('*')
+      .eq('countryAbout', nation)
+      .eq("difficulty", difficulty)
+      .eq('category', category.charAt(0).toUpperCase() + category.slice(1)); // Standardiser la casse
+  
+    if (error) throw error;
+    return data;
+  },
+  
+
 };
 
 

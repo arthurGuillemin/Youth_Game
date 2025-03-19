@@ -10,5 +10,5 @@ router.put('/:id', partyController.updateParty);
 router.delete('/:id', partyController.deleteParty);
 router.post('/:id/add', partyController.addUserToParty);
 router.post('/:id/remove', partyController.removeUserFromParty);
-
+router.get('/:id/nations' , partyController.getUserNationInParty);
 module.exports = router;

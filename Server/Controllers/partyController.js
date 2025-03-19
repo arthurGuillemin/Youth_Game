@@ -90,6 +90,16 @@ const partyController = {
       res.status(500).json({ error: error.message });
     }
   },
+
+  async getUserNationInParty(req, res) {
+    try {
+      const { id } = req.params; 
+      const users = await PartyModel.getUserNationInParty(id);
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   
   
   

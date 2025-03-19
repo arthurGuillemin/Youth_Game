@@ -2,7 +2,7 @@ const API_BASE_URL = "http://13.60.245.133:3000/parties";
 
 export const createParty = async (partyData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/create`, {
+    const response = await fetch(`${API_BASE_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(partyData),
@@ -74,5 +74,18 @@ export const removeUserFromParty = async (partyId, userId) => {
   } catch (error) {
     console.error("removeUserFromParty:", error.message);
     return null;
+  }}
+
+export const getUserNationInParty = async (partyId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${partyId}/users`);
+
+    if (!response.ok) throw new Error("Erreur lors de la récupération des nations des utilisateurs de la partie");
+
+    return await response.json();
+  } catch (error) {
+    console.error("getUserNationInParty:", error.message);
+    return null;
   }
-};
+
+}

@@ -16,7 +16,6 @@ const leaderboardRoutes = require('./Routes/leaderBoardRoutes');
 const emojjiGuessRoutes = require('./Routes/emojiGuessRoutes');
 const euquizQuestionsRoutes = require('./Routes/euquizQuestionsRoutes');
 const gamesRoutes = require('./Routes/gamesRoutes');
-
 app.use('/users', userRoutes);
 app.use('/parties', partyRoutes);
 app.use('/scores', scoreRoutes);
