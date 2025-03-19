@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://13.60.245.133:3000/quizzes";
+const API_BASE_URL = "http://13.60.245.133:3000/quiz-questions";
 
 export const createQuestion = async (questionData) => {
   try {
