@@ -10,7 +10,6 @@ const globalStyles = StyleSheet.create({
     fontSize: 35,
     color: theme.colors.text,
     fontFamily: theme.fonts.demiBold,
-    paddingHorizontal: theme.spacing.medium,
   },
   Subtitle: {
     fontSize: theme.fontSizes.xlarge,
