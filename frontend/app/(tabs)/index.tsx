@@ -2,6 +2,7 @@ import { View, Text, FlatList } from "react-native";
 import GameCard from "../../components/GameCard";
 import ProfileButton from "../../components/ProfileButton";
 import globalStyles from "../../styles/globalStyles";
+import theme from "@/styles/theme";
 
 export default function HomeScreen() {
   const games = [
@@ -16,8 +17,8 @@ export default function HomeScreen() {
     <View style={[globalStyles.container, { flex: 1 }]}>
       <ProfileButton />
       <View style={{ marginTop: 100 }}>
-        <Text style={globalStyles.Title}>Welcome</Text>
-        <Text style={globalStyles.Title}>Back!</Text>
+        <Text style={[globalStyles.Title, {marginLeft: theme.spacing.medium}]}>Welcome</Text>
+        <Text style={[globalStyles.Title, {marginLeft: theme.spacing.medium}]}>Back!</Text>
       </View>
 
       <View style={{ width: "100%", marginBottom: 20 }}>
