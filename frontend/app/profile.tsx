@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useRouter } from "expo-router"; 
+import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import ProfileCard from '@/components/ProfileCard';
-import { getUser} from '../services/userService';
+import { getUser } from '../services/userService';
 import { getUserStats } from '../services/playerStatsService';
 import { getAchievementsByUser } from '../services/achievementsService';
+import globalStyles from '@/styles/globalStyles';
 
-const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6"; // ID en dur temporairement
+const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6";
 
 interface AchievementCardProps {
   icon: React.ComponentType<{ name: string; size: number; color: string }>;
@@ -89,37 +90,43 @@ const Profile = () => {
 
   return (
     <View style={styles.container}>
-      <ProfileCard 
-        username={user?.username || "Loading..."} 
-        score={stats?.total_points || 0} 
-        highScore={stats?.highest_score || 0} 
+      <View style={[globalStyles.header, {marginBottom:-90}]}>
+        <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
+
+      <ProfileCard
+        username={user?.username || "Loading..."}
+        score={stats?.total_points || 0}
+        highScore={stats?.highest_score || 0}
       />
 
-<View>
-  <View style={styles.achievementsContainer}>
-    <Text style={styles.sectionTitle}>Achievements</Text>
-    <TouchableOpacity onPress={() => router.push("../achievement")}>
-      <Text style={styles.buttonAllAchievements}>Show all achievements</Text>
-    </TouchableOpacity>
-  </View>
+      <View>
+        <View style={styles.achievementsContainer}>
+          <Text style={styles.sectionTitle}>Achievements</Text>
+          <TouchableOpacity onPress={() => router.push("../achievement")}>
+            <Text style={styles.buttonAllAchievements}>Show all achievements</Text>
+          </TouchableOpacity>
+        </View>
 
-  <View style={styles.achievements}>
-    {achievements ? (
-      achievements.map((achievement, index) => (
-        <AchievementCard
-          key={achievement.id || index} 
-          icon={FontAwesome} 
-          iconName="trophy"
-          size={30}
-          color="#FFD700"
-          text={achievement.achievement_name}
-        />
-      ))
-    ) : (
-      <Text style={styles.noAchievementsText}>No achievements yet</Text>
-    )}
-  </View>
-</View>
+        <View style={styles.achievements}>
+          {achievements ? (
+            achievements.map((achievement, index) => (
+              <AchievementCard
+                key={achievement.id || index}
+                icon={FontAwesome}
+                iconName="trophy"
+                size={30}
+                color="#FFD700"
+                text={achievement.achievement_name}
+              />
+            ))
+          ) : (
+            <Text style={styles.noAchievementsText}>No achievements yet</Text>
+          )}
+        </View>
+      </View>
 
 
       <Text style={styles.sectionTitle}>Statistics</Text>
