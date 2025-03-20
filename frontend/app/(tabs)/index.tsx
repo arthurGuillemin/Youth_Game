@@ -52,7 +52,7 @@ export default function HomeScreen() {
 
       <View style={{ width: "100%", marginBottom: 20, marginTop: -40}}>
         <GameCard
-          title="EU Quizz"
+          title="EU Quiz"
           textColor="#ffffff"
           variant="rectangle"
           image={require("../../assets/images/ReadyForAQuiz.png")}
@@ -85,7 +85,6 @@ export default function HomeScreen() {
           <GameCard
             title={item.name}
             variant="square"
-            onPress={() => router.push("/game")}
           />
         )}
         horizontal={true}

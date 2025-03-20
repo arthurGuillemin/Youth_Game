@@ -27,7 +27,7 @@ export default function GameCard({
       return;
     }
 
-    if (title === "EU Quizz") {
+    if (title === "EU Quiz") {
       router.push("../euQuizz");
     } else if (title === "EmojiGame") {
       router.push("/game-emoji");

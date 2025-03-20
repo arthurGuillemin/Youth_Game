@@ -77,20 +77,35 @@ export default function RewardScreen() {
           const progress = userPoints / item.requiredPoints;
 
           return (
-            <TouchableOpacity onPress={() => router.push({ pathname: "/rewardInfo", params: item })}>
+            <TouchableOpacity
+              onPress={() => router.push({ pathname: "/rewardInfo", params: { ...item } })}
+            >
               <View style={styles.card}>
                 {item.image && <Image source={{ uri: item.image }} style={styles.image} />}
                 <Text style={styles.title}>{item.title}</Text>
+
                 <View style={styles.progressBarContainer}>
                   <View style={styles.progressBarWrapper}>
-                    <View style={[styles.progressBar, { width: `${Math.min(progress * 100, 100)}%` }]} />
+                    {userPoints > 0 && (
+                      <View
+                        style={[
+                          styles.progressBar,
+                          {
+                            width: `${Math.min((userPoints / (item.cost ?? 1)) * 100, 100)}%`,
+                            backgroundColor: userPoints >= (item.cost ?? 1) ? "#3ab54a" : "white",
+                          }
+                        ]}
+                      />
+                    )}
                   </View>
                   <Text style={styles.progressText}>
-                    {userPoints} / {item.cost}
+                    {userPoints} / {item.cost ?? "N/A"}
                   </Text>
                 </View>
               </View>
             </TouchableOpacity>
+
+
           );
         }}
         showsVerticalScrollIndicator={false}
