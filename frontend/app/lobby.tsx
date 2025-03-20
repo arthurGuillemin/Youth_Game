@@ -1,6 +1,6 @@
 import { View, Text, ActivityIndicator } from "react-native";
-import globalStyles from "../../styles/globalStyles";
-import euQuizzStyles from "../../styles/euQuizzStyles";
+import globalStyles from "../styles/globalStyles";
+import euQuizzStyles from "../styles/euQuizzStyles";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";

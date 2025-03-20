@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, Alert, ScrollView } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as Clipboard from "expo-clipboard";
+import globalStyles from "@/styles/globalStyles";
+import { Ionicons } from "@expo/vector-icons";
+import theme from "@/styles/theme";
 
 const RewardDetail: React.FC = () => {
   const router = useRouter();
   const { title, image, points, requiredPoints, description } = useLocalSearchParams();
   const [redeemed, setRedeemed] = useState(false);
-  const rewardCode = "ABC-XYZ-123"; 
+  const rewardCode = "ABC-XYZ-123";
 
   const handleRedeem = () => {
     setRedeemed(true);
@@ -20,7 +23,12 @@ const RewardDetail: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={image as any} style={styles.image} /> 
+      <View style={{  position: "relative", width: "100%",}}>
+        <TouchableOpacity onPress={() => router.back()} style={{position:'absolute', marginTop:theme.spacing.xxlarge, zIndex: 10,marginLeft: theme.spacing.medium}}>
+          <Ionicons name="chevron-back" size={40} color="#111d45" />
+        </TouchableOpacity>
+        <Image source={image as any} style={styles.image} />
+      </View>
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>

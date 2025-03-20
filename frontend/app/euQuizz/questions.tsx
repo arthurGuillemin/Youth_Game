@@ -17,9 +17,9 @@ export default function QuestionsScreen() {
       flag: "🇩🇪",
       points: 100,
       answers: [
-        { id: "1", image: require("../../assets/images/currywurst.png"), isCorrect: true },
-        { id: "2", image: require("../../assets/images/bretzel.png"), isCorrect: false },
-        { id: "3", image: require("../../assets/images/beer.png"), isCorrect: false },
+        { id: "1", text: 'text', isCorrect: true },
+        { id: "2", text: 'text', isCorrect: false },
+        { id: "3", text: 'text', isCorrect: false },
       ],
     },
     {
@@ -28,9 +28,9 @@ export default function QuestionsScreen() {
       flag: "🇫🇷",
       points: 200,
       answers: [
-        { id: "1", image: require("../../assets/images/baguette.png"), isCorrect: true },
-        { id: "2", image: require("../../assets/images/croissant.png"), isCorrect: false },
-        { id: "3", image: require("../../assets/images/cheese.png"), isCorrect: false },
+        { id: "1", text: 'text', isCorrect: true },
+        { id: "2", text: 'text', isCorrect: false },
+        { id: "3", text: 'text', isCorrect: false },
       ],
     },
   ];
@@ -76,8 +76,7 @@ export default function QuestionsScreen() {
         {questions[currentQuestionIndex].answers.map((answer) => (
           <View key={answer.id} style={{ marginBottom: 10 }}>
             <AnswerCard
-              //text={answer.text}
-              image={answer.image}
+              text={answer.text}
               onPress={() => handleSelectAnswer(answer.id)}
             />
             </View>

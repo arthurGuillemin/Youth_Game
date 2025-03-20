@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
 import globalStyles from "../styles/globalStyles";
 import { FontAwesome, FontAwesome5, AntDesign, SimpleLineIcons, Entypo, Feather, Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -32,12 +32,7 @@ const AchievementList = () => {
   const router = useRouter();
   return (
     <View style={globalStyles.container}>
-      <View style={[globalStyles.header, { marginBottom: -90, backgroundColor: theme.colors.background, zIndex: 10, height:100 }]}>
-        <TouchableOpacity onPress={() => router.back()} style={[globalStyles.goBackButton, {marginLeft: theme.spacing.medium}]}>
-          <Ionicons name="chevron-back" size={30} color="white" />
-        </TouchableOpacity>
-        <Text style={[styles.title, { marginTop: 40, backgroundColor: theme.colors.background }]}>Achievements</Text>
-      </View>
+ 
       <FlatList
         data={achievements}
         keyExtractor={(item, index) => index.toString()}
