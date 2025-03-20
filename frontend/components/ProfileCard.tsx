@@ -18,7 +18,6 @@ export default function ProfileCard({ username, score, highScore }: ProfileCardP
       <View>
         <Text style={globalStyles.Title}>{username}</Text>
         <Text style={rankingStyles.profileScore}>Score: {score} pts</Text>
-        <Text style={rankingStyles.profileHighScore}>Highest Monthly Score: {highScore}</Text>
       </View>
     </View>
   );

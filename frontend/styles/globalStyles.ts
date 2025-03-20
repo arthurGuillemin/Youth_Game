@@ -375,8 +375,6 @@ const globalStyles = StyleSheet.create({
     transform: [{ translateY: -8 }],
     color: "#ffffff",
   },
-  
-
   headerWithGoBack: {
     flexDirection: "row",
     alignItems: "center",

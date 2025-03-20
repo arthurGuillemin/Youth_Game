@@ -11,6 +11,7 @@ const difficulties = [
   { points: 100, color: "#4aabff" , name: "Easy"},
   { points: 300, color: "#56c2e3" ,  name: "Medium"},
   { points: 500, color: "#63dce0",  name: "Hard" },
+
 ];
 
 export default function DifficultySelection() {
@@ -39,9 +40,6 @@ export default function DifficultySelection() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ marginTop: theme.spacing.xxlarge }}
       />
-      <View style={euQuizzStyles.randomButton}>
-        <Text style={euQuizzStyles.randomButtonText}>🎲 random</Text>
-      </View>
     </View>
   );
 }

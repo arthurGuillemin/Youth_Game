@@ -34,9 +34,6 @@ export default function CategorySelection() {
   return (
     <View style={globalStyles.container}>
       <View style={globalStyles.headerWithGoBack}>
-        <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
-          <Ionicons name="chevron-back" size={30} color="white" />
-        </TouchableOpacity>
         <Text style={globalStyles.sectionTitle}>Categories</Text>
       </View>
       <FlatList
