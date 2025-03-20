@@ -20,7 +20,7 @@ export default function GameCard({
 
   const handlePress = () => {
     if (title === "EU Quizz") {
-      router.push("../euQuizz/category");
+      router.push("../euQuizz");
     } else if (title === "EmojiGame") {
       router.push("../game-emoji");
     } else if (title === "QuizzGame") {

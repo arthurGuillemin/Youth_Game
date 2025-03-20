@@ -4,37 +4,53 @@ import { useRouter } from "expo-router";
 
 const defaultImages: { [key: string]: any } = {
   Food: require("../../assets/images/food.jpg"),
-  Music: require("../../assets/images/music.jpg"),
+  Culture: require("../../assets/images/music.jpg"),
 };
 
 const defaultColors: { [key: string]: string } = {
   Food: "#4aabff",
-  Music: "#63dce0",
+  Culture: "#63dce0",
 };
 
 interface CategorySelectProps {
   title: string;
+  showPlayButton?: boolean;
+  image: string;
+  color: string;
 }
 
-export default function CategorySelect({ title }: CategorySelectProps) {
+export default function CategorySelect({ title, showPlayButton = true, image, color }: CategorySelectProps) {
   const router = useRouter();
 
   const handlePress = () => {
-    router.push({ pathname: "/euQuizz/difficulty", params: { category: title } });
+    router.push({
+      pathname: "/euQuizz/difficulty",
+      params: {
+        title: title,
+        image: defaultImages[title] ? title : "Food",
+        color: defaultColors[title] || "#4aabff",
+      },
+    });
   };
 
   return (
     <TouchableOpacity onPress={handlePress} style={euQuizzStyles.categoryCard}>
       <ImageBackground source={defaultImages[title] || require("../../assets/images/food.jpg")} style={euQuizzStyles.categoryImage}>
+      {showPlayButton && (
         <View style={euQuizzStyles.categoryImageOverlay}>
           <Text style={euQuizzStyles.categoryTitle}>{title}</Text>
         </View>
+        )}
       </ImageBackground>
 
-      <View style={[euQuizzStyles.categoryOverlay, { backgroundColor: defaultColors[title] || "#4aabff", alignItems: "flex-end" }]}>
-        <TouchableOpacity style={euQuizzStyles.playButton} onPress={handlePress}>
-          <Text style={euQuizzStyles.playButtonText}>Play</Text>
-        </TouchableOpacity>
+      <View style={[euQuizzStyles.categoryOverlay, { backgroundColor: defaultColors[title] || "#4aabff", alignItems: showPlayButton ? "flex-end" : "flex-start" }]}>
+        {!showPlayButton ? (
+          <Text style={euQuizzStyles.categoryTitle}>{title}</Text>
+        ) : (
+          <TouchableOpacity style={euQuizzStyles.playButton} onPress={handlePress}>
+            <Text style={euQuizzStyles.playButtonText}>Play</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </TouchableOpacity>
   );
