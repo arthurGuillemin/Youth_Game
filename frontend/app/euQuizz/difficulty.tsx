@@ -8,9 +8,9 @@ import theme from "@/styles/theme";
 import { useRouter } from "expo-router";
 
 const difficulties = [
-  { points: 100, color: "#4aabff" , nom: "Easy"},
-  { points: 300, color: "#56c2e3" ,  nom: "Medium"},
-  { points: 500, color: "#63dce0",  nom: "Hard" },
+  { points: 100, color: "#4aabff" , name: "Easy"},
+  { points: 300, color: "#56c2e3" ,  name: "Medium"},
+  { points: 500, color: "#63dce0",  name: "Hard" },
 
 ];
 

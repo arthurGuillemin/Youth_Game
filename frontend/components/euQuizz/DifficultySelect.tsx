@@ -17,12 +17,11 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
 
   const handlePress = () => {
 
-    router.push({ pathname: "/euQuizz/questions", params: { category : category } });
+    router.push({ pathname: "/euQuizz/questions", params: { category : category, difficulties: points } });}
 
   return (
     <TouchableOpacity onPress={handlePress} style={[euQuizzStyles.difficultyButton, { backgroundColor: color }]}>
       <Text style={euQuizzStyles.difficultyText}>{points}</Text>
     </TouchableOpacity>
   );
-}
 }
