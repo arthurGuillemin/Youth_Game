@@ -10,12 +10,14 @@ const rewards = [
     image: require("../../assets/images/tooGoodToGo.png"),
     points: 2350,
     requiredPoints: 5500,
+    description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt neque totam maiores ipsa maxime mollitia perspiciatis dolore magni fuga reprehenderit, voluptatem dolorum, velit deleniti rerum, enim in laborum odit quo?"
   },
   {
     title: "Hello FRESH",
     image: require("../../assets/images/helloFresh.png"),
     points: 2350,
     requiredPoints: 10000,
+    description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt neque totam maiores ipsa maxime mollitia perspiciatis dolore magni fuga reprehenderit, voluptatem dolorum, velit deleniti rerum, enim in laborum odit quo?"
   },
 ];
 
@@ -33,11 +35,10 @@ export default function RewardScreen() {
           const progress = item.points / item.requiredPoints;
 
           return (
-            <TouchableOpacity onPress={() => router.push("/rewardInfo")}>
+            <TouchableOpacity onPress={() => router.push({ pathname: "/rewardInfo", params: item })}>
               <View style={styles.card}>
                 <Image source={item.image} style={styles.image} />
                 <Text style={styles.title}>{item.title}</Text>
-
                 <View style={styles.progressBarContainer}>
                   <View style={styles.progressBarWrapper}>
                     <View 
