@@ -96,11 +96,11 @@ const euQuizzStyles = StyleSheet.create({
   timerScore: {
     fontSize: theme.fontSizes.medium,
     fontWeight: "bold",
-    color: "#482ab5",
+    color: "white",
   },
   timerTime: {
     fontSize: theme.fontSizes.medium,
-    color: "#482ab5",
+    color: "white",
     marginBottom: theme.spacing.small,
   },
   progressBar: {
@@ -109,12 +109,12 @@ const euQuizzStyles = StyleSheet.create({
     overflow: "hidden",
     marginBottom: theme.spacing.medium,
     borderWidth: 1,
-    borderColor: "#482ab5",
+    borderColor: "white",
     minHeight: 15,
   },
   progressFill: {
     height: "100%",
-    backgroundColor: "#482ab5",
+    backgroundColor: "white",
   },
 
   /* ─────────────── ANSWER CARD STYLES ─────────────── */
@@ -156,15 +156,16 @@ const euQuizzStyles = StyleSheet.create({
     fontSize: theme.fontSizes.xlarge,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#000",
+    color: "white",
     marginTop: theme.spacing.medium,
+    marginHorizontal: theme.spacing.medium
   },
 
   /* ─────────────── PLAYER STYLES ─────────────── */
   peopleContainer: {
     alignSelf: "flex-end",
     marginRight: theme.spacing.large,
-    marginTop: theme.spacing.xxlarge,
+    marginTop: 150,
     flexDirection: "row",
     gap: 10,
   },

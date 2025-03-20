@@ -8,6 +8,7 @@ import { getUser } from '../../services/userService';
 import euQuizzStyles from "@/styles/euQuizzStyles";
 import { getQuestionsByNationDifficulty } from "../../services/euQuizService";
 import { createScore } from '../../services/scoreService';
+import globalStyles from "@/styles/globalStyles";
 
 
 const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6";
@@ -67,64 +68,66 @@ export default function QuestionsScreen() {
 
   const handleSelectAnswer = async (answerId: string) => {
     if (!questions[currentQuestionIndex]) return; // Évite l'erreur si la question n'existe pas
-  
+
     const isCorrect = questions[currentQuestionIndex].correct_answer === answerId;
-  
+
     if (isCorrect) {
       let pointsToAdd = difficulty === "Easy" ? 100 : difficulty === "Medium" ? 300 : 500;
       setScore((prevScore) => prevScore + pointsToAdd);
     }
-  
+
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
       const user = await getUser(USER_ID);
       const userName = user ? user.username : "Unknown";
-      await createScore({ user_id : USER_ID, game_id : "93794c67-aeae-4cd3-b5af-32e538b68afb",  points : score   });
-  
+      await createScore({ user_id: USER_ID, game_id: "93794c67-aeae-4cd3-b5af-32e538b68afb", points: score });
+
       router.push({ pathname: "/euQuizz/result2", params: { score, name: userName } });
     }
   };
-  
-  
+
+
   return (
-    <View>
-<TimerBar
-  key={currentQuestionIndex}
-  duration={15}
-  onTimeUp={() => {
-    setCurrentQuestionIndex((prev) => (prev < questions.length - 1 ? prev + 1 : prev));
-  }}
-/>
+    <View style={globalStyles.container}>
+      <TimerBar
+        key={currentQuestionIndex}
+        duration={15}
+        onTimeUp={() => {
+          setCurrentQuestionIndex((prev) => (prev < questions.length - 1 ? prev + 1 : prev));
+        }}
+      />
 
       <View style={euQuizzStyles.questionContainer}>
         <Text style={euQuizzStyles.questionText}>{questions[currentQuestionIndex].Question}</Text>
         <View style={euQuizzStyles.peopleContainer}>
-          <Ionicons name="person-outline" size={30} color="navy" />
-          <Ionicons name="person-outline" size={30} color="navy" />
-          <Ionicons name="person-outline" size={30} color="navy" />
+          {/*<Ionicons name="person-outline" size={30} color="#4aabff" />
+          <Ionicons name="person-outline" size={30} color="#4aabff" />*/}
+          <Ionicons name="person-outline" size={30} color="#4aabff" />
         </View>
       </View>
 
       <View style={{ marginBottom: 40 }}>
-  {questions[currentQuestionIndex].anwser_options.map((answer) => (
-    <Text
-      key={answer}
-      style={{
-        backgroundColor: "#4aabff",
-        padding: 10,
-        marginVertical: 5,
-        textAlign: "center",
-        borderRadius: 8,
-        fontSize: 18,
-        color: "white",
-      }}
-      onPress={() => handleSelectAnswer(answer)}
-    >
-      {answer}
-    </Text>
-  ))}
-</View>
+        {questions[currentQuestionIndex].anwser_options.map((answer) => (
+          <Text
+            key={answer}
+            style={{
+              backgroundColor: "#4aabff",
+              padding: 10,
+              marginVertical: 5,
+              textAlign: "center",
+              borderRadius: 8,
+              fontSize: 18,
+              color: "white",
+              marginBlock: 10,
+              marginHorizontal: 20,
+            }}
+            onPress={() => handleSelectAnswer(answer)}
+          >
+            {answer}
+          </Text>
+        ))}
+      </View>
 
     </View>
   );
