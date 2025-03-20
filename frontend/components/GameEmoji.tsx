@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import { getRandomGuess } from "../services/emojiGuess.js";
+import theme from "@/styles/theme";
 
 const GameEmoji = () => {
   const [country, setCountry] = useState<any>(null);
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#2c3e50',
+    backgroundColor: theme.colors.background,
   },
   emoji: {
     fontSize: 50,
