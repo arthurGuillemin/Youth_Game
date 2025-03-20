@@ -12,6 +12,7 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
   const params = useLocalSearchParams();
   const router = useRouter();
 
+
   const category = params.title || "Unknown";
 
   const handlePress = () => {
@@ -23,4 +24,5 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
       <Text style={euQuizzStyles.difficultyText}>{points}</Text>
     </TouchableOpacity>
   );
+}
 }
