@@ -19,62 +19,10 @@ const globalStyles = StyleSheet.create({
     color: theme.colors.text,
     fontFamily: theme.fonts.regular,
   },
-
-  /** Index */
-  welcomeText: {
-    fontSize: theme.fontSizes.xlarge,
-    fontWeight: "bold",
-    color: "#ffffff",
-    marginTop: theme.spacing.xxlarge,
-  },
-  minigamesTitle: {
-    fontSize: theme.fontSizes.large,
-    fontWeight: "bold",
-    color: "#ffffff",
-    marginBottom: theme.spacing.medium,
-  },
-
-
-  /** Profile Card */
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: theme.spacing.large
-  },
-  profileHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: theme.spacing.xxlarge,
-  },
-
-  profileImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: theme.spacing.small,
-  },
-
-  profileCountry: {
-    fontSize: theme.fontSizes.small,
-    color: theme.colors.muted,
-  },
-
-  statsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: theme.spacing.medium,
-  },
-
-  statsBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: theme.colors.secondary,
-    padding: theme.spacing.small,
-    borderRadius: theme.borderRadius.small,
-    flex: 1,
-    marginHorizontal: 5,
-    gap: 15,
-    justifyContent: "flex-start",
   },
 
   /** Games List */
@@ -89,7 +37,7 @@ const globalStyles = StyleSheet.create({
   gameCardSquare: {
     flex: 1,
     height: 100,
-    width:200,
+    width: 200,
     margin: 10,
     justifyContent: "flex-end",
     alignItems: "flex-start",
@@ -99,7 +47,7 @@ const globalStyles = StyleSheet.create({
   },
   gameCardRectangle: {
     height: 200,
-    marginHorizontal:theme.spacing.medium,
+    marginHorizontal: theme.spacing.medium,
     justifyContent: "flex-end",
     alignItems: "flex-start",
     borderRadius: 10,
@@ -117,50 +65,6 @@ const globalStyles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 8,
-  },
-
-  gameTitle: {
-    fontSize: theme.fontSizes.medium,
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
-
-  gameIcon: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-  },
-  gamePlayerCount: {
-    fontSize: 12,
-    position: "absolute",
-    top: 10,
-    right: 25,
-  },
-
-  /** Search Bar */
-  searchWrapper: {
-    position: "absolute",
-    top: 160,
-    paddingHorizontal: theme.spacing.large,
-    width: "100%",
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: theme.colors.background,
-    borderRadius: theme.borderRadius.medium,
-    paddingHorizontal: theme.spacing.medium,
-    paddingVertical: theme.spacing.small,
-    borderWidth: 2,
-    borderColor: theme.colors.highlight,
-  },
-
-  searchInput: {
-    flex: 1,
-    fontSize: theme.fontSizes.medium,
-    fontFamily: "Inter-Regular",
-    color: theme.colors.text,
-    paddingVertical: theme.spacing.small,
   },
 
   /** Simple Card */
@@ -212,13 +116,10 @@ const globalStyles = StyleSheet.create({
     borderRadius: 500,
     justifyContent: "center",
     alignItems: "center",
-    borderColor : theme.colors.text,
+    borderColor: theme.colors.text,
     borderWidth: 1,
   },
-  infoContainer: {
-    marginTop: theme.spacing.large,
-    backgroundColor: theme.colors.background,
-  },
+
   infoRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -232,21 +133,6 @@ const globalStyles = StyleSheet.create({
     marginLeft: theme.spacing.small,
     color: theme.colors.text,
   },
-
-  /** Edit Profil Button */
-  editProfileButton: {
-    backgroundColor: theme.colors.primary,
-    padding: theme.spacing.medium,
-    borderRadius: theme.borderRadius.medium,
-    alignItems: "center",
-    margin: theme.spacing.medium
-  },
-  editProfileText: {
-    color: "#ffffff",
-    fontSize: theme.fontSizes.medium,
-    fontFamily: "MontserratAlternates-Bold",
-  },
-
 
   /** Connexion */
   fullScreenContainer: {
@@ -306,9 +192,6 @@ const globalStyles = StyleSheet.create({
     alignItems: "center",
     width: "80%",
   },
-  buttonSelected: {
-    backgroundColor: "#FFD700",
-  },
   buttonText: {
     color: "white",
     fontWeight: "bold",
@@ -350,24 +233,24 @@ const globalStyles = StyleSheet.create({
   },
   /** Sélecteur de pays */
   pickerContainer: {
-    backgroundColor: "#4aabff", // 🔹 Fond bleu
+    backgroundColor: "#4aabff",
     borderRadius: 8,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    width: "100%", // 🔹 Largeur complète
-    height: 50, // 🔹 Hauteur plus grande
+    width: "100%",
+    height: 50,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 10,
   },
-  
+
   pickerText: {
-    fontSize: 18, // 🔹 Texte plus grand
-    color: "#ffffff", // 🔹 Texte blanc pour contraste
+    fontSize: 18,
+    color: "#ffffff",
     fontWeight: "bold",
     textAlign: "center",
   },
-  
+
   pickerIcon: {
     position: "absolute",
     right: 15,
