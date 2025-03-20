@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image, StyleSheet } from "react-native";
 import GameCard from "../../components/GameCard";
 import ProfileButton from "../../components/ProfileButton";
 import globalStyles from "../../styles/globalStyles";
@@ -29,7 +29,7 @@ export default function HomeScreen() {
   }, []);
 
   const games = [
-    { id: "1", title: "QuizzGame", isMultiplayer: true },
+    { id: "1", title: "Europa Trivia", isMultiplayer: true },
     { id: "2", title: "EmojiGame", isMultiplayer: false },
     { id: "3", title: "EU Quizz", isMultiplayer: false },
     { id: "4", title: "Comming soon", isMultiplayer: true },
@@ -40,12 +40,12 @@ export default function HomeScreen() {
   return (
     <View style={[globalStyles.container, { flex: 1 }]}>
       <ProfileButton />
-      <View style={{ marginTop: 100 }}>
-        <Text style={[globalStyles.Title, { marginLeft: theme.spacing.medium }]}>Welcome</Text>
-        <Text style={[globalStyles.Title, { marginLeft: theme.spacing.medium }]}>Back!</Text>
-      </View>
+      <View style={styles.logoContainer}>
+  <Image source={require("../../assets/images/bigLogo.png")} style={styles.logo} />
+</View>
 
-      <View style={{ width: "100%", marginBottom: 20 }}>
+
+      <View style={{ width: "100%", marginBottom: 20, marginTop: -40}}>
         <GameCard
           title="EU Quizz"
           textColor="#ffffff"
@@ -54,7 +54,7 @@ export default function HomeScreen() {
         />
       </View>
 
-      <Text style={globalStyles.Subtitle}>Reward</Text>
+      <Text style={globalStyles.Subtitle}>Rewards</Text>
 
       <FlatList
         data={rewards}
@@ -63,7 +63,7 @@ export default function HomeScreen() {
           <GameCard
             title={item.title}
             variant="square"
-            image={{ uri: item.image }} // Ajout de l’image récupérée
+            image={{ uri: item.image }}
             onPress={() => router.push("/rewardInfo")}
           />
         )}
@@ -71,7 +71,7 @@ export default function HomeScreen() {
         showsHorizontalScrollIndicator={false}
       />
 
-      <Text style={globalStyles.Subtitle}>Minigames</Text>
+      <Text style={globalStyles.Subtitle}>Mini Games</Text>
 
       <FlatList
         data={games}
@@ -82,4 +82,15 @@ export default function HomeScreen() {
       />
     </View>
   );
-}
+  };
+  const styles = StyleSheet.create({
+    logoContainer: {
+      marginTop: 55,
+      marginLeft: theme.spacing.medium
+    },
+    logo: {
+      width: 200,
+      height: 150,
+      resizeMode: "contain",
+    },
+    });

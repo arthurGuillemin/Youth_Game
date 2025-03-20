@@ -31,7 +31,7 @@ export default function GameCard({
       router.push("../euQuizz");
     } else if (title === "EmojiGame") {
       router.push("/game-emoji");
-    } else if (title === "QuizzGame") {
+    } else if (title === "Europa Trivia") {
       router.push("/game-quizz");
     }
   };
