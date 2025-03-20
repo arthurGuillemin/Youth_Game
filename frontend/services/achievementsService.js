@@ -13,7 +13,7 @@ export const getAllAchievements = async () => {
 
 export const getAchievementsByUser = async (userId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/user/${userId}`);
+    const response = await fetch(`${API_BASE_URL}/${userId}`);
     if (!response.ok) throw new Error("Erreur lors de la récupération des achievements de l'utilisateur");
     return await response.json();
   } catch (error) {

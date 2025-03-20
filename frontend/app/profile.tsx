@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter } from "expo-router"; 
 
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -8,9 +8,13 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import Feather from '@expo/vector-icons/Feather';
-import ProfileCard from '@/components/ProfileCard';
 
+import ProfileCard from '@/components/ProfileCard';
+import { getUser} from '../services/userService';
+import { getUserStats } from '../services/playerStatsService';
+import { getAchievementsByUser } from '../services/achievementsService';
+
+const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6"; // ID en dur temporairement
 
 interface AchievementCardProps {
   icon: React.ComponentType<{ name: string; size: number; color: string }>;
@@ -25,13 +29,14 @@ interface StatCardProps {
   iconName: string;
   size: number;
   text: string;
+  value: string | number;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ icon: Icon, iconName, size, text }) => (
+const StatCard: React.FC<StatCardProps> = ({ icon: Icon, iconName, size, text, value }) => (
   <View style={styles.statCard}>
     <Icon name={iconName} size={size} color="white" />
     <View style={styles.statCardText}>
-      <Text style={styles.statTextDays}>1 day </Text>
+      <Text style={styles.statTextDays}>{value}</Text>
       <Text style={styles.statText}>{text}</Text>
     </View>
   </View>
@@ -44,50 +49,89 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ icon: Icon, iconName,
   </View>
 );
 
-
 const Profile = () => {
+  const router = useRouter();
 
-  const router = useRouter(); 
+  // États pour stocker les données
+  const [user, setUser] = useState<{ username: string } | null>(null);
+  const [stats, setStats] = useState<any>(null);
+  const [achievements, setAchievements] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const achievements = [
-    { icon: FontAwesome, iconName: "diamond", size: 30, color: "#00D8FF", text: "Logged in 50 times in a row" },
-    { icon: SimpleLineIcons, iconName: "fire", size: 30, color: "#FF9C00", text: "Triple Daily Login" },
-    { icon: AntDesign, iconName: "check", size: 30, color: "#31BF00", text: "Completed 50 Quizzes" }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await getUser(USER_ID);
+        const userStats = await getUserStats(USER_ID);
+        const userAchievements = await getAchievementsByUser(USER_ID);
 
-  const statistics = [
-    { icon: FontAwesome5, iconName: "medal", size: 24, text: "best streak" },
-    { icon: MaterialIcons, iconName: "bolt", size: 34, text: "best streak" },
-    { icon: FontAwesome6, iconName: "fire-flame-curved", size: 24, text: "best streak" },
-    { icon: AntDesign, iconName: "heart", size: 24, text: "best streak" }
-  ];
+        setUser(userData);
+        setStats(userStats.length ? userStats[0] : null);
+        setAchievements(userAchievements);
+        console.log("Achievements récupérés :", userAchievements);
+      } catch (error) {
+        console.error("Erreur lors du chargement des données :", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#00D8FF" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <ProfileCard username="Kai" score={2100} highScore={500} />
-      <View>
-      <View style={styles.achievementsContainer}>
-        <Text style={styles.sectionTitle}>Achievements</Text>
-        <TouchableOpacity  onPress={() => router.push("../achievement")}>
-          <Text style={styles.buttonAllAchievements}>Show all achievements</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.achievements}>
-        {achievements.map((achievement, index) => (
-          <AchievementCard key={index} {...achievement} />
-        ))}
-      </View>
-      </View>
+      <ProfileCard 
+        username={user?.username || "Loading..."} 
+        score={stats?.total_points || 0} 
+        highScore={stats?.highest_score || 0} 
+      />
+
+<View>
+  <View style={styles.achievementsContainer}>
+    <Text style={styles.sectionTitle}>Achievements</Text>
+    <TouchableOpacity onPress={() => router.push("../achievement")}>
+      <Text style={styles.buttonAllAchievements}>Show all achievements</Text>
+    </TouchableOpacity>
+  </View>
+
+  <View style={styles.achievements}>
+    {achievements ? (
+      achievements.map((achievement, index) => (
+        <AchievementCard
+          key={achievement.id || index} 
+          icon={FontAwesome} 
+          iconName="trophy"
+          size={30}
+          color="#FFD700"
+          text={achievement.achievement_name}
+        />
+      ))
+    ) : (
+      <Text style={styles.noAchievementsText}>No achievements yet</Text>
+    )}
+  </View>
+</View>
+
+
       <Text style={styles.sectionTitle}>Statistics</Text>
       <View style={styles.statistics}>
-        {statistics.map((stat, index) => (
-          <StatCard key={index} {...stat} />
-        ))}
+        <StatCard icon={FontAwesome5} iconName="medal" size={24} text="Total Points" value={stats?.total_points || 0} />
+        <StatCard icon={MaterialIcons} iconName="games" size={34} text="Games Played" value={stats?.games_played || 0} />
+        <StatCard icon={FontAwesome6} iconName="fire-flame-curved" size={24} text="Highest Score" value={stats?.highest_score || 0} />
+        <StatCard icon={AntDesign} iconName="heart" size={24} text="Average Score" value={stats?.average_score || 0} />
       </View>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -95,30 +139,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#111d45',
     padding: 20,
   },
-  header: {
-    marginTop: 20,
-    marginBottom: 20,
-    flexDirection: 'row',
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 40,
-    backgroundColor: '#fff',
-    marginRight: 20,
-    marginLeft: 20,
-  },
-  User:{
-    flexDirection: 'row',
-  },
-  name: {
-    fontSize: 26,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  info: {
-    color: '#ccc',
   },
   sectionTitle: {
     fontSize: 24,
@@ -135,8 +159,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-
-    
   },
   achievements: {
     flexDirection: 'row',
@@ -151,10 +173,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  achievementIcon: {
-    marginBottom: 10,
-  },
   achievementText: {
+    textAlign: 'center',
+  },
+  noAchievementsText: {
+    color: '#ccc',
     textAlign: 'center',
   },
   statistics: {
@@ -172,7 +195,7 @@ const styles = StyleSheet.create({
     width: '48%',
     marginBottom: 10,
     borderColor: '#fff',
-    borderWidth:1,
+    borderWidth: 1,
   },
   statCardText: {
     marginLeft: 20,
