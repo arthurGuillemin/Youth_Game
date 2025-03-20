@@ -1,15 +1,29 @@
-import { View, Text } from "react-native";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { View, Text, ActivityIndicator } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import TimerBar from "../../components/euQuizz/TimerBar";
 import AnswerCard from "../../components/euQuizz/AnswerCard";
 import euQuizzStyles from "@/styles/euQuizzStyles";
-import { useRouter } from "expo-router";
 
 export default function QuestionsScreen() {
+  const router = useRouter();
+  const params = useLocalSearchParams();
+
+  // Récupération des paramètres transmis depuis DifficultySelection
+  const category = params.category || "Unknown";
+  const difficulty = params.difficulty || "Easy";
+  
+  // Log des paramètres pour vérification
+  useEffect(() => {
+    console.log("Paramètres reçus :", { category, difficulty });
+  }, [category, difficulty]);
+
+  // États pour gérer les questions, le score, etc.
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const router = useRouter();
+  
+  // Exemple de questions (à remplacer par le service getQuestionsByNationDifficulty)
   const questions = [
     {
       id: "1",
@@ -43,7 +57,7 @@ export default function QuestionsScreen() {
     }
 
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
+      setCurrentQuestionIndex(prev => prev + 1);
     } else {
       router.push({ pathname: "/euQuizz/result2", params: { score } });
     }
@@ -51,7 +65,7 @@ export default function QuestionsScreen() {
 
   const handleTimeUp = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
+      setCurrentQuestionIndex(prev => prev + 1);
     } else {
       router.push({ pathname: "/euQuizz/result2", params: { score } });
     }
@@ -76,13 +90,13 @@ export default function QuestionsScreen() {
         {questions[currentQuestionIndex].answers.map((answer) => (
           <View key={answer.id} style={{ marginBottom: 10 }}>
             <AnswerCard
-              text={answer.text}
+              image={answer.image}
+
               onPress={() => handleSelectAnswer(answer.id)}
             />
-            </View>
+          </View>
         ))}
       </View>
-
     </View>
   );
 }
