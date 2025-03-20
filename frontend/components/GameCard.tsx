@@ -9,22 +9,29 @@ interface GameCardProps {
   isMultiplayer?: boolean;
   variant?: "square" | "rectangle";
   image?: any;
+  onPress?: () => void;
 }
 
 export default function GameCard({
   title,
   variant = "square",
-  image
+  image,
+  onPress
 }: GameCardProps) {
   const router = useRouter();
 
   const handlePress = () => {
+    if (onPress) {
+      onPress();
+      return;
+    }
+
     if (title === "EU Quizz") {
       router.push("../euQuizz");
     } else if (title === "EmojiGame") {
-      router.push("../game-emoji");
+      router.push("/game-emoji");
     } else if (title === "QuizzGame") {
-      router.push("../game-quizz");
+      router.push("/game-quizz");
     }
   };
 
