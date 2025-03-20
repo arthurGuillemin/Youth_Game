@@ -29,6 +29,7 @@ import gamesRoutes from "./Routes/gamesRoutes.js";
 import achievementRoutes from './Routes/AchievementRoutes.js';
 import playerstatsRoutes from './Routes/playerStatsRoutes.js';
 import rewardsStatsRoutes from './Routes/rewardsStatsRoutes.js';
+import imageRoutes from "./Routes/imagesRoutes.js";
 
 
 app.use('/users', userRoutes);
@@ -42,6 +43,7 @@ app.use('/games', gamesRoutes);
 app.use('/achievements', achievementRoutes);
 app.use('/playerstats', playerstatsRoutes);
 app.use('/rewards', rewardsStatsRoutes);
+app.use('/images', imageRoutes )
 
 app.use(express.static(path.join(__dirname, 'public')));
 
