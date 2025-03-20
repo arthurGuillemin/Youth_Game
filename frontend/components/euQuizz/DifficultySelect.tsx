@@ -12,13 +12,11 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
   const params = useLocalSearchParams();
   const router = useRouter();
 
-  // 🔥 Correction : Récupérer la catégorie depuis les paramètres
   const category = params.title || "Unknown";
 
-  // 🔥 Correction : Transmettre la catégorie en plus de la difficulté
   const handlePress = () => {
+
     router.push({ pathname: "/euQuizz/questions", params: { category : category } });
-  };
 
   return (
     <TouchableOpacity onPress={handlePress} style={[euQuizzStyles.difficultyButton, { backgroundColor: color }]}>
