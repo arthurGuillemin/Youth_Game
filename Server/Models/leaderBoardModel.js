@@ -4,7 +4,7 @@ const LeaderboardModel = {
   async getLeaderBoard() {
     const { data, error } = await supabase
       .from('leaderboard')
-      .select('user_id, total_points, users(username)')
+      .select('user_id, total_points, users(username) , country')
       .order('total_points', { ascending: false });
 
     if (error) throw error;

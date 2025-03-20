@@ -1,213 +1,137 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useRouter } from "expo-router"; 
+import React, { useEffect, useState } from "react";
+import { View, Text, ScrollView, ActivityIndicator, Alert } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
+import globalStyles from "@/styles/globalStyles";
+import RankingTab from "../components/RankingTab";
+import ProfileCard from "../components/ProfileCard";
+import { getLeaderBoard, getLeaderBoardByCountry } from "../services/leaderbordService";
+import { getUser } from "../services/userService";
+import { getUserStats } from "../services/playerStatsService";
 
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import rankingStyles from "@/styles/RankingStyles";
+import { Ionicons } from "@expo/vector-icons";
 
-import ProfileCard from '@/components/ProfileCard';
-import { getUser} from '../services/userService';
-import { getUserStats } from '../services/playerStatsService';
-import { getAchievementsByUser } from '../services/achievementsService';
+const countryFlags: { [key: string]: string } = {
+  France: "🇫🇷",
+  Germany: "🇩🇪",
+  Spain: "🇪🇸",
+  Italy: "🇮🇹",
+  UnitedKingdom: "🇬🇧",
+  UnitedStates: "🇺🇸",
+  Canada: "🇨🇦",
+  Brazil: "🇧🇷",
+  Japan: "🇯🇵",
+  China: "🇨🇳",
+  India: "🇮🇳",
+  Russia: "🇷🇺",
+};
 
-const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6"; // ID en dur temporairement
+const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6";
 
-interface AchievementCardProps {
-  icon: React.ComponentType<{ name: string; size: number; color: string }>;
-  iconName: string;
-  size: number;
-  color: string;
-  text: string;
-}
-
-interface StatCardProps {
-  icon: React.ComponentType<{ name: string; size: number; color: string }>;
-  iconName: string;
-  size: number;
-  text: string;
-  value: string | number;
-}
-
-const StatCard: React.FC<StatCardProps> = ({ icon: Icon, iconName, size, text, value }) => (
-  <View style={styles.statCard}>
-    <Icon name={iconName} size={size} color="white" />
-    <View style={styles.statCardText}>
-      <Text style={styles.statTextDays}>{value}</Text>
-      <Text style={styles.statText}>{text}</Text>
-    </View>
-  </View>
-);
-
-const AchievementCard: React.FC<AchievementCardProps> = ({ icon: Icon, iconName, size, color, text }) => (
-  <View style={styles.achievementCard}>
-    <Icon name={iconName} size={size} color={color} />
-    <Text style={styles.achievementText}>{text}</Text>
-  </View>
-);
-
-const Profile = () => {
-  const router = useRouter();
-
-  // États pour stocker les données
+export default function RankingScreen() {
+  const [selectedRegion, setSelectedRegion] = useState("Europe");
+  const [rankingData, setRankingData] = useState<{ name: string; points: string; country?: string }[]>([]);
+  const [userCountry, setUserCountry] = useState<string | null>(null);
   const [user, setUser] = useState<{ username: string } | null>(null);
   const [stats, setStats] = useState<any>(null);
-  const [achievements, setAchievements] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUserData = async () => {
       try {
         const userData = await getUser(USER_ID);
         const userStats = await getUserStats(USER_ID);
-        const userAchievements = await getAchievementsByUser(USER_ID);
-
+        
+        if (!userData || !userData.country) throw new Error("Pays introuvable");
+        
         setUser(userData);
+        setUserCountry(userData.country);
         setStats(userStats.length ? userStats[0] : null);
-        setAchievements(userAchievements);
-        console.log("Achievements récupérés :", userAchievements);
       } catch (error) {
-        console.error("Erreur lors du chargement des données :", error);
+        console.error("Erreur récupération user:", error);
+        setUserCountry("Unknown");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchUserData();
   }, []);
+
+  useEffect(() => {
+    if (!userCountry) return;
+
+    const fetchRanking = async () => {
+      setLoading(true);
+      try {
+        const leaderboard =
+          selectedRegion === "Europe"
+            ? await getLeaderBoard()
+            : await getLeaderBoardByCountry(userCountry);
+
+        if (!Array.isArray(leaderboard)) throw new Error("Format de données invalide");
+
+        const rankingWithCountries = leaderboard.map((entry) => ({
+          name: entry.users?.username ?? "Unknown",
+          points: `${entry.total_points ?? 0} pts`,
+          country: entry.users?.country ?? "Unknown",
+        }));
+
+        setRankingData(rankingWithCountries);
+      } catch (error) {
+        Alert.alert("Error", "Unable to load ranking.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRanking();
+  }, [selectedRegion, userCountry]);
 
   if (loading) {
     return (
-      <View style={styles.loaderContainer}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#00D8FF" />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <ProfileCard 
         username={user?.username || "Loading..."} 
         score={stats?.total_points || 0} 
         highScore={stats?.highest_score || 0} 
       />
 
-<View>
-  <View style={styles.achievementsContainer}>
-    <Text style={styles.sectionTitle}>Achievements</Text>
-    <TouchableOpacity onPress={() => router.push("../achievement")}>
-      <Text style={styles.buttonAllAchievements}>Show all achievements</Text>
-    </TouchableOpacity>
-  </View>
-
-  <View style={styles.achievements}>
-    {achievements ? (
-      achievements.map((achievement, index) => (
-        <AchievementCard
-          key={achievement.id || index} 
-          icon={FontAwesome} 
-          iconName="trophy"
-          size={30}
-          color="#FFD700"
-          text={achievement.achievement_name}
-        />
-      ))
-    ) : (
-      <Text style={styles.noAchievementsText}>No achievements yet</Text>
-    )}
-  </View>
-</View>
-
-
-      <Text style={styles.sectionTitle}>Statistics</Text>
-      <View style={styles.statistics}>
-        <StatCard icon={FontAwesome5} iconName="medal" size={24} text="Total Points" value={stats?.total_points || 0} />
-        <StatCard icon={MaterialIcons} iconName="games" size={34} text="Games Played" value={stats?.games_played || 0} />
-        <StatCard icon={FontAwesome6} iconName="fire-flame-curved" size={24} text="Highest Score" value={stats?.highest_score || 0} />
-        <StatCard icon={AntDesign} iconName="heart" size={24} text="Average Score" value={stats?.average_score || 0} />
+      <View style={rankingStyles.leaderboardHeader}>
+        <Text style={globalStyles.Subtitle}>Leaderboard</Text>
       </View>
+
+      <View style={rankingStyles.pickerContainer}>
+        <RNPickerSelect
+          onValueChange={(value) => setSelectedRegion(value)}
+          items={[
+            { label: "🇪🇺 All of Europe", value: "Europe" },
+            userCountry ? { label: `🌍 All of ${userCountry}`, value: userCountry } : null,
+          ].filter(Boolean)}
+          value={selectedRegion}
+          style={{
+            inputIOS: rankingStyles.pickerText,
+          }}
+          useNativeAndroidPickerStyle={false}
+          fixAndroidTouchableBug={true}
+          placeholder={{}}
+          Icon={() => (
+            <Ionicons name="chevron-down-outline" size={24} style={rankingStyles.pickerIcon} />
+          )}
+        />
+      </View>
+
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <RankingTab title="Top 3 of all Time" data={rankingData} countryFlags={countryFlags} />
+        <RankingTab title="Top 3 of this Month" data={rankingData} countryFlags={countryFlags} />
+      </ScrollView>
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#111d45',
-    padding: 20,
-  },
-  loaderContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    color: '#fff',
-    fontWeight: 'bold',
-    marginTop: 30,
-    marginBottom: 20,
-  },
-  buttonAllAchievements: {
-    color: '#fff',
-    fontSize: 14,
-  },
-  achievementsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  achievements: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  achievementCard: {
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 10,
-    flex: 1,
-    marginHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  achievementText: {
-    textAlign: 'center',
-  },
-  noAchievementsText: {
-    color: '#ccc',
-    textAlign: 'center',
-  },
-  statistics: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  statCard: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#111d45',
-    padding: 10,
-    borderRadius: 10,
-    width: '48%',
-    marginBottom: 10,
-    borderColor: '#fff',
-    borderWidth: 1,
-  },
-  statCardText: {
-    marginLeft: 20,
-  },
-  statText: {
-    color: '#fff',
-  },
-  statTextDays: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});
-
-export default Profile;
+}
