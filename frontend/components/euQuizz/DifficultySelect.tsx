@@ -17,7 +17,7 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
 
   // 🔥 Correction : Transmettre la catégorie en plus de la difficulté
   const handlePress = () => {
-    router.push({ pathname: "/euQuizz/questions", params: { category : category, difficulty: name } });
+    router.push({ pathname: "/euQuizz/questions", params: { category : category, difficulty: nom } });
   };
 
   return (
