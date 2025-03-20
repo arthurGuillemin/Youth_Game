@@ -1,27 +1,21 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import euQuizzStyles from "../../styles/euQuizzStyles";
-import RankingCard from "../../components/euQuizz/RankingCard";
+import { Ionicons } from "@expo/vector-icons";
 import globalStyles from "@/styles/globalStyles";
 import theme from "@/styles/theme";
 
-export default function ResultScreen() {
+export default function Result2Screen() {
   const router = useRouter();
 
   return (
     <View style={globalStyles.container}>
       <Text style={[globalStyles.Title, {textAlign: 'center', marginTop: 130, marginBottom: theme.spacing.xxlarge}]}>Results</Text>
-
-      <RankingCard
-        playerName="Maria won!"
-        score={20}
-        alignRight={false}
-      />
-      <RankingCard
-        playerName="Paul"
-        score={5}
-        alignRight={true}
-      />
+      <View style={{alignItems: 'center', justifyContent: 'center', marginVertical: theme.spacing.xxlarge}}>
+      <Ionicons name="person-circle-outline" size={90} color="white" />
+      <Text style={globalStyles.Title}>Name</Text>
+      <Text style={globalStyles.Subtitle}>+ 20 pts</Text>
+      </View>
       <TouchableOpacity
         style={euQuizzStyles.nextButton}
         onPress={() => router.push("../(tabs)")}

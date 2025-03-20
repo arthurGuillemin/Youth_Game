@@ -7,7 +7,7 @@ export default function GameNavigator() {
       <Stack.Screen name="category" />
       <Stack.Screen name="difficulty" />
       <Stack.Screen name="questions" />
-      <Stack.Screen name="result" />
+      <Stack.Screen name="result2" />
     </Stack>
   );
 }
