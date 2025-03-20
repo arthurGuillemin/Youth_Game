@@ -24,16 +24,17 @@ const euQuizController = {
       res.status(500).json({ error: error.message });
     }
   }, 
-  async getQuestionByNationDifficulty(req, res) {
+
+async getQuestionByDifficultyAndCategory(req, res) {
     try {
-      console.log("Params reçus:", req.params); // Log pour voir les paramètres
+      console.log("Params reçus:", req.params); 
   
-      const { nation, difficulty, category } = req.params;
-      if (!nation || !difficulty || !category) {
-        return res.status(400).json({ error: "Les paramètres 'nation', 'difficulty', 'category' sont requis." });
+      const { difficulty, category } = req.params;
+      if (!difficulty || !category) {
+        return res.status(400).json({ error: "Les paramètres 'difficulty' et 'category' sont requis." });
       }
   
-      const questions = await euQuizModel.getQuestionByNationDifficulty(nation, difficulty, category);
+      const questions = await euQuizModel.getQuestionByDifficultyAndCategory(difficulty, category);
       
       if (!questions.length) {
         return res.status(404).json({ message: "Aucune question trouvée pour ces critères." });
@@ -41,10 +42,11 @@ const euQuizController = {
   
       res.json(questions);
     } catch (error) {
-      console.error("Erreur dans getQuestionByNationDifficulty:", error.message);
+      console.error("Erreur dans getQuestionByDifficultyAndCategory:", error.message);
       res.status(500).json({ error: error.message });
     }
-  }, 
+},
+
   async getCategories(req, res) {
     try {
       const categories = await euQuizModel.getCategories();

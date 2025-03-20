@@ -4,14 +4,14 @@ const rewardsModel = {
   async getRewards() {
     const { data, error } = await supabase
       .from('rewards')
-      .select('title' , 'id');
+      .select('*');
     if (error) throw error;
     return data;
   }, 
   async getRewardsInfos(id){
     const { data, error } = await supabase
       .from('rewards')
-      .select('title' , 'description' , 'code')
+      .select('*')
       .eq('id', id)
     if (error) throw error;
     return data;
