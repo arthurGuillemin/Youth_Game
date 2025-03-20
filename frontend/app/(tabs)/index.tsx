@@ -5,37 +5,41 @@ import ProfileButton from "../../components/ProfileButton";
 import globalStyles from "../../styles/globalStyles";
 import theme from "@/styles/theme";
 import { getRewards } from "../../services/rewardService";
-import { getImageUrl } from "../../services/imageService"; // Import du service d’images
+import { getImageUrl } from "../../services/imageService"; // Service d'images
+import gameService from "../../services/gameService"; // Service pour récupérer les jeux
 import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
   const [rewards, setRewards] = useState<{ id: string; title: string; image?: string }[]>([]);
+  const [games, setGames] = useState<{ id: string; name: string; isMultiplayer: boolean }[]>([]);
   const router = useRouter();
 
   useEffect(() => {
+    // Récupérer les récompenses avec images
     const fetchRewards = async () => {
       const data = await getRewards();
       if (data) {
         const rewardsWithImages = await Promise.all(
           data.map(async (reward) => {
-            const imageUrl = await getImageUrl(reward.title); 
+            const imageUrl = await getImageUrl(reward.title);
             return { ...reward, image: imageUrl };
           })
         );
         setRewards(rewardsWithImages);
       }
     };
-    fetchRewards();
-  }, []);
 
-  const games = [
-    { id: "1", title: "QuizzGame", isMultiplayer: true },
-    { id: "2", title: "EmojiGame", isMultiplayer: false },
-    { id: "3", title: "EU Quizz", isMultiplayer: false },
-    { id: "4", title: "Comming soon", isMultiplayer: true },
-    { id: "5", title: "Comming soon", isMultiplayer: false },
-    { id: "6", title: "Comming soon", isMultiplayer: false },
-  ];
+    // Récupérer les jeux
+    const fetchGames = async () => {
+      const data = await gameService.getAllGamesNames();
+      if (data) {
+        setGames(data);
+      }
+    };
+
+    fetchRewards();
+    fetchGames();
+  }, []);
 
   return (
     <View style={[globalStyles.container, { flex: 1 }]}>
@@ -63,7 +67,7 @@ export default function HomeScreen() {
           <GameCard
             title={item.title}
             variant="square"
-            image={{ uri: item.image }} // Ajout de l’image récupérée
+            image={{ uri: item.image }}
             onPress={() => router.push("/rewardInfo")}
           />
         )}
@@ -75,11 +79,18 @@ export default function HomeScreen() {
 
       <FlatList
         data={games}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <GameCard title={item.title} variant="square" />}
+        keyExtractor={(item, index) => item.id || index.toString()}
+        renderItem={({ item }) => (
+          <GameCard
+            title={item.name}
+            variant="square"
+            onPress={() => router.push("/game")}
+          />
+        )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       />
+
     </View>
   );
 }

@@ -8,11 +8,9 @@ import theme from "@/styles/theme";
 import { useRouter } from "expo-router";
 
 const difficulties = [
-  { points: 100, color: "#4aabff" },
-  { points: 200, color: "#4eb0f2" },
-  { points: 300, color: "#56c2e3" },
-  { points: 400, color: "#5dc8de" },
-  { points: 500, color: "#63dce0" },
+  { points: 100, color: "#4aabff" , name: "Easy"},
+  { points: 300, color: "#56c2e3" ,  name: "Medium"},
+  { points: 500, color: "#63dce0",  name: "Hard" },
 ];
 
 export default function DifficultySelection() {

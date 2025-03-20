@@ -42,7 +42,15 @@ export default function CategorySelection() {
       <FlatList
         data={categories}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <CategorySelect title={item} />}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              router.push({ pathname: "/euQuizz/difficulty", params: { category: item } })
+            }
+          >
+            <CategorySelect title={item} />
+          </TouchableOpacity>
+        )}
         showsVerticalScrollIndicator={false}
       />
     </View>
