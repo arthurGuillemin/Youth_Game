@@ -27,6 +27,8 @@ import emojiGuessRoutes from "./Routes/emojiGuessRoutes.js";
 import euquizQuestionsRoutes from "./Routes/euquizQuestionsRoutes.js";
 import gamesRoutes from "./Routes/gamesRoutes.js";
 import achievementRoutes from './Routes/AchievementRoutes.js';
+import playerstatsRoutes from './Routes/playerStatsRoutes.js';
+import rewardsStatsRoutes from './Routes/rewardsStatsRoutes.js';
 
 
 app.use('/users', userRoutes);
@@ -38,7 +40,8 @@ app.use('/emojiguess', emojiGuessRoutes);
 app.use('/euquizquestions', euquizQuestionsRoutes);
 app.use('/games', gamesRoutes);
 app.use('/achievements', achievementRoutes);
-
+app.use('/playerstats', playerstatsRoutes);
+app.use('/rewards', rewardsStatsRoutes);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
