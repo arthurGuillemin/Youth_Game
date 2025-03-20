@@ -14,7 +14,7 @@ export default function RankingScreen() {
   const [rankingData, setRankingData] = useState<{ name: string; points: string; country?: string }[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const userCountry = "Allemagne";
+  const userCountry = "France";
 
   useEffect(() => {
     const fetchRanking = async () => {
