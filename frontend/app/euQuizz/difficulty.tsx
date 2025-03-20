@@ -1,5 +1,4 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, FlatList } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import globalStyles from "../../styles/globalStyles";
 import euQuizzStyles from "../../styles/euQuizzStyles";
@@ -7,11 +6,6 @@ import CategorySelect from "@/components/euQuizz/CategorySelect";
 import DifficultySelect from "@/components/euQuizz/DifficultySelect";
 import theme from "@/styles/theme";
 import { useRouter } from "expo-router";
-
-const categories = [
-  { id: "1", title: "International Food", image: require("../../assets/images/food.jpg"), color: "#5D9CEC" },
-  { id: "2", title: "Music and Culture", image: require("../../assets/images/music.jpg"), color: "#6DD5FA" },
-];
 
 const difficulties = [
   { points: 100, color: "#4aabff" },
@@ -22,21 +16,23 @@ const difficulties = [
 ];
 
 export default function DifficultySelection() {
-  const { category } = useLocalSearchParams();
-  const selectedCategory = categories.find((cat) => cat.id === category);
+  const params = useLocalSearchParams();
   const router = useRouter();
+
+  const selectedCategory = {
+    title: Array.isArray(params.title) ? params.title[0] : params.title || "Unknown",
+    image: params.image || require("../../assets/images/food.jpg"),
+    color: Array.isArray(params.color) ? params.color[0] : params.color || "#4aabff",
+  };
 
   return (
     <View style={globalStyles.container}>
       <View style={globalStyles.headerWithGoBack}>
-        <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
-          <Ionicons name="chevron-back" size={30} color="white" />
-        </TouchableOpacity>
         <Text style={globalStyles.sectionTitle}>Difficulty</Text>
       </View>
 
       {selectedCategory && (
-        <CategorySelect id={selectedCategory.id} title={selectedCategory.title} image={selectedCategory.image} color={selectedCategory.color} showPlayButton={false} />
+        <CategorySelect title={selectedCategory.title} image={selectedCategory.image} color={selectedCategory.color} showPlayButton={false} />
       )}
       <FlatList
         data={difficulties}
