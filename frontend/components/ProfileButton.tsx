@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import globalStyles from "../styles/globalStyles";
@@ -9,9 +9,9 @@ export default function ProfileButton() {
   return (
     <TouchableOpacity
       style={globalStyles.profileButton}
-      onPress={() => {router.push("/profile");}}>
-      <View style={globalStyles.profileIconContainer}>
-        <Ionicons name="person-outline" size={30} color="white" />
+      onPress={() => { router.push("/profile"); }}>
+      <View>
+        <Image source={require("../assets/images/avatar.png")} style={{ width: 50, height: 50 }} />
       </View>
     </TouchableOpacity>
   );

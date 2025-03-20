@@ -13,11 +13,11 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
   const router = useRouter();
 
   // 🔥 Correction : Récupérer la catégorie depuis les paramètres
-  const category = params.title || "Unknown"; 
+  const category = params.title || "Unknown";
 
   // 🔥 Correction : Transmettre la catégorie en plus de la difficulté
   const handlePress = () => {
-    router.push({ pathname: "/euQuizz/questions", params: { category : category, difficulty: name } });
+    router.push({ pathname: "/euQuizz/questions", params: { category : category } });
   };
 
   return (

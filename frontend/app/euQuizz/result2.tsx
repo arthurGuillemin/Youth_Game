@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import euQuizzStyles from "../../styles/euQuizzStyles";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,7 +15,7 @@ export default function Result2Screen() {
         Results
       </Text>
       <View style={{ alignItems: "center", justifyContent: "center", marginVertical: theme.spacing.xxlarge }}>
-        <Ionicons name="person-circle-outline" size={90} color="white" />
+                <Image source={require("../../assets/images/avatar.png")} style={{width:90, height:90, marginBottom: theme.spacing.large}} />
         <Text style={globalStyles.Title}>{params.name || "Unknown"}</Text>
         <Text style={globalStyles.Subtitle}>+ {params.score} pts</Text>
       </View>
