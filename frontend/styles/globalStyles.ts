@@ -116,7 +116,7 @@ const globalStyles = StyleSheet.create({
   gameImage: {
     width: "100%",
     height: "100%",
-    borderRadius: 10,
+    borderRadius: 8,
   },
 
   gameTitle: {

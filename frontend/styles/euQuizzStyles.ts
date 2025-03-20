@@ -41,6 +41,7 @@ const euQuizzStyles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: 'flex-start',
     padding: 20,
+    borderRadius: 8
   },
   categoryTitle: {
     fontSize: theme.fontSizes.medium,

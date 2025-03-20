@@ -5,22 +5,28 @@ import ProfileButton from "../../components/ProfileButton";
 import globalStyles from "../../styles/globalStyles";
 import theme from "@/styles/theme";
 import { getRewards } from "../../services/rewardService";
+import { getImageUrl } from "../../services/imageService"; // Import du service d’images
 import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
-  const [rewards, setRewards] = useState<{ id: string; title: string }[]>([]);
+  const [rewards, setRewards] = useState<{ id: string; title: string; image?: string }[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     const fetchRewards = async () => {
       const data = await getRewards();
       if (data) {
-        setRewards(data);
+        const rewardsWithImages = await Promise.all(
+          data.map(async (reward) => {
+            const imageUrl = await getImageUrl(reward.title); 
+            return { ...reward, image: imageUrl };
+          })
+        );
+        setRewards(rewardsWithImages);
       }
     };
     fetchRewards();
   }, []);
-
 
   const games = [
     { id: "1", title: "QuizzGame", isMultiplayer: true },
@@ -57,6 +63,7 @@ export default function HomeScreen() {
           <GameCard
             title={item.title}
             variant="square"
+            image={{ uri: item.image }} // Ajout de l’image récupérée
             onPress={() => router.push("/rewardInfo")}
           />
         )}

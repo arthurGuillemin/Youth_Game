@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
 import globalStyles from "../styles/globalStyles";
+import euQuizzStyles from "@/styles/euQuizzStyles";
 
 interface GameCardProps {
   title: string;
@@ -44,8 +45,8 @@ export default function GameCard({
         <Image source={image} style={globalStyles.gameImage} resizeMode="cover" />
       )}
 
-      <View style={globalStyles.overlay}>
-        <Text style={globalStyles.gameTitle}>{title}</Text>
+      <View style={euQuizzStyles.categoryImageOverlay}>
+        <Text style={euQuizzStyles.categoryTitle}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
