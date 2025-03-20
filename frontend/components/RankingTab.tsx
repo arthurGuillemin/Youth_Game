@@ -20,7 +20,7 @@ export default function RankingTab({ title, data, countryFlags }: RankingTabProp
   return (
     <View style={{ margin: theme.spacing.medium }}>
       <Text style={rankingStyles.rankSectionTitle}>{title}</Text>
-      {data.slice(0, 3).map((item, index) => (
+      {data.map((item, index) => (
         <View key={`${title}-${index}`} style={rankingStyles.rankItem}>
           <Text style={rankingStyles.rankPosition}>{index + 1}.</Text>
           <View>
