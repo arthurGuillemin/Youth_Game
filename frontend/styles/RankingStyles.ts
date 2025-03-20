@@ -125,7 +125,6 @@ const rankingStyles = StyleSheet.create({
         height: 50,
         alignSelf: "center",
         flexDirection: "row",
-        marginVertical: theme.spacing.small,
       },
       pickerText: {
         fontSize: 18,

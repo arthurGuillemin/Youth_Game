@@ -15,7 +15,7 @@ const GameEmoji = () => {
     const fetchData = async () => {
       const randomGuess = await getRandomGuess();
       if (randomGuess && randomGuess.length > 0) {
-        setCountry(randomGuess[0]); // Stocke la première question reçue
+        setCountry(randomGuess[0]);
       }
     };
 
@@ -72,25 +72,44 @@ const GameEmoji = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
+    backgroundColor: '#2c3e50',
   },
   emoji: {
-    fontSize: 40,
+    fontSize: 50,
     marginBottom: 20,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    paddingHorizontal: 10,
+    height: 50,
+    borderColor: '#ecf0f1',
+    borderWidth: 2,
+    borderRadius: 10,
+    paddingHorizontal: 15,
     marginBottom: 10,
-    width: "80%",
+    width: '80%',
+    fontSize: 18,
+    backgroundColor: '#fff',
+  },
+  button: {
+    backgroundColor: '#3498db',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   message: {
-    marginTop: 10,
+    marginTop: 15,
     fontSize: 18,
+    fontWeight: 'bold',
+    color: '#ecf0f1',
+    textAlign: 'center',
   },
 });
 

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { View, Text, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert, TouchableOpacity } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import globalStyles from "@/styles/globalStyles";
 import RankingTab from "../../components/RankingTab";
 import ProfileCard from "../../components/ProfileCard";
-import { getLeaderBoard, getLeaderBoardByCountry } from "../../services/leaderbordService"; 
+import { getLeaderBoard, getLeaderBoardByCountry } from "../../services/leaderbordService";
 import rankingStyles from "@/styles/RankingStyles";
 import theme from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons";
@@ -51,9 +51,8 @@ export default function RankingScreen() {
 
       <View style={rankingStyles.leaderboardHeader}>
         <Text style={globalStyles.Subtitle}>Leaderboard</Text>
-        <Text style={{color : theme.colors.text, fontSize: theme.fontSizes.small, fontFamily: theme.fonts.regular}}>Show All</Text>
-        </View>
-        <View style={rankingStyles.pickerContainer}>
+      </View>
+      <View style={rankingStyles.pickerContainer}>
         <RNPickerSelect
           onValueChange={(value) => setSelectedRegion(value)}
           items={[
@@ -74,10 +73,10 @@ export default function RankingScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-    <RankingTab title="Top 3 of all Time" data={rankingData} />
-    <RankingTab title="Top 3 of this Month" data={rankingData} />
-  </ScrollView>
-</View>
+        <RankingTab title="Top 3 of all Time" data={rankingData} />
+        <RankingTab title="Top 3 of this Month" data={rankingData} />
+      </ScrollView>
+    </View>
 
 
   );
