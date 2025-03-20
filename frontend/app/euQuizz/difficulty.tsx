@@ -36,7 +36,7 @@ export default function DifficultySelection() {
       <FlatList
         data={difficulties}
         keyExtractor={(item) => item.points.toString()}
-        renderItem={({ item }) => <DifficultySelect points={item.points} color={item.color} />}
+        renderItem={({ item }) => <DifficultySelect points={item.name} color={item.color} />}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ marginTop: theme.spacing.xxlarge }}
       />

@@ -11,7 +11,7 @@ export const getAllQuestions = async () => {
   }
 };
 
-export const getQuestionsByCategoryExcludeCountry = async (category, country, difficulty) => {
+export const getQuestionsByCategoryExcludeCountry = async (category, difficulty) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${category}/exclude/${country}/${difficulty}`);
     if (!response.ok) throw new Error("Erreur lors de la récupération des questions filtrées");

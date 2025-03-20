@@ -1,11 +1,11 @@
 const API_BASE_URL = "http://13.60.245.133:3000/scores";
 
-export const createScore = async (scoreData) => {
+export const createScore = async (user_id, game_id, party_id, points) => {
   try {
     const response = await fetch(`${API_BASE_URL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(scoreData),
+      body: JSON.stringify(user_id, game_id, party_id, points),
     });
 
     return await response.json();

@@ -22,7 +22,7 @@ export default function DifficultySelect({ points, color }: DifficultySelectProp
 
   return (
     <TouchableOpacity onPress={handlePress} style={[euQuizzStyles.difficultyButton, { backgroundColor: color }]}>
-      <Text style={euQuizzStyles.difficultyText}>{points} pts</Text>
+      <Text style={euQuizzStyles.difficultyText}>{points}</Text>
     </TouchableOpacity>
   );
 }

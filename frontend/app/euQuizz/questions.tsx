@@ -4,8 +4,13 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import TimerBar from "../../components/euQuizz/TimerBar";
 import AnswerCard from "../../components/euQuizz/AnswerCard";
+import { getUser } from '../../services/userService';
 import euQuizzStyles from "@/styles/euQuizzStyles";
 import { getQuestionsByNationDifficulty } from "../../services/euQuizService";
+import { createScore } from '../../services/scoreService';
+
+
+const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6";
 
 export default function QuestionsScreen() {
   const router = useRouter();
@@ -16,7 +21,13 @@ export default function QuestionsScreen() {
   const difficulty = params.difficulty || "Easy";
 
   // 🔥 États pour stocker les questions et gérer le chargement
-  const [questions, setQuestions] = useState([]);
+  interface Question {
+    Question: string;
+    correct_answer: string;
+    anwser_options: string[];
+  }
+
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -54,28 +65,40 @@ export default function QuestionsScreen() {
     );
   }
 
-  const handleSelectAnswer = (answerId: string) => {
+  const handleSelectAnswer = async (answerId: string) => {
+    if (!questions[currentQuestionIndex]) return; // Évite l'erreur si la question n'existe pas
+  
     const isCorrect = questions[currentQuestionIndex].correct_answer === answerId;
-
+  
     if (isCorrect) {
-      setScore(score + questions[currentQuestionIndex].points);
+      let pointsToAdd = difficulty === "Easy" ? 100 : difficulty === "Medium" ? 300 : 500;
+      setScore((prevScore) => prevScore + pointsToAdd);
     }
-
+  
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      router.push({ pathname: "/euQuizz/result2", params: { score } });
+      const user = await getUser(USER_ID);
+      const userName = user ? user.username : "Unknown";
+      await createScore({ user_id : USER_ID, game_id : "93794c67-aeae-4cd3-b5af-32e538b68afb",  points : score   });
+  
+      router.push({ pathname: "/euQuizz/result2", params: { score, name: userName } });
     }
   };
-
+  
+  
   return (
     <View>
-      <TimerBar key={currentQuestionIndex} duration={15} onTimeUp={() => setCurrentQuestionIndex((prev) => prev + 1)} />
+<TimerBar
+  key={currentQuestionIndex}
+  duration={15}
+  onTimeUp={() => {
+    setCurrentQuestionIndex((prev) => (prev < questions.length - 1 ? prev + 1 : prev));
+  }}
+/>
 
       <View style={euQuizzStyles.questionContainer}>
-        <Text style={euQuizzStyles.flag}>{questions[currentQuestionIndex].countryAbout}</Text>
         <Text style={euQuizzStyles.questionText}>{questions[currentQuestionIndex].Question}</Text>
-
         <View style={euQuizzStyles.peopleContainer}>
           <Ionicons name="person-outline" size={30} color="navy" />
           <Ionicons name="person-outline" size={30} color="navy" />
@@ -84,12 +107,25 @@ export default function QuestionsScreen() {
       </View>
 
       <View style={{ marginBottom: 40 }}>
-        {questions[currentQuestionIndex].anwser_options.map((answer) => (
-          <View key={answer} style={{ marginBottom: 10 }}>
-            <AnswerCard image={null} onPress={() => handleSelectAnswer(answer)} />
-          </View>
-        ))}
-      </View>
+  {questions[currentQuestionIndex].anwser_options.map((answer) => (
+    <Text
+      key={answer}
+      style={{
+        backgroundColor: "#4aabff",
+        padding: 10,
+        marginVertical: 5,
+        textAlign: "center",
+        borderRadius: 8,
+        fontSize: 18,
+        color: "white",
+      }}
+      onPress={() => handleSelectAnswer(answer)}
+    >
+      {answer}
+    </Text>
+  ))}
+</View>
+
     </View>
   );
 }
