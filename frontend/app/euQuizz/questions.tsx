@@ -45,7 +45,7 @@ export default function QuestionsScreen() {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      router.push({ pathname: "/euQuizz/result", params: { score } });
+      router.push({ pathname: "/euQuizz/result2", params: { score } });
     }
   };
 
@@ -53,7 +53,7 @@ export default function QuestionsScreen() {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      router.push({ pathname: "/euQuizz/result", params: { score } });
+      router.push({ pathname: "/euQuizz/result2", params: { score } });
     }
   };
 
