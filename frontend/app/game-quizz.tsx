@@ -9,7 +9,7 @@ export default function GameQuizzScreen() {
   const router = useRouter();
 
   const handleFinishQuiz = () => {
-    router.back();
+    router.replace("/")
   };
 
   return (
