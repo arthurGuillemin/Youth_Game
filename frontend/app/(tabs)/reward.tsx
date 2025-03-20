@@ -8,7 +8,7 @@ const rewards = [
   {
     title: "TOO GOOD TO GO",
     image: require("../../assets/images/tooGoodToGo.png"),
-    points: 2350,
+    points: 230,
     requiredPoints: 5500,
     description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt neque totam maiores ipsa maxime mollitia perspiciatis dolore magni fuga reprehenderit, voluptatem dolorum, velit deleniti rerum, enim in laborum odit quo?"
   },

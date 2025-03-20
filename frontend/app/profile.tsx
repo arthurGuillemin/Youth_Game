@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -53,11 +53,9 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ icon: Icon, iconName,
 const Profile = () => {
   const router = useRouter();
 
-  // États pour stocker les données
   const [user, setUser] = useState<{ username: string } | null>(null);
   const [stats, setStats] = useState<any>(null);
   const [achievements, setAchievements] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,35 +67,24 @@ const Profile = () => {
         setUser(userData);
         setStats(userStats.length ? userStats[0] : null);
         setAchievements(userAchievements);
-        console.log("Achievements récupérés :", userAchievements);
       } catch (error) {
         console.error("Erreur lors du chargement des données :", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <View style={styles.loaderContainer}>
-        <ActivityIndicator size="large" color="#00D8FF" />
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
-      <View style={[globalStyles.header, {marginBottom:-90}]}>
+      <View style={[globalStyles.header, { marginBottom: -90 }]}>
         <TouchableOpacity onPress={() => router.back()} style={globalStyles.goBackButton}>
           <Ionicons name="chevron-back" size={30} color="white" />
         </TouchableOpacity>
       </View>
 
       <ProfileCard
-        username={user?.username || "Loading..."}
+        username={user?.username || "User"}
         score={stats?.total_points || 0}
         highScore={stats?.highest_score || 0}
       />
@@ -111,7 +98,7 @@ const Profile = () => {
         </View>
 
         <View style={styles.achievements}>
-          {achievements ? (
+          {achievements.length > 0 ? (
             achievements.map((achievement, index) => (
               <AchievementCard
                 key={achievement.id || index}
@@ -127,7 +114,6 @@ const Profile = () => {
           )}
         </View>
       </View>
-
 
       <Text style={styles.sectionTitle}>Statistics</Text>
       <View style={styles.statistics}>
@@ -145,11 +131,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#111d45',
     padding: 20,
-  },
-  loaderContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   sectionTitle: {
     fontSize: 24,

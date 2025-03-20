@@ -83,20 +83,6 @@ const euQuizzStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: theme.fontSizes.medium,
   },
-  randomButton: {
-    borderWidth: 2,
-    borderColor: "#FFF",
-    borderRadius: theme.borderRadius.medium,
-    paddingVertical: theme.spacing.medium,
-    alignItems: "center",
-    marginBottom: theme.spacing.large,
-    marginHorizontal: theme.spacing.medium,
-  },
-  randomButtonText: {
-    color: "#FFF",
-    fontWeight: "bold",
-    fontSize: theme.fontSizes.medium,
-  },
 
   /* ─────────────── TIMER BAR STYLES ─────────────── */
   timerBar: {
