@@ -32,17 +32,17 @@ const AchievementList = () => {
   const router = useRouter();
   return (
     <View style={globalStyles.container}>
-      <View style={[globalStyles.header, { marginBottom: -90, marginTop: theme.spacing.large }]}>
+      <View style={[globalStyles.header, { marginBottom: -90, backgroundColor: theme.colors.background, zIndex: 10, height:100 }]}>
         <TouchableOpacity onPress={() => router.back()} style={[globalStyles.goBackButton, {marginLeft: theme.spacing.medium}]}>
           <Ionicons name="chevron-back" size={30} color="white" />
         </TouchableOpacity>
-        <Text style={[styles.title, { marginTop: 40 }]}>Achievements</Text>
+        <Text style={[styles.title, { marginTop: 40, backgroundColor: theme.colors.background }]}>Achievements</Text>
       </View>
       <FlatList
         data={achievements}
         keyExtractor={(item, index) => index.toString()}
         numColumns={2}
-        contentContainerStyle={styles.container}
+        contentContainerStyle={{ padding: theme.spacing.medium,marginTop: theme.spacing.xxlarge}}
         renderItem={({ item }) => (
           <View style={styles.achievementCard}>
             <item.icon name={item.iconName} size={40} color={item.color} />

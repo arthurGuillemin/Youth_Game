@@ -384,7 +384,7 @@ const globalStyles = StyleSheet.create({
     marginHorizontal: 20,
   },
   goBackButton: {
-    marginTop: theme.spacing.medium
+    marginTop: theme.spacing.medium,
   },
 
 });
