@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-
-
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { useRouter } from "expo-router";
 import globalStyles from "../styles/globalStyles";
 import { FontAwesome, FontAwesome5, AntDesign, SimpleLineIcons, Entypo, Feather, Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import theme from '@/styles/theme';
 
 const achievements = [
   { icon: FontAwesome, iconName: "diamond", color: "#00D8FF", text: "Logged in 50 times" },
@@ -29,29 +29,35 @@ const achievements = [
 ];
 
 const AchievementList = () => {
+  const router = useRouter();
   return (
     <View style={globalStyles.container}>
-      <Text style={styles.title}>Achievements</Text>
+      <View style={[globalStyles.header, { marginBottom: -90, marginTop: theme.spacing.large }]}>
+        <TouchableOpacity onPress={() => router.back()} style={[globalStyles.goBackButton, {marginLeft: theme.spacing.medium}]}>
+          <Ionicons name="chevron-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={[styles.title, { marginTop: 40 }]}>Achievements</Text>
+      </View>
       <FlatList
-      data={achievements}
-      keyExtractor={(item, index) => index.toString()}
-      numColumns={4}
-      contentContainerStyle={styles.container}
-      renderItem={({ item }) => (
-        <View style={styles.achievementCard}>
-          <item.icon name={item.iconName} size={30} color={item.color} />
-          <Text style={styles.achievementText}>{item.text}</Text>
-        </View>
-      )}
-    />
+        data={achievements}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+        contentContainerStyle={styles.container}
+        renderItem={({ item }) => (
+          <View style={styles.achievementCard}>
+            <item.icon name={item.iconName} size={40} color={item.color} />
+            <Text style={styles.achievementText}>{item.text}</Text>
+          </View>
+        )}
+      />
     </View>
-    
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: theme.spacing.medium,
+    marginTop: theme.spacing.xxlarge
   },
   title: {
     fontSize: 24,
@@ -73,10 +79,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     flex: 1,
-    marginHorizontal: 5,
+    marginHorizontal: theme.spacing.small,
+    marginVertical: theme.spacing.small,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    height: 150,
+    gap: 20
   },
   achievementIcon: {
     marginBottom: 10,

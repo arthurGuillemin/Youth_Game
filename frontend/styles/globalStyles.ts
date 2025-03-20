@@ -36,7 +36,11 @@ const globalStyles = StyleSheet.create({
 
 
   /** Profile Card */
-
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: theme.spacing.large
+  },
   profileHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -380,7 +384,7 @@ const globalStyles = StyleSheet.create({
     marginHorizontal: 20,
   },
   goBackButton: {
-    marginTop: 60,
+    marginTop: theme.spacing.medium
   },
 
 });
