@@ -131,26 +131,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
-  loaderContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  errorText: {
-    fontSize: 18,
-    color: "red",
-  },
   progressBarContainer: {
     width: '100%',
     alignItems: 'center',
     marginBottom: 20,
   },
   progressText: {
+    color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
@@ -167,6 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4caf50', 
   },
   question: {
+    color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
