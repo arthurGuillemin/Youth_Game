@@ -22,9 +22,9 @@ export const getQuestionsByCategoryExcludeCountry = async (category, country, di
   }
 };
 
-export const getQuestionsByNationDifficulty = async (nation, difficulty, category) => {
+export const getQuestionsByNationDifficulty = async ( difficulty, category) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/${nation}/${difficulty}/${category}`);
+    const response = await fetch(`${API_BASE_URL}/${difficulty}/${category}`);
     if (!response.ok) throw new Error("Erreur lors de la récupération des questions filtrées");
     return await response.json();
   } catch (error) {

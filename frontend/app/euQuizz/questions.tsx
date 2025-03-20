@@ -1,42 +1,61 @@
-import { View, Text } from "react-native";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { View, Text, ActivityIndicator } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import TimerBar from "../../components/euQuizz/TimerBar";
 import AnswerCard from "../../components/euQuizz/AnswerCard";
 import euQuizzStyles from "@/styles/euQuizzStyles";
-import { useRouter } from "expo-router";
+import { getQuestionsByNationDifficulty } from "../../services/euQuizService";
 
 export default function QuestionsScreen() {
+  const router = useRouter();
+  const params = useLocalSearchParams();
+
+  // 🔥 Récupérer les paramètres
+  const category = params.category || "Unknown";
+  const difficulty = params.difficulty || "Easy";
+
+  // 🔥 États pour stocker les questions et gérer le chargement
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const router = useRouter();
-  const questions = [
-    {
-      id: "1",
-      question: "What is a „Currywurst“?",
-      flag: "🇩🇪",
-      points: 100,
-      answers: [
-        { id: "1", text: 'text', isCorrect: true },
-        { id: "2", text: 'text', isCorrect: false },
-        { id: "3", text: 'text', isCorrect: false },
-      ],
-    },
-    {
-      id: "2",
-      question: "What is a „Baguette“?",
-      flag: "🇫🇷",
-      points: 200,
-      answers: [
-        { id: "1", text: 'text', isCorrect: true },
-        { id: "2", text: 'text', isCorrect: false },
-        { id: "3", text: 'text', isCorrect: false },
-      ],
-    },
-  ];
+
+  useEffect(() => {
+    console.log("Paramètres reçus :", { category, difficulty });
+
+    // 🔥 Récupérer les questions depuis l'API
+    const fetchQuestions = async () => {
+      const data = await getQuestionsByNationDifficulty(difficulty, category);
+      if (data) {
+        setQuestions(data);
+      } else {
+        console.error("Erreur lors du chargement des questions");
+      }
+      setLoading(false);
+    };
+
+    fetchQuestions();
+  }, [category, difficulty]);
+
+  if (loading) {
+    return (
+      <View style={euQuizzStyles.loadingContainer}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
+  }
+
+  if (questions.length === 0) {
+    return (
+      <View style={euQuizzStyles.loadingContainer}>
+        <Text>Aucune question trouvée.</Text>
+      </View>
+    );
+  }
 
   const handleSelectAnswer = (answerId: string) => {
-    const isCorrect = questions[currentQuestionIndex].answers.find(a => a.id === answerId)?.isCorrect;
+    const isCorrect = questions[currentQuestionIndex].correct_answer === answerId;
 
     if (isCorrect) {
       setScore(score + questions[currentQuestionIndex].points);
@@ -49,21 +68,13 @@ export default function QuestionsScreen() {
     }
   };
 
-  const handleTimeUp = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-    } else {
-      router.push({ pathname: "/euQuizz/result2", params: { score } });
-    }
-  };
-
   return (
     <View>
-      <TimerBar key={currentQuestionIndex} duration={15} onTimeUp={handleTimeUp} />
+      <TimerBar key={currentQuestionIndex} duration={15} onTimeUp={() => setCurrentQuestionIndex((prev) => prev + 1)} />
 
       <View style={euQuizzStyles.questionContainer}>
-        <Text style={euQuizzStyles.flag}>{questions[currentQuestionIndex].flag}</Text>
-        <Text style={euQuizzStyles.questionText}>{questions[currentQuestionIndex].question}</Text>
+        <Text style={euQuizzStyles.flag}>{questions[currentQuestionIndex].countryAbout}</Text>
+        <Text style={euQuizzStyles.questionText}>{questions[currentQuestionIndex].Question}</Text>
 
         <View style={euQuizzStyles.peopleContainer}>
           <Ionicons name="person-outline" size={30} color="navy" />
@@ -73,16 +84,12 @@ export default function QuestionsScreen() {
       </View>
 
       <View style={{ marginBottom: 40 }}>
-        {questions[currentQuestionIndex].answers.map((answer) => (
-          <View key={answer.id} style={{ marginBottom: 10 }}>
-            <AnswerCard
-              text={answer.text}
-              onPress={() => handleSelectAnswer(answer.id)}
-            />
-            </View>
+        {questions[currentQuestionIndex].anwser_options.map((answer) => (
+          <View key={answer} style={{ marginBottom: 10 }}>
+            <AnswerCard image={null} onPress={() => handleSelectAnswer(answer)} />
+          </View>
         ))}
       </View>
-
     </View>
   );
 }
