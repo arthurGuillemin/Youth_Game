@@ -90,6 +90,7 @@ export default function RankingScreen() {
       }
     };
     
+    
 
     fetchRanking();
   }, [selectedRegion, userCountry]);
