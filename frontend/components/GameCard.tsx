@@ -27,24 +27,28 @@ export default function GameCard({
       return;
     }
 
-    if (title === "EU Quiz") {
-      router.push("../euQuizz");
-    } else if (title === "EmojiGame") {
-      router.push("/game-emoji");
-    } else if (title === "Europa Trivia") {
-      router.push("/game-quizz");
+    switch (title) {
+      case "EU Quiz":
+        router.push("/euQuizz");
+        break;
+      case "EmojiGame":
+        router.push("/game-emoji");
+        break;
+      case "Europa Trivia":
+        router.push("/game-quizz");
+        break;
+      default:
+        console.warn("No route found for this game or reward.");
     }
   };
 
-    return (
-      <TouchableOpacity onPress={handlePress} style={[
-        variant === "rectangle" ? globalStyles.gameCardRectangle : globalStyles.gameCardSquare,
-      ]}>
-
+  return (
+    <TouchableOpacity onPress={handlePress} style={[
+      variant === "rectangle" ? globalStyles.gameCardRectangle : globalStyles.gameCardSquare,
+    ]}>
       {image && (
         <Image source={image} style={globalStyles.gameImage} resizeMode="cover" />
       )}
-
       <View style={euQuizzStyles.categoryImageOverlay}>
         <Text style={euQuizzStyles.categoryTitle}>{title}</Text>
       </View>

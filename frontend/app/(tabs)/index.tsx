@@ -14,8 +14,13 @@ export default function HomeScreen() {
   const [games, setGames] = useState<{ id: string; name: string; isMultiplayer: boolean }[]>([]);
   const router = useRouter();
 
+  const gameImages: { [key: string]: any } = {
+    "EU Quiz": require("../../assets/images/ReadyForAQuiz.png"),
+    "EmojiGame": require("../../assets/images/emoji.png"),
+    "Europa Trivia": require("../../assets/images/europa.png"),
+  };
+
   useEffect(() => {
-    // Récupérer les récompenses avec images
     const fetchRewards = async () => {
       const data = await getRewards();
       if (data) {
@@ -29,7 +34,6 @@ export default function HomeScreen() {
       }
     };
 
-    // Récupérer les jeux
     const fetchGames = async () => {
       const data = await gameService.getAllGamesNames();
       if (data) {
@@ -46,11 +50,10 @@ export default function HomeScreen() {
     <View style={[globalStyles.container, { flex: 1 }]}>
       <ProfileButton />
       <View style={styles.logoContainer}>
-  <Image source={require("../../assets/images/bigLogo.png")} style={styles.logo} />
-</View>
+        <Image source={require("../../assets/images/bigLogo.png")} style={styles.logo} />
+      </View>
 
-
-      <View style={{ width: "100%", marginBottom: 20, marginTop: -40}}>
+      <View style={{ width: "100%", marginBottom: 20, marginTop: -40 }}>
         <GameCard
           title="EU Quiz"
           textColor="#ffffff"
@@ -63,18 +66,26 @@ export default function HomeScreen() {
 
       <FlatList
         data={rewards}
-        keyExtractor={(item, index) => item.id || index.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <GameCard
             title={item.title}
             variant="square"
             image={{ uri: item.image }}
-            onPress={() => router.push("/rewardInfo")}
+            onPress={() => router.push({
+              pathname: "/rewardInfo",
+              params: {
+                id: item.id,
+                title: item.title,
+                image: item.image,
+              }
+            })}
           />
         )}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       />
+
 
       <Text style={globalStyles.Subtitle}>Mini Games</Text>
 
@@ -85,6 +96,7 @@ export default function HomeScreen() {
           <GameCard
             title={item.name}
             variant="square"
+            image={gameImages[item.name]}
           />
         )}
         horizontal={true}
@@ -93,15 +105,15 @@ export default function HomeScreen() {
 
     </View>
   );
-  };
-  const styles = StyleSheet.create({
-    logoContainer: {
-      marginTop: 55,
-      marginLeft: theme.spacing.medium
-    },
-    logo: {
-      width: 200,
-      height: 150,
-      resizeMode: "contain",
-    },
-    });
+};
+const styles = StyleSheet.create({
+  logoContainer: {
+    marginTop: 55,
+    marginLeft: theme.spacing.medium
+  },
+  logo: {
+    width: 200,
+    height: 150,
+    resizeMode: "contain",
+  },
+});

@@ -37,7 +37,7 @@ const euQuizzStyles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.21)",
+    backgroundColor: "rgba(0, 0, 0, 0.38)",
     justifyContent: "flex-end",
     alignItems: 'flex-start',
     padding: 20,

@@ -78,7 +78,16 @@ export default function RewardScreen() {
 
           return (
             <TouchableOpacity
-              onPress={() => router.push({ pathname: "/rewardInfo", params: { ...item } })}
+              onPress={() => router.push({
+                pathname: "/rewardInfo",
+                params: {
+                  id: item.id,
+                  title: item.title,
+                  image: item.image,
+                  requiredPoints: item.requiredPoints,
+                  cost: item.cost ?? "N/A",
+                }
+              })}
             >
               <View style={styles.card}>
                 {item.image && <Image source={{ uri: item.image }} style={styles.image} />}

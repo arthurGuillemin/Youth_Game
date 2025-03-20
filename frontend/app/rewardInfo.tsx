@@ -1,14 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, Alert, ScrollView } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as Clipboard from "expo-clipboard";
 import globalStyles from "@/styles/globalStyles";
 import { Ionicons } from "@expo/vector-icons";
 import theme from "@/styles/theme";
+import { getRewardDetails } from "../services/rewardService";
 
 const RewardDetail: React.FC = () => {
   const router = useRouter();
-  const { title, image, points, requiredPoints, description } = useLocalSearchParams();
+  const params = useLocalSearchParams();
+
+  const requiredPoints = params.requiredPoints ? Number(params.requiredPoints) : 0;
+  const cost = params.cost ? Number(params.cost) : 0;
+
+  const [reward, setReward] = useState({
+    id: params.id || "",
+    title: params.title || "Unknown",
+    image: params.image || null,
+    requiredPoints,
+    cost,
+    description: "",
+  });
+
+  useEffect(() => {
+    const fetchRewardDetails = async () => {
+      if (!reward.id) return;
+      const details = await getRewardDetails(reward.id);
+
+      if (details && details.length > 0) {
+        setReward((prev) => ({
+          ...prev,
+          description: details[0].description || "No description available.",
+          code: details[0].code || "ABC-XYZ-123"
+        }));
+      }
+    };
+
+    fetchRewardDetails();
+  }, [reward.id]);
+
+
   const [redeemed, setRedeemed] = useState(false);
   const rewardCode = "ABC-XYZ-123";
 
@@ -23,41 +55,44 @@ const RewardDetail: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{  position: "relative", width: "100%",}}>
-        <TouchableOpacity onPress={() => router.back()} style={{position:'absolute', marginTop:theme.spacing.xxlarge, zIndex: 10,marginLeft: theme.spacing.medium}}>
+      <View style={{ position: "relative", width: "100%" }}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={{ position: "absolute", marginTop: theme.spacing.xxlarge, zIndex: 10, marginLeft: theme.spacing.medium }}
+        >
           <Ionicons name="chevron-back" size={40} color="#111d45" />
         </TouchableOpacity>
-        <Image source={image as any} style={styles.image} />
+        {reward.image && <Image source={{ uri: reward.image }} style={styles.image} />}
       </View>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.title}>{reward.title}</Text>
+        <Text style={styles.description}>{reward.description}</Text>
       </ScrollView>
 
       {redeemed ? (
         <View style={styles.fixedBottom}>
           <Text style={styles.codeLabel}>Your Code is</Text>
           <TouchableOpacity style={styles.codeBox} onPress={copyToClipboard}>
-            <Text style={styles.codeText}>{rewardCode}</Text>
+            <Text style={styles.codeText}>{reward.code}</Text>
           </TouchableOpacity>
-          <Text style={styles.copyText}>Tap to copy the code</Text>
         </View>
       ) : (
         <TouchableOpacity style={styles.redeemButton} onPress={handleRedeem}>
-          <Text style={styles.redeemText}>Redeem for {requiredPoints} points</Text>
+          <Text style={styles.redeemText}>Redeem for {reward.requiredPoints} points</Text>
         </TouchableOpacity>
       )}
     </View>
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#3498db", 
+    backgroundColor: "#3498db",
   },
   image: {
-    width: "100%", 
+    width: "100%",
     height: 200,
     resizeMode: "cover",
   },
@@ -66,7 +101,7 @@ const styles = StyleSheet.create({
     top: 20,
     left: 10,
     padding: 5,
-    backgroundColor: "transparent", 
+    backgroundColor: "transparent",
     borderRadius: 5,
   },
   backText: {
@@ -78,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 100, 
+    paddingBottom: 100,
   },
   title: {
     fontSize: 22,
