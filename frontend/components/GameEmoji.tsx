@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import { getRandomGuess } from "../services/emojiGuess.js";
+import { createScore } from "../services/scoreService"; // 🔥 Import de la fonction pour enregistrer le score
 import theme from "@/styles/theme";
+import { getUser } from '../services/userService';
+
+const USER_ID = "c83b94c4-1aec-45e2-8c36-c1df039159f6"; // Remplace par l'ID de l'utilisateur
 
 const GameEmoji = () => {
   const [country, setCountry] = useState<any>(null);
@@ -23,10 +27,13 @@ const GameEmoji = () => {
     fetchData();
   }, []);
 
-  const checkAnswer = () => {
+  const checkAnswer = async () => {
     if (!country) return;
 
+    let points = 0;
+
     if (input.trim().toLowerCase() === country.correct_answer.toLowerCase()) {
+      points = 100; 
       setMessage("Bravo ! Vous avez trouvé !");
       Alert.alert("Félicitations !", `La bonne réponse est ${country.correct_answer}`, [
         {
@@ -46,7 +53,19 @@ const GameEmoji = () => {
         setMessage(`Perdu ! La bonne réponse était ${country.correct_answer}`);
       }
     }
+
+    const user = await getUser(USER_ID);
+    const userName = user ? user.username : "Unknown";
+
+    await createScore({
+      user_id: USER_ID,
+      game_id: "e39f9f00-94e7-4e7e-bf24-f4df1b6c611d", 
+      points: points,
+    });
+
     setInput("");
+    router.push({ pathname: "/euQuizz/result2", params: { score : points, name: userName } });
+
   };
 
   return (
@@ -73,8 +92,8 @@ const GameEmoji = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
     backgroundColor: theme.colors.background,
   },
@@ -84,33 +103,21 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    borderColor: '#ecf0f1',
+    borderColor: "#ecf0f1",
     borderWidth: 2,
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 10,
-    width: '80%',
+    width: "80%",
     fontSize: 18,
-    backgroundColor: '#fff',
-  },
-  button: {
-    backgroundColor: '#3498db',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginTop: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    backgroundColor: "#fff",
   },
   message: {
     marginTop: 15,
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#ecf0f1',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#ecf0f1",
+    textAlign: "center",
   },
 });
 
