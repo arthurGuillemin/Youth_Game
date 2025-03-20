@@ -1,6 +1,5 @@
 import { View, Text, ActivityIndicator } from "react-native";
 import globalStyles from "../../styles/globalStyles";
-import euQuizzStyles from "../../styles/euQuizzStyles";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
@@ -22,9 +21,9 @@ export default function LobbyScreen() {
         clearInterval(interval);
         setTimeout(() => {
           router.push("/euQuizz/category");
-        }, 20000);
+        }, 2000);
       }
-    }, 1500); // Simulation de chargement des joueurs
+    }, 1500);
     return () => clearInterval(interval);
   }, [currentPlayers, players.length, router]);
 
@@ -41,12 +40,11 @@ export default function LobbyScreen() {
             key={player.id}
             name="person-circle-outline"
             size={50}
-            color={index < currentPlayers ? "white" : "gray"} // ✅ Afficher en gris si non connecté
+            color={index < currentPlayers ? "white" : "gray"}
           />
         ))}
       </View>
 
-      {/* ✅ Affichage des drapeaux */}
       <View style={{ flexDirection: "row", gap: 50, marginTop: 10 }}>
         {players.slice(0, currentPlayers).map((player) => (
           <Text key={player.id} style={{ fontSize: 20 }}>{player.country}</Text>
