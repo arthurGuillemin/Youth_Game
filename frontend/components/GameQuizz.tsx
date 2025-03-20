@@ -45,21 +45,23 @@ const GameQuizz = ({ onFinish }) => {
   const handleAnswer = (selectedOption: string) => {
     const currentQuestion = randomizedQuestions[currentQuestionIndex];
     if (!currentQuestion) return;
-
+  
     const correctAnswer = currentQuestion.answer;
     const newButtonColors = [...buttonColors];
-
+  
+    let newScore = score; // Capture le score actuel
+  
     if (selectedOption === correctAnswer) {
       newButtonColors[currentQuestion.options.indexOf(selectedOption)] = 'green';
-      setScore(prevScore => prevScore + 1);
+      newScore += 1;
     } else {
       newButtonColors[currentQuestion.options.indexOf(selectedOption)] = 'red';
       newButtonColors[currentQuestion.options.indexOf(correctAnswer)] = 'green';
     }
-
+  
     setButtonColors(newButtonColors);
     setIsAnswered(true);
-
+  
     setTimeout(() => {
       const nextIndex = currentQuestionIndex + 1;
       if (nextIndex < randomizedQuestions.length) {
@@ -67,17 +69,19 @@ const GameQuizz = ({ onFinish }) => {
       } else {
         Alert.alert(
           "Quiz terminé",
-          `Vous avez obtenu ${score + 1} sur 10`, // ✅ Correction affichage score final
-          [{ text: "OK", onPress: onFinish }]
+          `Vous avez obtenu ${newScore} sur 10`,
+          [{ text: "OK", onPress: () => onFinish() }] 
         );
-        setCurrentQuestionIndex(0);
-        setScore(0); // ✅ Reset du score après le quiz
       }
+      
       setIsAnswered(false);
       setButtonColors(Array(4).fill('#007bff'));
     }, 500);
+  
+    setScore(newScore);
   };
-
+  
+    
   if (loading) {
     return (
       <View style={styles.loaderContainer}>
