@@ -135,8 +135,7 @@ export default function RankingScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <RankingTab title="Top 3 of all Time" data={rankingData} countryFlags={countryFlags} />
-        <RankingTab title="Top 3 of this Month" data={rankingData} countryFlags={countryFlags} />
+        <RankingTab title="Leaderboard" data={rankingData} countryFlags={countryFlags} />
       </ScrollView>
     </View>
   );
