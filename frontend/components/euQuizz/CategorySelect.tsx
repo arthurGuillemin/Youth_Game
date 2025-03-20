@@ -5,11 +5,21 @@ import { useRouter } from "expo-router";
 const defaultImages: { [key: string]: any } = {
   Food: require("../../assets/images/food.jpg"),
   Culture: require("../../assets/images/music.jpg"),
+  Economy: require("../../assets/images/economie.jpg"),
+  Geography: require("../../assets/images/geography.jpg"),
+  History: require("../../assets/images/history.jpg"),
+  Space: require("../../assets/images/history.jpg"),
+  Sports: require("../../assets/images/sport.jpg"),
 };
 
 const defaultColors: { [key: string]: string } = {
-  Food: "#4aabff",
   Culture: "#63dce0",
+  Economy:"#4aabff",
+  Food: "#63dce0",
+  Geography:"#4aabff",
+  History: "#63dce0",
+  Space:"#4aabff",
+  Sports: "#63dce0",
 };
 
 interface CategorySelectProps {
@@ -37,7 +47,7 @@ export default function CategorySelect({ title, showPlayButton = true, image, co
     <TouchableOpacity onPress={handlePress} style={euQuizzStyles.categoryCard}>
       <ImageBackground source={defaultImages[title] || require("../../assets/images/food.jpg")} style={euQuizzStyles.categoryImage}>
       {showPlayButton && (
-        <View style={euQuizzStyles.categoryImageOverlay}>
+        <View style={[euQuizzStyles.categoryImageOverlay, {borderRadius:0}]}>
           <Text style={euQuizzStyles.categoryTitle}>{title}</Text>
         </View>
         )}
