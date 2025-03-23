@@ -1,5 +1,18 @@
 # Youth_Game
 
+Développeur back-end & en charge du déploiement :
+- **Guillemin Arthur**
+   - Github: [https://github.com/arthurGuillemin](https://github.com/arthurGuillemin)
+
+Développeuses front-end : 
+- **Kelly Gama**
+   - Github: [https://github.com/yelineeee](https://github.com/yelineeee)
+
+- **Emilie Caverne**
+   - Github: [https://github.com/emilie-caverne](https://github.com/emilie-caverne)
+
+
+
 # Youth Games: Be Part of Tomorrow's Europe
 
 Youth Games is an annual European-wide competition designed to unite young Europeans, enhance their learning experiences, and strengthen their sense of belonging to the European Union. Our mission is to bring together European youth in a collaborative environment that fosters education, teamwork, and cultural exchange.
