@@ -8,7 +8,6 @@ interface RankingTabProps {
   countryFlags: { [key: string]: string };
 }
 
-// Fonction pour récupérer le bon drapeau
 const getCountryFlag = (country: string | undefined, countryFlags: { [key: string]: string }) => {
   if (!country) return "🏳"; // Drapeau blanc si inconnu
   const formattedCountry = country.replace(/\s+/g, "");
